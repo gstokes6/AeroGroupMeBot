@@ -27,7 +27,7 @@ def webhook():
 # Send a message in the groupchat
 def reply(msg):
     print(bot_id)
-    struc = {
+    data = {
                     'text'                  : msg,
                     'bot_id'                : bot_id
 
