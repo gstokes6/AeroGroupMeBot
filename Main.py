@@ -7,17 +7,16 @@ from flask import Flask, request
 
 app = Flask(__name__)
 bot_id = os.getenv('GROUPME_BOT_ID')
-print(bot_id)
 # Called whenever the app's callback URL receives a POST request
 # That'll happen every time a message is sent in the group
 @app.route('/', methods=['POST'])
 def webhook():
     # 'message' is an object that represents a single GroupMe message.
     message = request.get_json()
-
+    print(message['text'])
     # TODO: Your bot's logic here
-    #if not sender_is_bot(message):
-    #    reply("hey")
+    if not sender_is_bot(message):
+        reply("hey")
     return "ok", 200
 
 ################################################################################
