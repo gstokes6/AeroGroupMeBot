@@ -1,6 +1,7 @@
 # IMPORTS
 import os
 import json
+import requests
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
@@ -28,7 +29,8 @@ def reply(msg):
                     'text'                  : msg
     }
     #request = Request(url, urlencode(data).encode())
-    json = urlopen(url,urlencode(data).encode()).read().decode()
+    #json = urlopen(request).read().decode()
+    requests.post(url, json = data)
 
 # Send a message with an image attached in the groupchat
 def reply_with_image(msg, imgURL):
