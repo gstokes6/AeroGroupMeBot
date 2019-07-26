@@ -23,15 +23,16 @@ def webhook():
 
 # Send a message in the groupchat
 def reply(msg):
-    url = 'https://api.groupme.com/v3/bots/post'
-    data = {
+
+    struc = {
                     'text'                  : msg,
                     'bot_id'                : bot_id
 
     }
     #request = Request(url, urlencode(data).encode())
     #json = urlopen(request).read().decode()
-    response = requests.post(url, json = data)
+    response = requests.post("https://api.groupme.com/v3/bots/post", data = struc)
+    print(response,response.status_code,response.reason)
 
 # Send a message with an image attached in the groupchat
 def reply_with_image(msg, imgURL):
