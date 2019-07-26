@@ -13,7 +13,6 @@ bot_id = os.getenv('GROUPME_BOT_ID')
 def webhook():
     # 'message' is an object that represents a single GroupMe message.
     message = request.get_json()
-    print(message['text'])
     # TODO: Your bot's logic here
     if not sender_is_bot(message):
         reply("hey")
@@ -23,14 +22,13 @@ def webhook():
 
 # Send a message in the groupchat
 def reply(msg):
-    url = 'http://api.groupme.com/v3/bots/post'
-    print(url)
+    url = 'https://api.groupme.com/v3/bots/post'
     data = {
                     'bot_id'                : bot_id,
                     'text'                  : msg
     }
     request = Request(url, urlencode(data).encode())
-    json = urlopen(request).read().decode()
+    #json = urlopen(request).read().decode()
 
 # Send a message with an image attached in the groupchat
 def reply_with_image(msg, imgURL):
