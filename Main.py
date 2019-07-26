@@ -23,7 +23,8 @@ def webhook():
 
 # Send a message in the groupchat
 def reply(msg):
-    url = 'https://api.groupme.com/v3/bots/post'
+    url = 'http://api.groupme.com/v3/bots/post'
+    print(url)
     data = {
                     'bot_id'                : bot_id,
                     'text'                  : msg
