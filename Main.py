@@ -8,6 +8,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 bot_id = os.getenv('GROUPME_BOT_ID')
+print(bot_id)
 # Called whenever the app's callback URL receives a POST request
 # That'll happen every time a message is sent in the group
 @app.route('/', methods=['POST'])
@@ -23,15 +24,13 @@ def webhook():
 
 # Send a message in the groupchat
 def reply(msg):
-
+    print(bot_id)
     struc = {
                     'text'                  : msg,
                     'bot_id'                : bot_id
 
     }
-    #request = Request(url, urlencode(data).encode())
-    #json = urlopen(request).read().decode()
-    response = requests.post("https://api.groupme.com/v3", data = struc)
+    response = requests.post("https://api.groupme.com/v3/bots/post", data = struc)
     print(response,response.status_code,response.reason)
 
 # Send a message with an image attached in the groupchat
