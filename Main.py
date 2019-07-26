@@ -27,8 +27,8 @@ def reply(msg):
                     'bot_id'                : bot_id,
                     'text'                  : msg
     }
-    request = Request(url, urlencode(data).encode())
-    #json = urlopen(request).read().decode()
+    #request = Request(url, urlencode(data).encode())
+    json = urlopen(url,urlencode(data).encode()).read().decode()
 
 # Send a message with an image attached in the groupchat
 def reply_with_image(msg, imgURL):
