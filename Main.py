@@ -30,7 +30,7 @@ def reply(msg):
     }
     #request = Request(url, urlencode(data).encode())
     #json = urlopen(request).read().decode()
-    requests.post(url, json = data)
+    response = requests.post(url, json = data)
 
 # Send a message with an image attached in the groupchat
 def reply_with_image(msg, imgURL):
