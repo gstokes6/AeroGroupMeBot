@@ -9,6 +9,8 @@ from flask import Flask, request
 app = Flask(__name__)
 bot_id = os.getenv('GROUPME_BOT_ID')
 print(bot_id)
+url = 'https://api.groupme.com/v3/bots/post'
+
 # Called whenever the app's callback URL receives a POST request
 # That'll happen every time a message is sent in the group
 @app.route('/', methods=['POST'])
@@ -30,8 +32,12 @@ def reply(msg):
                     'bot_id'                : bot_id
 
     }
-    response = requests.post("https://api.groupme.com/v3/bots/post", data = struc)
-    print(response,response.status_code,response.reason)
+    request = Request(url, urlencode(data).encode())
+    json = urlopen(request).read().decode()
+
+
+    #response = requests.post("https://api.groupme.com/v3/bots/post", data = struc)
+    #print(response,response.status_code,response.reason)
 
 # Send a message with an image attached in the groupchat
 def reply_with_image(msg, imgURL):
