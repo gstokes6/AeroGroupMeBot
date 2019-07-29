@@ -18,9 +18,12 @@ def webhook():
     # 'message' is an object that represents a single GroupMe message.
     message = request.get_json()
     # TODO: Your bot's logic here
-    if (not sender_is_bot(message)) and (message['attachments']['type'] == 'image'):
+    if (not sender_is_bot(message)) and (len(message['attachments'])!= 0):
         print('Found Message')
         print(message['attachments'])
+        for attachment in message['attachments']:
+            if attachment['type'] == 'image':
+                print(attachment['url'])
     return "ok", 200
 
 ################################################################################
