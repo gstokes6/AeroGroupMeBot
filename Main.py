@@ -23,7 +23,12 @@ def webhook():
         print(message['attachments'])
         for attachment in message['attachments']:
             if attachment['type'] == 'image':
-                print(attachment['url'])
+                TempURL = attachment['url']
+                FileName = TempURL.split('.')[-1] + '.' + TempURL.split('.')[-1]
+                print(TempURL,FileName)
+                tempfile = urllib.URLopener()
+                tempfile.retrieve(TempURL, FileName)
+                print(tempfile)
     return "ok", 200
 
 ################################################################################
