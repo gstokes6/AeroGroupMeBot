@@ -51,7 +51,7 @@ def Setup(drive):
 
 def FindOrCreateFolder(drive,title,root):
     search_list = []
-    file_list = drive.ListFile({'q': "'%s in parents and trashed=false"%(root)}).GetList()
+    file_list = drive.ListFile({'q': "'%s' in parents and trashed=false"%(root)}).GetList()
     for file in file_list:
             if (file['title'] == title):
                     search_list.append(file)
