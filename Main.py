@@ -26,39 +26,40 @@ url = 'https://api.groupme.com/v3/bots/post'
 def webhook():
     # 'message' is an object that represents a single GroupMe message.
     message = request.get_json()
+    print('message')
     # TODO: Your bot's logic here
     if (not sender_is_bot(message)) and (len(message['attachments'])!= 0) and (message['text']):
-        if ('[[academic]]' in message['text'].lower().split()[0]):
-            print('Found Message')
-            FoundMention = 0
-            for attachment in message['attachments']:
-                #Check for Mention of @academic here
-                if True:
+        print('Found Message')
+        FoundMention = 0
+        for attachment in message['attachments']:
+            #Check for Mention of @academic here
+            if attachment['type'] == 'mentions':
+                if '73362029' in attachment['user_ids']:
                     FoundMention = 1
-            if FoundMention != 0:
-                for attachment in message['attachments']:
-                    print(attachment)
-                    if (attachment['type'] == 'image'):
-                        TempURL = attachment['url']
-                        FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
-                        tempfile = wget.download(TempURL,FileName)
-                        if len(message['text'].upper().split()) > 1:
-                            FolderName = message['text'].upper().split()[1]
-                        else:
-                            FolderName = None
-                        GD.SortFile(drive,tempfile,message['created_at'],FolderName)
-                        requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message['id'],gm_access_token))
-    ##                ##No support for files yet
-    ##                if (attachment['type'] == 'file'):
-    ##                    TempURL = "https://file.groupme.com/v1/%s/files/%s"%(group_id,attachment['file_id'])
-    ##                    print(TempURL)
-    ##                    FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
-    ##                    tempfile = wget.download(TempURL,FileName)
-    ##                    if len(message['text'].upper().split()) > 1:
-    ##                        FolderName = message['text'].upper().split()[1]
-    ##                    else:
-    ##                        FolderName = None
-    ##                    GD.SortFile(drive,tempfile,message['created_at'],FolderName)
+        if FoundMention != 0:
+            for attachment in message['attachments']:
+                print(attachment)
+                if (attachment['type'] == 'image'):
+                    TempURL = attachment['url']
+                    FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
+                    tempfile = wget.download(TempURL,FileName)
+                    if len(message['text'].upper().split()) > 1:
+                        FolderName = message['text'].upper().split()[1]
+                    else:
+                        FolderName = None
+                    GD.SortFile(drive,tempfile,message['created_at'],FolderName)
+                    requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message['id'],gm_access_token))
+##                ##No support for files yet
+##                if (attachment['type'] == 'file'):
+##                    TempURL = "https://file.groupme.com/v1/%s/files/%s"%(group_id,attachment['file_id'])
+##                    print(TempURL)
+##                    FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
+##                    tempfile = wget.download(TempURL,FileName)
+##                    if len(message['text'].upper().split()) > 1:
+##                        FolderName = message['text'].upper().split()[1]
+##                    else:
+##                        FolderName = None
+##                    GD.SortFile(drive,tempfile,message['created_at'],FolderName)
     GD.UpdateEnvVars()
     return "ok", 200
 
