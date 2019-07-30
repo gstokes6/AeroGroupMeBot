@@ -28,7 +28,6 @@ def webhook():
     message = request.get_json()
     # TODO: Your bot's logic here
     if (not sender_is_bot(message)) and (len(message['attachments'])!= 0) and (message['text']):
-        requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message['id'],gm_access_token))
         if ('[[academic]]' in message['text'].lower().split()[0]):
             print('Found Message')
             for attachment in message['attachments']:
@@ -41,6 +40,7 @@ def webhook():
                     else:
                         FolderName = None
                     GD.SortFile(drive,tempfile,message['created_at'],FolderName)
+                    requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message['id'],gm_access_token))
 ##                ##No support for files yet
 ##                if (attachment['type'] == 'file'):
 ##                    TempURL = "https://file.groupme.com/v1/%s/files/%s"%(group_id,attachment['file_id'])
