@@ -27,7 +27,7 @@ def webhook():
                 TempURL = attachment['url']
                 FileName = TempURL.split('.')[-1] + '.' + TempURL.split('.')[-1]
                 print(TempURL,FileName)
-                tempfile = wget(TempURL,FileName)
+                tempfile = wget.download(TempURL,FileName)
                 print(tempfile)
     return "ok", 200
 
