@@ -3,7 +3,7 @@ from pydrive.drive import GoogleDrive
 import os
 
 def MakeClient(client_secret,client_id):
-    text = '''{"installed":{"client_id":%s,"project_id":"quickstart-1564436220867","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":%s,"redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}'''%(client_id,client_secret)
+    Text = '''{"installed":{"client_id":%s,"project_id":"quickstart-1564436220867","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":%s,"redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}'''%(client_id,client_secret)
     f = open("client_secrets.json","w+")
     f.write(Text)
     f.close()
