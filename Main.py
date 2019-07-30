@@ -59,8 +59,6 @@ def webhook():
 ##                    else:
 ##                        FolderName = None
 ##                    GD.SortFile(drive,tempfile,message['created_at'],FolderName)
-            else:
-                
         elif not ('' == message['text'].lower().replace('@academic ','')):
             #Implement Text Saving
             print("Text saving case found")
