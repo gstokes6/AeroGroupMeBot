@@ -36,7 +36,7 @@ def webhook():
             if attachment['type'] == 'mentions':
                 if '73362029' in attachment['user_ids']:
                     FoundMention = 1
-        if (FoundMention != 0) and (len(message['attachments']) > 1) and ('' == message['text'].lower().replace('@academic ','')):
+        if (FoundMention != 0) and (len(message['attachments']) > 1) and (not ('' == message['text'].lower().replace('@academic ',''))):
             for attachment in message['attachments']:
                 if (attachment['type'] == 'image'):
                     TempURL = attachment['url']
