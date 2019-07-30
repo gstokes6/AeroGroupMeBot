@@ -66,7 +66,7 @@ def webhook():
             if "are you with me?" in message['text'].lower():
                 CounterID = GD.FindOrCreateFolder(drive,['Python Bot','HartCounter.txt'])
                 Counter = drive.CreateFile({'id':CounterID})
-                Iteration = int(Spreadsheet.GetContentString('Classes.xlsx'))
+                Iteration = int(Counter.GetContentString())
                 Memes.GetHart(Iteration)
                 HartPath = 'ModifiedHart.jpg'
                 reply_with_image('Time for a 5 min lecture.', HartPath)
