@@ -29,7 +29,7 @@ def webhook():
         if ('[[academic]]' in message['text'].lower().split()[0]):
             print('Found Message')
             for attachment in message['attachments']:
-                print(attachment['type'])
+                print(attachment)
                 if (attachment['type'] == 'image') or (attachment['type'] == 'file'):
                     TempURL = attachment['url']
                     FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
