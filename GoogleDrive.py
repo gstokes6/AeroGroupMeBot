@@ -75,7 +75,7 @@ def FindOrCreateFolder(drive,Titles):
 
 def SortFile(drive,path,FolderName=None):
     Setup(drive)
-    if folder_id:
+    if FolderName:
         folder_id = FindOrCreateFolder(drive,['Python Bot','Uploads',FolderName])
         f = UploadFile(drive,path,folder_id)
         return f
