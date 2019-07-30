@@ -47,8 +47,8 @@ def webhook():
                     else:
                         FolderName = None
                     GD.SortFile(drive,tempfile,message['created_at'],FolderName)
-                    requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message['id'],gm_access_token))
-##                ##No support for files yet
+                    LikeMessage(message)
+                  ##No support for files yet
 ##                if (attachment['type'] == 'file'):
 ##                    TempURL = "https://file.groupme.com/v1/%s/files/%s"%(group_id,attachment['file_id'])
 ##                    print(TempURL)
@@ -64,8 +64,8 @@ def webhook():
             print("Text saving case found")
         else:
             SharingLink = GD.FindOrCreateFolderLink(drive,['Python Bot'])['alternateLink']
-            print(SharingLink)
             reply(SharingLink,bot_id)
+            LikeMessage(message)
     GD.UpdateEnvVars()
     return "ok", 200
 
@@ -74,19 +74,21 @@ def webhook():
 # Send a message in the groupchat
 def reply(msg,bot_id):
     url = 'https://api.groupme.com/v3/bots/post'
+    bot_id = bot_id.replace("'",'')
     data = {
                     'text'                  : msg,
                     'bot_id'                : bot_id
 
-    }
-    bot_id = bot_id.replace("'",'')
-    PostRequest = "https://api.groupme.com/v3/bots/post?bot_id=%s&text=%s&token=%s"%(bot_id,msg,gm_access_token)
-    print(PostRequest)
-    requests.post(PostRequest)
+    } 
+    #PostRequest = "https://api.groupme.com/v3/bots/post?bot_id=%s&text=%s&token=%s"%(bot_id,msg,gm_access_token)
+    #requests.post(PostRequest)
+    
+    request = Request(url, urlencode(data).encode())
+    json = urlopen(request).read().decode()
     print('Posted!')
-    #request = Request(url, urlencode(data).encode())
-    #json = urlopen(request).read().decode()
 
+def LikeMessage(message):
+    requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message['id'],gm_access_token))
 
 # Checks whether the message sender is a bot
 def sender_is_bot(message):
