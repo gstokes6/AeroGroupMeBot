@@ -36,7 +36,7 @@ def webhook():
             if attachment['type'] == 'mentions':
                 if '73362029' in attachment['user_ids']:
                     FoundMention = 1
-        if (FoundMention != 0) and (len(message['attachments']) > 1):
+        if (FoundMention != 0) and (len(message['attachments']) > 1) and ('' = message['text'].lower().replace('@academic ','')):
             for attachment in message['attachments']:
                 if (attachment['type'] == 'image'):
                     TempURL = attachment['url']
@@ -61,7 +61,7 @@ def webhook():
 ##                    GD.SortFile(drive,tempfile,message['created_at'],FolderName)
         else:
             0==0
-            print(FindOrCreateFolderLink(drive,['Python Bot']))
+            print(GD.FindOrCreateFolderLink(drive,['Python Bot']))
     GD.UpdateEnvVars()
     return "ok", 200
 
