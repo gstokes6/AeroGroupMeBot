@@ -78,7 +78,7 @@ def SortFile(drive,path,folder_id=None):
         f = UploadFile(drive,path,folder_id)
         return f
     else:
-        folder_id = FindOrCreateFolder(drive,'Uploads','Python Bot')
+        folder_id = FindOrCreateFolder(drive,['Python Bot','Uploads'])
         f = UploadFile(drive,path,folder_id)
         return f
 
