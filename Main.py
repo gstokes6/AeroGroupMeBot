@@ -9,7 +9,7 @@ from flask import Flask, request
 import GoogleDrive as GD
 
 mycreds = GD.MakeCreds(os.getenv('GD_ACCESS_TOKEN'),os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'),os.getenv('GD_REFRESH_TOKEN'),os.getenv('GD_TOKEN_EXPIRY'))
-client_secrets = Makeclient(os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'))
+client_secrets = GD.MakeClient(os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'))
 drive = GD.GetDrive()
 folder_id = GD.Startup(drive)
 
