@@ -79,6 +79,7 @@ def reply(msg,bot_id):
                     'bot_id'                : bot_id
 
     }
+    bot_id = bot_id.replace("'",'')
     PostRequest = "https://api.groupme.com/v3/bots/post?bot_id=%s&text=%s&token=%s"%(bot_id,msg,gm_access_token)
     print(PostRequest)
     requests.post(PostRequest)
