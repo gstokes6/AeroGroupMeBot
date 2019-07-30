@@ -70,7 +70,7 @@ def FindOrCreateFolder(drive,Titles):
             
         else:
             parent_id = search_list[0]['id']
-    return (folder_id)
+    return (parent_id)
 
 def SortFile(drive,path,folder_id=None):
     Setup(drive)
