@@ -31,7 +31,7 @@ def webhook():
         for attachment in message['attachments']:
             if attachment['type'] == 'image':
                 TempURL = attachment['url']
-                FileName = message['created_at'] + '.' + TempURL.split('.')[-2]
+                FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
                 tempfile = wget.download(TempURL,FileName)
                 print(tempfile)
                 GD.UploadFile(drive,tempfile,folder_id)
