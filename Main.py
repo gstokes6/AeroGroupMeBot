@@ -60,8 +60,9 @@ def webhook():
 ##                        FolderName = None
 ##                    GD.SortFile(drive,tempfile,message['created_at'],FolderName)
         else:
-            0==0
-            print(GD.FindOrCreateFolderLink(drive,['Python Bot']))
+            SharingLink = GD.FindOrCreateFolderLink(drive,['Python Bot'])['alternateLink']
+            print(SharingLink)
+            reply(SharingLink)
     GD.UpdateEnvVars()
     return "ok", 200
 
@@ -79,8 +80,8 @@ def reply(msg):
     json = urlopen(request).read().decode()
 
 
-    #response = requests.post("https://api.groupme.com/v3/bots/post", data = struc)
-    #print(response,response.status_code,response.reason)
+    response = requests.post("https://api.groupme.com/v3/bots/post", data = struc)
+    print(response,response.status_code,response.reason)
 
 # Send a message with an image attached in the groupchat
 def reply_with_image(msg, imgURL):
