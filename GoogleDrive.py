@@ -49,7 +49,7 @@ def Setup(drive):
     PythonBotID = FindOrCreateFolder(drive,['Python Bot'])
     UploadsID = FindOrCreateFolder(drive,['Python Bot','Uploads'])
 
-def FindOrCreateFolder(drive,Titles,parent_id):
+def FindOrCreateFolder(drive,Titles):
     parent_id = 'root'
     for title in Titles:
         search_list = []
