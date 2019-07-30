@@ -79,8 +79,10 @@ def reply(msg,bot_id):
                     'bot_id'                : bot_id
 
     }
-    request = Request(url, urlencode(data).encode())
-    json = urlopen(request).read().decode()
+    PostRequest = "https://api.groupme.com/v3/bots/post?bot_id=%s&text=%s&token=%s"%(bot_id,msg,gm_access_token)
+    requests.post(PostRequest)
+    #request = Request(url, urlencode(data).encode())
+    #json = urlopen(request).read().decode()
 
 
 # Checks whether the message sender is a bot
