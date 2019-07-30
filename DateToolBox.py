@@ -24,9 +24,9 @@ def GetSpreadsheetContents(DataSheet):
     return Classes,MeetingDays,TimeStart,TimeEnd
 
 def UpdateDataSheet(drive):
-    PythonBotID = GD.FindOrCreateFolder(drive,['Python Bot'])
-    file_list = drive.ListFile({'q': "'%s' in parents and trashed=false"%(PythonBotID)}).GetList()
-    file_list[0].GetContentFile('Classes.xlsx')
+    SpreadsheetID = GD.FindOrCreateFolder(drive,['Python Bot','Classes.xlsx'])
+    Spreadsheet = drive.CreateFile({'id':SpreadsheetID})
+    Spreadsheet.GetContentFile('Classes.xlsx')
     DataSheet,wb = GetSpreadsheet('Classes.xlsx')
     return DataSheet
     
@@ -72,9 +72,8 @@ def IsInClass(drive,timestamp):
 
 if __name__ == "__main__":
     drive = GD.GetDrive()
-    timestamp = time.time()
-    Test = IsInClass(drive,timestamp)
-
+    DataSheet = UpdateDataSheet(drive)
+    print(DataSheet)
 
 
 

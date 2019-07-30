@@ -64,9 +64,14 @@ def webhook():
             #Implement Text Saving
             print("Text saving case found")
             if "are you with me?" in message['text'].lower():
-                Memes.GetHart(4)
+                CounterID = GD.FindOrCreateFolder(drive,['Python Bot','HartCounter.txt'])
+                Counter = drive.CreateFile({'id':CounterID})
+                Iteration = int(Spreadsheet.GetContentString('Classes.xlsx'))
+                Memes.GetHart(Iteration)
                 HartPath = 'ModifiedHart.jpg'
                 reply_with_image('Time for a 5 min lecture.', HartPath)
+                Counter.SetContentString(str(Iteration+1))
+                Counter.Upload()
                 LikeMessage(message)
         else:
             SharingLink = GD.FindOrCreateFolderLink(drive,['Python Bot'])['alternateLink']
