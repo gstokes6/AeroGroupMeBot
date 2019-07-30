@@ -30,19 +30,20 @@ def zoom(im,zoom):
     out = out.resize((normX,normY))
     return out
 
-def GetHart(im,iteration):
+def GetHart(iteration):
+    im = Image.open("centered-hartfield-roy.jpg")
     ZoomIntensity = 1+.25*i
     RedIntensity = .006*i*i
     print(ZoomIntensity,RedIntensity)
     z = zoom(im,ZoomIntensity)
     out = colorize(z,RedIntensity)
-    return out
+    out.save('ModifiedHart.jpg')
 
-im = Image.open("centered-hartfield-roy.jpg")
 
-i = 0
-out = GetHart(i)
-out.show()
+if __name__ == "__main__":
+    i = 0
+    out = GetHart(i)
+    out.show()
 
 
 

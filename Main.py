@@ -3,6 +3,7 @@ import os
 import json
 import requests
 import wget
+import Memes
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
@@ -62,6 +63,10 @@ def webhook():
         elif not ('' == message['text'].lower().replace('@academic ','')):
             #Implement Text Saving
             print("Text saving case found")
+            if "are you with me?" in message['text'].lower():
+                Memes.GetHart(4)
+                HartPath = 'ModifiedHart.jpg'
+                reply_with_image('Time for a 5 min lecture.', HartPath)
         else:
             SharingLink = GD.FindOrCreateFolderLink(drive,['Python Bot'])['alternateLink']
             reply(SharingLink,bot_id)
@@ -74,7 +79,6 @@ def webhook():
 # Send a message in the groupchat
 def reply(msg,bot_id):
     url = 'https://api.groupme.com/v3/bots/post'
-    bot_id = bot_id.replace("'",'')
     data = {
                     'text'                  : msg,
                     'bot_id'                : bot_id
@@ -86,6 +90,30 @@ def reply(msg,bot_id):
     request = Request(url, urlencode(data).encode())
     json = urlopen(request).read().decode()
     print('Posted!')
+    
+def reply_with_image(msg, imgPath):
+	url = 'https://api.groupme.com/v3/bots/post'
+	urlOnGroupMeService = upload_image_to_groupme(imgPath)
+	data = {
+		'bot_id'		: bot_id,
+		'text'			: msg,
+		'picture_url'		: urlOnGroupMeService
+	}
+	request = Request(url, urlencode(data).encode())
+	json = urlopen(request).read().decode()
+
+
+def upload_image_to_groupme(imgPath):
+    # Send Image
+    headers = {'content-type': 'application/json'}
+    url = 'https://image.groupme.com/pictures'
+    files = {'file': open(imgPath, 'rb')}
+    payload = {'access_token': gm_access_token}
+    r = requests.post(url, files=files, params=payload)
+    imageurl = r.json()['payload']['url']
+    os.remove(filename)
+    return imageurl
+
 
 def LikeMessage(message):
     requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message['id'],gm_access_token))
