@@ -26,7 +26,7 @@ url = 'https://api.groupme.com/v3/bots/post'
 def webhook():
     # 'message' is an object that represents a single GroupMe message.
     message = request.get_json()
-    print('message')
+    print(message)
     # TODO: Your bot's logic here
     if (not sender_is_bot(message)) and (len(message['attachments'])!= 0) and (message['text']):
         print('Found Message')
@@ -36,9 +36,8 @@ def webhook():
             if attachment['type'] == 'mentions':
                 if '73362029' in attachment['user_ids']:
                     FoundMention = 1
-        if FoundMention != 0:
+        if (FoundMention != 0) and (len(message['attachments']) > 1):
             for attachment in message['attachments']:
-                print(attachment)
                 if (attachment['type'] == 'image'):
                     TempURL = attachment['url']
                     FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
@@ -60,6 +59,9 @@ def webhook():
 ##                    else:
 ##                        FolderName = None
 ##                    GD.SortFile(drive,tempfile,message['created_at'],FolderName)
+        else:
+            0==0
+            print(FindOrCreateFolderLink(drive,['Python Bot']))
     GD.UpdateEnvVars()
     return "ok", 200
 

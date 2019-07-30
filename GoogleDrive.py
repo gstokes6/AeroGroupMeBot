@@ -74,6 +74,29 @@ def FindOrCreateFolder(drive,Titles):
             parent_id = search_list[0]['id']
     return (parent_id)
 
+def FindOrCreateFolderLink(drive,Titles):
+    parent_id = 'root'
+    for title in Titles:
+        search_list = []
+        file_list = drive.ListFile({'q': "'%s' in parents and trashed=false"%(parent_id)}).GetList()
+        for file in file_list:
+                if (file['title'] == title):
+                        search_list.append(file)
+        if len(search_list) == 0:
+            # Create folder.
+            folder_metadata = {
+                'title' : title,
+                # The mimetype defines this new file as a folder, so don't change this.
+                'mimeType' : 'application/vnd.google-apps.folder',
+                "parents"  : [{"kind": "drive#fileLink", "id": parent_id}]
+            }
+            folder = drive.CreateFile(folder_metadata)
+            folder.Upload()
+            
+        else:
+            folder = search_list[0]
+    return (folder)
+
 def SortFile(drive,path,timestamp,FolderName=None):
     Setup(drive)
     DTB.AddClassFolders(drive)
