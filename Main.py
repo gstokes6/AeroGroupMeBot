@@ -6,6 +6,12 @@ import wget
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
+import GoogleDrive as GD
+
+mycreds = GD.MakeCreds(os.getenv('GD_ACCESS_TOKEN'),os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'),os.getenv('GD_REFRESH_TOKEN'),os.getenv('GD_TOKEN_EXPIRY'))
+client_secrets = Makeclient(os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'))
+drive = GD.GetDrive()
+folder_id = GD.Startup(drive)
 
 app = Flask(__name__)
 bot_id = os.getenv('GROUPME_BOT_ID')
@@ -25,10 +31,11 @@ def webhook():
         for attachment in message['attachments']:
             if attachment['type'] == 'image':
                 TempURL = attachment['url']
-                FileName = TempURL.split('.')[-1] + '.' + TempURL.split('.')[-1]
-                print(TempURL,FileName)
+                FileName = TempURL.split('.')[-1] + '.' + TempURL.split('.')[-2]
                 tempfile = wget.download(TempURL,FileName)
                 print(tempfile)
+                GD.UploadFile(drive,tempfile,folder_id)
+    GD.UpdateEnvVars()
     return "ok", 200
 
 ################################################################################
