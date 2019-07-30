@@ -30,7 +30,7 @@ def webhook():
             print('Found Message')
             for attachment in message['attachments']:
                 print(attachment['type'])
-                if attachment['type'] == 'image':
+                if (attachment['type'] == 'image') or (attachment['type'] == 'file'):
                     TempURL = attachment['url']
                     FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
                     tempfile = wget.download(TempURL,FileName)
