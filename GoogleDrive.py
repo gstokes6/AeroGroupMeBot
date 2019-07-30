@@ -73,9 +73,15 @@ def FindOrCreateFolder(drive,Titles):
             parent_id = search_list[0]['id']
     return (parent_id)
 
-def SortFile(drive,path,FolderName=None):
+def SortFile(drive,path,timestamp,FolderName=None):
     Setup(drive)
+    DTB.AddClassFolders(drive)
     if FolderName:
+        folder_id = FindOrCreateFolder(drive,['Python Bot','Uploads',FolderName])
+        f = UploadFile(drive,path,folder_id)
+        return f
+    elif DTB.IsInClass(drive,timestamp):
+        FolderName = DTB.IsInClass(drive,timestamp);
         folder_id = FindOrCreateFolder(drive,['Python Bot','Uploads',FolderName])
         f = UploadFile(drive,path,folder_id)
         return f
@@ -94,6 +100,16 @@ def UploadFile(drive,path,folder_id):
 
 if __name__ == "__main__":
     drive = GetDrive()
-    PythonBotID = FindOrCreateFolder(drive,["Python Bot"])
-    folder_id = FindOrCreateFolder(drive,['Python Bot','Uploads','Unsorted'])
-    file_list = drive.ListFile({'q': "'%s' in parents and trashed=false"%(PythonBotID)}).GetList()
+    path = 'C:\\Users\\gstok\\Desktop\\2vi3ju.jpg'
+    SortFile(drive,path,FolderName=None)
+
+
+
+
+
+
+
+
+
+
+   
