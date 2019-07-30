@@ -45,25 +45,40 @@ def GetDrive():
     drive = GoogleDrive(gauth)
     return drive
 
-def Startup(drive):
+def Setup(drive):
+    folder_id = FindOrCreateFolder(drive,'Python Bot','root')
+    FindOrCreateFolder(drive,'Uploads','Python Bot')
+
+def FindOrCreateFolder(drive,title,root):
     search_list = []
-    file_list = drive.ListFile({'q': "'root' in parents"}).GetList()
+    file_list = drive.ListFile({'q': "'%s in parents and trashed=false"%(root)}).GetList()
     for file in file_list:
-            if (file['title'] == 'Python Bot') and (file['explicitlyTrashed'] == False):
+            if (file['title'] == title):
                     search_list.append(file)
     if len(search_list) == 0:
         # Create folder.
         folder_metadata = {
-            'title' : 'Python Bot',
+            'title' : title,
             # The mimetype defines this new file as a folder, so don't change this.
             'mimeType' : 'application/vnd.google-apps.folder'
         }
         folder = drive.CreateFile(folder_metadata)
         folder.Upload()
-        folder_id = folder['id'] 
+        folder_id = folder['id']
+        
     else:
         folder_id = search_list[0]['id']
-    return folder_id
+    return (folder_id)
+
+def SortFile(drive,path,folder_id=None):
+    Setup(drive)
+    if folder_id:
+        f = UploadFile(drive,path,folder_id)
+        return f
+    else:
+        folder_id = FindOrCreateFolder(drive,'Uploads','Python Bot')
+        f = UploadFile(drive,path,folder_id)
+        return f
 
 def UploadFile(drive,path,folder_id):
     f = drive.CreateFile({"parents": [{"kind": "drive#fileLink", "id": folder_id}],'title': path})

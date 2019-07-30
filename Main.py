@@ -11,7 +11,7 @@ import GoogleDrive as GD
 mycreds = GD.MakeCreds(os.getenv('GD_ACCESS_TOKEN'),os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'),os.getenv('GD_REFRESH_TOKEN'),os.getenv('GD_TOKEN_EXPIRY'))
 client_secrets = GD.MakeClient(os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'))
 drive = GD.GetDrive()
-folder_id = GD.Startup(drive)
+GD.Setup(drive)
 
 app = Flask(__name__)
 bot_id = os.getenv('GROUPME_BOT_ID')
@@ -34,7 +34,7 @@ def webhook():
                 FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
                 tempfile = wget.download(TempURL,FileName)
                 print(tempfile)
-                GD.UploadFile(drive,tempfile,folder_id)
+                GD.SortFile(drive,tempfile,folder_id)
     GD.UpdateEnvVars()
     return "ok", 200
 
