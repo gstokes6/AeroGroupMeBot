@@ -34,7 +34,7 @@ def webhook():
                 FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
                 tempfile = wget.download(TempURL,FileName)
                 print(tempfile)
-                GD.SortFile(drive,tempfile,folder_id)
+                GD.SortFile(drive,tempfile)
     GD.UpdateEnvVars()
     return "ok", 200
 
