@@ -43,6 +43,7 @@ def webhook():
                     GD.SortFile(drive,tempfile,message['created_at'],FolderName)
                 if (attachment['type'] == 'file'):
                     TempURL = "https://file.groupme.com/v1/%s/files/%s"%(group_id,attachment['file_id'])
+                    print(TempUrl)
                     FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
                     tempfile = wget.download(TempURL,FileName)
                     if len(message['text'].upper().split()) > 1:
