@@ -31,7 +31,7 @@ def webhook():
         if ('[[academic]]' in message['text'].lower().split()[0]):
             print('Found Message')
             FoundMention = 0
-            for attachment in message['attachments']
+            for attachment in message['attachments']:
                 #Check for Mention of @academic here
                 if True:
                     FoundMention = 1
