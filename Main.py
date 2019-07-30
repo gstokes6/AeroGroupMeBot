@@ -16,6 +16,7 @@ GD.Setup(drive)
 app = Flask(__name__)
 bot_id = os.getenv('GROUPME_BOT_ID')
 group_id = os.getenv('GROUPME_GROUP_ID')
+gm_access_token = os.getenv('GROUPME_ACCESS_TOKEN')
 print(bot_id)
 url = 'https://api.groupme.com/v3/bots/post'
 
@@ -27,11 +28,10 @@ def webhook():
     message = request.get_json()
     # TODO: Your bot's logic here
     if (not sender_is_bot(message)) and (len(message['attachments'])!= 0) and (message['text']):
+        requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message['id'],gm_access_token))
         if ('[[academic]]' in message['text'].lower().split()[0]):
             print('Found Message')
             for attachment in message['attachments']:
-                ##if (attachment['type'] == 'image') or (attachment['type'] == 'file'):
-                ##No support for 'file attachments
                 if (attachment['type'] == 'image'):
                     TempURL = attachment['url']
                     FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
@@ -41,16 +41,17 @@ def webhook():
                     else:
                         FolderName = None
                     GD.SortFile(drive,tempfile,message['created_at'],FolderName)
-                if (attachment['type'] == 'file'):
-                    TempURL = "https://file.groupme.com/v1/%s/files/%s"%(group_id,attachment['file_id'])
-                    print(TempURL)
-                    FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
-                    tempfile = wget.download(TempURL,FileName)
-                    if len(message['text'].upper().split()) > 1:
-                        FolderName = message['text'].upper().split()[1]
-                    else:
-                        FolderName = None
-                    GD.SortFile(drive,tempfile,message['created_at'],FolderName)
+##                ##No support for files yet
+##                if (attachment['type'] == 'file'):
+##                    TempURL = "https://file.groupme.com/v1/%s/files/%s"%(group_id,attachment['file_id'])
+##                    print(TempURL)
+##                    FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
+##                    tempfile = wget.download(TempURL,FileName)
+##                    if len(message['text'].upper().split()) > 1:
+##                        FolderName = message['text'].upper().split()[1]
+##                    else:
+##                        FolderName = None
+##                    GD.SortFile(drive,tempfile,message['created_at'],FolderName)
     GD.UpdateEnvVars()
     return "ok", 200
 
