@@ -25,16 +25,18 @@ def webhook():
     # 'message' is an object that represents a single GroupMe message.
     message = request.get_json()
     # TODO: Your bot's logic here
-    if (not sender_is_bot(message)) and (len(message['attachments'])!= 0):
+    if (not sender_is_bot(message)) and (len(message['attachments'])!= 0) and ('[[academic]]' in message['text'].lower().split()[0]):
         print('Found Message')
-        print(message['attachments'])
         for attachment in message['attachments']:
             if attachment['type'] == 'image':
                 TempURL = attachment['url']
                 FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
                 tempfile = wget.download(TempURL,FileName)
-                print(tempfile)
-                GD.SortFile(drive,tempfile)
+                if len(message['text'].upper().split()) > 1:
+                    FolderName = message['text'].upper().split()[1]
+                else:
+                    FolderName = None
+                GD.SortFile(drive,tempfile,FolderName)
     GD.UpdateEnvVars()
     return "ok", 200
 

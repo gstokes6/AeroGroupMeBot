@@ -46,8 +46,8 @@ def GetDrive():
     return drive
 
 def Setup(drive):
-    PythonBotID = FindOrCreateFolder(drive,['Python Bot'])
-    UploadsID = FindOrCreateFolder(drive,['Python Bot','Uploads'])
+    #PythonBotID = FindOrCreateFolder(drive,['Python Bot'])
+    UploadsID = FindOrCreateFolder(drive,['Python Bot','Uploads','Unsorted'])
 
 def FindOrCreateFolder(drive,Titles):
     parent_id = 'root'
@@ -62,7 +62,8 @@ def FindOrCreateFolder(drive,Titles):
             folder_metadata = {
                 'title' : title,
                 # The mimetype defines this new file as a folder, so don't change this.
-                'mimeType' : 'application/vnd.google-apps.folder'
+                'mimeType' : 'application/vnd.google-apps.folder',
+                "parents"  : [{"kind": "drive#fileLink", "id": parent_id}]
             }
             folder = drive.CreateFile(folder_metadata)
             folder.Upload()
@@ -72,13 +73,14 @@ def FindOrCreateFolder(drive,Titles):
             parent_id = search_list[0]['id']
     return (parent_id)
 
-def SortFile(drive,path,folder_id=None):
+def SortFile(drive,path,FolderName=None):
     Setup(drive)
     if folder_id:
+        folder_id = FindOrCreateFolder(drive,['Python Bot','Uploads',FolderName])
         f = UploadFile(drive,path,folder_id)
         return f
     else:
-        folder_id = FindOrCreateFolder(drive,['Python Bot','Uploads'])
+        folder_id = FindOrCreateFolder(drive,['Python Bot','Uploads','Unsorted'])
         f = UploadFile(drive,path,folder_id)
         return f
 
@@ -91,9 +93,7 @@ def UploadFile(drive,path,folder_id):
 
 
 if __name__ == "__main__":
-    0==0
-##    path = 'dsmGaKWMeHXe9QuJtq_ys30PNfTGnMsRuHuo_MUzGCg.jpg'
-##    drive = GetDrive()
-##    folder_id = Startup(drive)
-##    file = UploadFile(drive,path,folder_id)
-
+    drive = GetDrive()
+    PythonBotID = FindOrCreateFolder(drive,["Python Bot"])
+    folder_id = FindOrCreateFolder(drive,['Python Bot','Uploads','Unsorted'])
+    file_list = drive.ListFile({'q': "'%s' in parents and trashed=false"%(PythonBotID)}).GetList()
