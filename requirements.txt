@@ -1,3 +1,4 @@
 Flask==1.0
 gunicorn==19.6.0
 GroupyAPI==0.10.3
+wget==3.2

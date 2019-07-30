@@ -2,7 +2,7 @@
 import os
 import json
 import requests
-import urllib
+import wget
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
@@ -27,8 +27,7 @@ def webhook():
                 TempURL = attachment['url']
                 FileName = TempURL.split('.')[-1] + '.' + TempURL.split('.')[-1]
                 print(TempURL,FileName)
-                tempfile = urllib.URLopener()
-                tempfile.retrieve(TempURL, FileName)
+                tempfile = wget(TempURL,FileName)
                 print(tempfile)
     return "ok", 200
 
