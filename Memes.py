@@ -30,7 +30,7 @@ def zoom(im,zoom):
     out = out.resize((normX,normY))
     return out
 
-def GetHart(iteration):
+def GetHart(i):
     im = Image.open("centered-hartfield-roy.jpg")
     ZoomIntensity = 1+.25*i
     RedIntensity = .006*i*i
