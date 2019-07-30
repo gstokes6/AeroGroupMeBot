@@ -46,28 +46,30 @@ def GetDrive():
     return drive
 
 def Setup(drive):
-    folder_id = FindOrCreateFolder(drive,'Python Bot','root')
-    FindOrCreateFolder(drive,'Uploads','Python Bot')
+    PythonBotID = FindOrCreateFolder(drive,['Python Bot'])
+    UploadsID = FindOrCreateFolder(drive,['Python Bot','Uploads'])
 
-def FindOrCreateFolder(drive,title,root):
-    search_list = []
-    file_list = drive.ListFile({'q': "'%s' in parents and trashed=false"%(root)}).GetList()
-    for file in file_list:
-            if (file['title'] == title):
-                    search_list.append(file)
-    if len(search_list) == 0:
-        # Create folder.
-        folder_metadata = {
-            'title' : title,
-            # The mimetype defines this new file as a folder, so don't change this.
-            'mimeType' : 'application/vnd.google-apps.folder'
-        }
-        folder = drive.CreateFile(folder_metadata)
-        folder.Upload()
-        folder_id = folder['id']
-        
-    else:
-        folder_id = search_list[0]['id']
+def FindOrCreateFolder(drive,Titles,parent_id):
+    parent_id = 'root'
+    for title in Titles:
+        search_list = []
+        file_list = drive.ListFile({'q': "'%s' in parents and trashed=false"%(parent_id)}).GetList()
+        for file in file_list:
+                if (file['title'] == title):
+                        search_list.append(file)
+        if len(search_list) == 0:
+            # Create folder.
+            folder_metadata = {
+                'title' : title,
+                # The mimetype defines this new file as a folder, so don't change this.
+                'mimeType' : 'application/vnd.google-apps.folder'
+            }
+            folder = drive.CreateFile(folder_metadata)
+            folder.Upload()
+            parent_id = folder['id']
+            
+        else:
+            parent_id = search_list[0]['id']
     return (folder_id)
 
 def SortFile(drive,path,folder_id=None):
