@@ -67,6 +67,7 @@ def webhook():
                 Memes.GetHart(4)
                 HartPath = 'ModifiedHart.jpg'
                 reply_with_image('Time for a 5 min lecture.', HartPath)
+                LikeMessage(message)
         else:
             SharingLink = GD.FindOrCreateFolderLink(drive,['Python Bot'])['alternateLink']
             reply(SharingLink,bot_id)
@@ -111,7 +112,7 @@ def upload_image_to_groupme(imgPath):
     payload = {'access_token': gm_access_token}
     r = requests.post(url, files=files, params=payload)
     imageurl = r.json()['payload']['url']
-    os.remove(filename)
+    os.remove(imgPath)
     return imageurl
 
 
