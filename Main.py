@@ -80,7 +80,9 @@ def reply(msg,bot_id):
 
     }
     PostRequest = "https://api.groupme.com/v3/bots/post?bot_id=%s&text=%s&token=%s"%(bot_id,msg,gm_access_token)
+    print(PostRequest)
     requests.post(PostRequest)
+    print('Posted!')
     #request = Request(url, urlencode(data).encode())
     #json = urlopen(request).read().decode()
 
