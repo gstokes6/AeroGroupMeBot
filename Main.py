@@ -30,10 +30,10 @@ def webhook():
     message = request.get_json()
     print(message)
     # TODO: Your bot's logic here
-    if (not sender_is_bot(message)) and (len(message['attachments'])!= 0) and (message['text']):
+    if (not sender_is_bot(message)) and (message['text']):
         print('Found Message')
-        Invoked, InvokeType = IsInvoked(message)
-        if Invoked and (len(message['attachments']) > 1):
+        Invoked, InvokeType, AttachmentAdj = IsInvoked(message)
+        if Invoked and (len(message['attachments']) > (1 - AttachmentAdj)):
             for attachment in message['attachments']:
                 if (attachment['type'] == 'image'):
                     TempURL = attachment['url']
@@ -45,7 +45,6 @@ def webhook():
                         FolderName = None
                     GD.SortFile(drive,tempfile,message['created_at'],Root,FolderName)
                     LikeMessage(message)
-                  ##No support for files yet
                 if (attachment['type'] == 'file'):
                     TempURL = "https://file.groupme.com/v1/%s/files/%s?token=%s"%(group_id,attachment['file_id'],gm_access_token)
                     print(TempURL)
@@ -56,6 +55,7 @@ def webhook():
                     else:
                         FolderName = None
                     GD.SortFile(drive,tempfile,message['created_at'],FolderName)
+                    LikeMessage(message)
         elif Invoked and not ('' == message['text'].lower().replace(InvokeType+' ','')):
             #Implement Text Saving
             print("Text saving case found")
@@ -69,7 +69,7 @@ def webhook():
                 Counter.SetContentString(str(Iteration+1))
                 Counter.Upload()
                 LikeMessage(message)
-        else:
+        elif Invoked:
             SharingLink = GD.FindOrCreateFolderLink(drive,[Root])['alternateLink']
             reply(SharingLink,bot_id)
             LikeMessage(message)
@@ -127,17 +127,19 @@ def sender_is_bot(message):
 def IsInvoked(Message):
     FoundInvoke = False
     InvokeType = None
+    AttachmentAdj = 0
     for attachment in Message['attachments']:
         #Check for Mention of @academic here
         if attachment['type'] == 'mentions':
             if '73362029' in attachment['user_ids']:
                 FoundInvoke = True
                 InvokeType = '@academic'
+                AttachmentAdj = 1
     if ('[[academic]]' in Message['text'].lower()):
         FoundInvoke= True
         InvokeType = '[[academic]]'
     if sender_is_bot(Message):
         FoundInvoke = False
     print(FoundInvoke)
-    return FoundInvoke, InvokeType
+    return FoundInvoke, InvokeType, AttachmentAdj
 
