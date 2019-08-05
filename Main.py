@@ -61,7 +61,7 @@ def webhook():
                     else:
                         FolderName = None
                     GD.SortFile(drive,tempfile,message['created_at'],FolderName)
-        elif IsInovked(message) and not ('' == message['text'].lower().replace('@academic ','')):
+        elif IsInvoked(message) and not ('' == message['text'].lower().replace('@academic ','')):
             #Implement Text Saving
             print("Text saving case found")
             if "are you with me?" in message['text'].lower():
