@@ -136,7 +136,7 @@ def IsInvoked(Message):
         if attachment['type'] == 'mentions':
             if '73362029' in attachment['user_ids']:
                 FoundInvoke = True
-    if ('[[academic]]' in essage['text'].lower()):
+    if ('[[academic]]' in Message['text'].lower()):
         FoundInvoke= True
     if sender_is_bot(Message):
         FoundInvoke = False
