@@ -46,9 +46,8 @@ def GetDrive():
     drive = GoogleDrive(gauth)
     return drive
 
-def Setup(drive):
-    #PythonBotID = FindOrCreateFolder(drive,['Python Bot'])
-    UploadsID = FindOrCreateFolder(drive,['Python Bot','Uploads','Unsorted'])
+def Setup(drive,Root):
+    UploadsID = FindOrCreateFolder(drive,[Root,'Uploads','Unsorted'])
 
 def FindOrCreateFolder(drive,Titles):
     parent_id = 'root'
@@ -98,20 +97,20 @@ def FindOrCreateFolderLink(drive,Titles):
     return (folder)
 
 
-def SortFile(drive,path,timestamp,FolderName=None):
+def SortFile(drive,path,timestamp,Root,FolderName=None):
     Setup(drive)
     DTB.AddClassFolders(drive)
     if FolderName:
-        folder_id = FindOrCreateFolder(drive,['Python Bot','Uploads',FolderName])
+        folder_id = FindOrCreateFolder(drive,[Root,'Uploads',FolderName])
         f = UploadFile(drive,path,folder_id)
         return f
     elif DTB.IsInClass(drive,timestamp):
         FolderName = DTB.IsInClass(drive,timestamp);
-        folder_id = FindOrCreateFolder(drive,['Python Bot','Uploads',FolderName])
+        folder_id = FindOrCreateFolder(drive,[Root,'Uploads',FolderName])
         f = UploadFile(drive,path,folder_id)
         return f
     else:
-        folder_id = FindOrCreateFolder(drive,['Python Bot','Uploads','Unsorted'])
+        folder_id = FindOrCreateFolder(drive,[Root,'Uploads','Unsorted'])
         f = UploadFile(drive,path,folder_id)
         return f
 

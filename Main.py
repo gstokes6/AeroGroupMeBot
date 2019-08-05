@@ -9,17 +9,18 @@ from urllib.request import Request, urlopen
 from flask import Flask, request
 import GoogleDrive as GD
 
-mycreds = GD.MakeCreds(os.getenv('GD_ACCESS_TOKEN'),os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'),os.getenv('GD_REFRESH_TOKEN'),os.getenv('GD_TOKEN_EXPIRY'))
-client_secrets = GD.MakeClient(os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'))
-drive = GD.GetDrive()
-GD.Setup(drive)
-
 app = Flask(__name__)
+Root = os.getenv('ROOT')
 bot_id = os.getenv('GROUPME_BOT_ID')
 group_id = os.getenv('GROUPME_GROUP_ID')
 gm_access_token = os.getenv('GROUPME_ACCESS_TOKEN')
 print(bot_id)
 url = 'https://api.groupme.com/v3/bots/post'
+
+mycreds = GD.MakeCreds(os.getenv('GD_ACCESS_TOKEN'),os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'),os.getenv('GD_REFRESH_TOKEN'),os.getenv('GD_TOKEN_EXPIRY'))
+client_secrets = GD.MakeClient(os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'))
+drive = GD.GetDrive()
+GD.Setup(drive,Root)
 
 # Called whenever the app's callback URL receives a POST request
 # That'll happen every time a message is sent in the group
@@ -47,24 +48,24 @@ def webhook():
                         FolderName = message['text'].upper().split()[1]
                     else:
                         FolderName = None
-                    GD.SortFile(drive,tempfile,message['created_at'],FolderName)
+                    GD.SortFile(drive,tempfile,message['created_at'],Root,FolderName)
                     LikeMessage(message)
                   ##No support for files yet
-##                if (attachment['type'] == 'file'):
-##                    TempURL = "https://file.groupme.com/v1/%s/files/%s"%(group_id,attachment['file_id'])
-##                    print(TempURL)
-##                    FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
-##                    tempfile = wget.download(TempURL,FileName)
-##                    if len(message['text'].upper().split()) > 1:
-##                        FolderName = message['text'].upper().split()[1]
-##                    else:
-##                        FolderName = None
-##                    GD.SortFile(drive,tempfile,message['created_at'],FolderName)
+                if (attachment['type'] == 'file'):
+                    TempURL = "https://file.groupme.com/v1/%s/files/%s?token=%s"%(group_id,attachment['file_id'],gm_access_token)
+                    print(TempURL)
+                    FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
+                    tempfile = wget.download(TempURL)
+                    if len(message['text'].upper().split()) > 1:
+                        FolderName = message['text'].upper().split()[1]
+                    else:
+                        FolderName = None
+                    GD.SortFile(drive,tempfile,message['created_at'],FolderName)
         elif not ('' == message['text'].lower().replace('@academic ','')):
             #Implement Text Saving
             print("Text saving case found")
             if "are you with me?" in message['text'].lower():
-                CounterID = GD.FindOrCreateFolder(drive,['Python Bot','HartCounter.txt'])
+                CounterID = GD.FindOrCreateFolder(drive,[Root,'HartCounter.txt'])
                 Counter = drive.CreateFile({'id':CounterID})
                 Iteration = int(Counter.GetContentString())
                 Memes.GetHart(Iteration)
@@ -74,7 +75,7 @@ def webhook():
                 Counter.Upload()
                 LikeMessage(message)
         else:
-            SharingLink = GD.FindOrCreateFolderLink(drive,['Python Bot'])['alternateLink']
+            SharingLink = GD.FindOrCreateFolderLink(drive,[Root])['alternateLink']
             reply(SharingLink,bot_id)
             LikeMessage(message)
     GD.UpdateEnvVars()
