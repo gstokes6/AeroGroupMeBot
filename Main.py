@@ -32,13 +32,8 @@ def webhook():
     # TODO: Your bot's logic here
     if (not sender_is_bot(message)) and (len(message['attachments'])!= 0) and (message['text']):
         print('Found Message')
-        FoundMention = 0
-        for attachment in message['attachments']:
-            #Check for Mention of @academic here
-            if attachment['type'] == 'mentions':
-                if '73362029' in attachment['user_ids']:
-                    FoundMention = 1
-        if (IsInvoked(message)) and (len(message['attachments']) > 1):
+        Invoked, InvokeType = IsInvoked(message)
+        if Invoked and (len(message['attachments']) > 1):
             for attachment in message['attachments']:
                 if (attachment['type'] == 'image'):
                     TempURL = attachment['url']
@@ -61,7 +56,7 @@ def webhook():
                     else:
                         FolderName = None
                     GD.SortFile(drive,tempfile,message['created_at'],FolderName)
-        elif IsInvoked(message) and not ('' == message['text'].lower().replace('@academic ','')):
+        elif Invoked and not ('' == message['text'].lower().replace(InvokeType+' ','')):
             #Implement Text Saving
             print("Text saving case found")
             if "are you with me?" in message['text'].lower():
@@ -131,14 +126,18 @@ def sender_is_bot(message):
 
 def IsInvoked(Message):
     FoundInvoke = False
+    InvokeType = None
     for attachment in Message['attachments']:
         #Check for Mention of @academic here
         if attachment['type'] == 'mentions':
             if '73362029' in attachment['user_ids']:
                 FoundInvoke = True
+                InvokeType = '@academic'
     if ('[[academic]]' in Message['text'].lower()):
         FoundInvoke= True
+        InvokeType = '[[academic]]'
     if sender_is_bot(Message):
         FoundInvoke = False
-    return FoundInvoke
+    print(FoundInvoke)
+    return FoundInvoke, InvokeType
 
