@@ -38,7 +38,7 @@ def webhook():
             if attachment['type'] == 'mentions':
                 if '73362029' in attachment['user_ids']:
                     FoundMention = 1
-        if (FoundMention != 0) and (len(message['attachments']) > 1):
+        if (IsInvoked(message)) and (len(message['attachments']) > 1):
             for attachment in message['attachments']:
                 if (attachment['type'] == 'image'):
                     TempURL = attachment['url']
@@ -61,7 +61,7 @@ def webhook():
                     else:
                         FolderName = None
                     GD.SortFile(drive,tempfile,message['created_at'],FolderName)
-        elif not ('' == message['text'].lower().replace('@academic ','')):
+        elif IsInovked(message) and not ('' == message['text'].lower().replace('@academic ','')):
             #Implement Text Saving
             print("Text saving case found")
             if "are you with me?" in message['text'].lower():
@@ -128,4 +128,17 @@ def LikeMessage(message):
 # Checks whether the message sender is a bot
 def sender_is_bot(message):
     return message['sender_type'] == "bot"
+
+def IsInvoked(Message):
+    FoundInvoke = False
+    for attachment in message['attachments']:
+        #Check for Mention of @academic here
+        if attachment['type'] == 'mentions':
+            if '73362029' in attachment['user_ids']:
+                FoundInvoke = True
+    if ('[[academic]]' in message['text'].lower()):
+        FoundInvoke= True
+    if sender_is_bot(Message):
+        FoundInvoke = False
+    return FoundInvoke
 
