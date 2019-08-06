@@ -34,6 +34,7 @@ def webhook():
         print('Found Message')
         Invoked, InvokeType, AttachmentAdj = IsInvoked(message)
         if Invoked and (len(message['attachments']) > (1 - AttachmentAdj)):
+            print("attachment message found")
             for attachment in message['attachments']:
                 if (attachment['type'] == 'image'):
                     TempURL = attachment['url']
@@ -56,7 +57,7 @@ def webhook():
                         FolderName = None
                     GD.SortFile(drive,tempfile,message['created_at'],FolderName)
                     LikeMessage(message)
-        elif Invoked and not ('' == message['text'].lower().replace(InvokeType+' ','')):
+        elif Invoked and not ('' == message['text'].lower().replace(InvokeType,'')):
             #Implement Text Saving
             print("Text saving case found")
             if "are you with me?" in message['text'].lower():
@@ -133,11 +134,11 @@ def IsInvoked(Message):
         if attachment['type'] == 'mentions':
             if '73362029' in attachment['user_ids']:
                 FoundInvoke = True
-                InvokeType = '@academic'
-                AttachmentAdj = 1
+                InvokeType = '@academic '
     if ('[[academic]]' in Message['text'].lower()):
         FoundInvoke= True
         InvokeType = '[[academic]]'
+        AttachmentAdj = 1
     if sender_is_bot(Message):
         FoundInvoke = False
     print(FoundInvoke)
