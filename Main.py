@@ -80,7 +80,7 @@ def webhook():
             #Implement Text Saving
             print("Text saving case found")
             if "update" in message['text'].lower():
-                UpdateID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','Update'])
+                UpdateID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','Update.txt'])
                 UpdateTextFile = drive.CreateFile({'id':UpdateID})
                 UpdateText = UpdateTextFile.GetContentString()
                 reply(UpdateText, bot_id)
