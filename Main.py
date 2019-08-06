@@ -67,7 +67,7 @@ def webhook():
                         FolderName = message['text'].upper().split()[1]
                     else:
                         FolderName = None
-                    GD.SortFile(drive,FileName,message['created_at'],Root,FolderName)
+                    GD.SortFile(drive,FileName + '.' + FileType,message['created_at'],Root,FolderName)
                     LikeMessage(message)
         elif Invoked and not ('' == message['text'].lower().replace(InvokeType,'')):
             #Implement Text Saving
