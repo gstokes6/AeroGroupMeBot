@@ -51,16 +51,15 @@ def webhook():
                     LikeMessage(message)
                 if (attachment['type'] == 'file'):
                     TempURL = "https://file.groupme.com/v1/%s/files/%s?token=%s"%(group_id,attachment['file_id'],gm_access_token)
-                    print(TempURL)
-                    
                     response = urllib.request.urlopen(TempURL)
-                    print(response)
-                    Desc = magic.from_buffer(response,mime=True)
-                    FileType = Desc.split('/')[1]
-
-                    FileName = str(message['created_at']) + '.' + FileType 
+                    FileName = str(message['created_at'])
                     TempFile = open(FileName, 'wb')
                     shutil.copyfileobj(response, TempFile)
+                    
+                    Desc = magic.from_File(TempFile,mime=True)
+                    FileType = Desc.split('/')[1]
+
+                    os.rename(FileName,FileName + '.' + FileType)
                     
 ##                    AfterDir = os.listdir(os.path.curdir)
 ##                    print(AfterDir)
