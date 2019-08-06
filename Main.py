@@ -51,6 +51,7 @@ def webhook():
                     print(TempURL)
                     FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
                     tempfile = requests.get(TempURL, allow_redirects=True)
+                    print(tempfile)
                     if len(message['text'].upper().split()) > 1:
                         FolderName = message['text'].upper().split()[1]
                     else:
