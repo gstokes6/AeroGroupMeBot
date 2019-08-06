@@ -54,8 +54,7 @@ def webhook():
                     r = requests.get(TempURL)
                     print(r.headers['content-type'])
                     FileName = str(message['created_at']) + '.pdf'
-                    TempFile = open(FileName, 'wb')
-                    shutil.copyfileobj(r.content,TempFile)
+                    TempFile = open(FileName, 'wb').write(r.content)
                     
 
 
