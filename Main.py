@@ -6,6 +6,7 @@ import wget
 import Memes
 import urllib
 import shutil
+import magic
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
