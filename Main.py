@@ -58,7 +58,8 @@ def webhook():
                     Desc = magic.from_file(FileName,mime=True)
                     FileType = Desc.split('/')[1]
                     FileName = FileName + '.' + FileType
-                    
+
+                    response = urllib.request.urlopen(TempURL)
                     TempFile = open(FileName, 'wb')
                     shutil.copyfileobj(response, TempFile)
 
