@@ -51,11 +51,17 @@ def webhook():
                 if (attachment['type'] == 'file'):
                     TempURL = "https://file.groupme.com/v1/%s/files/%s?token=%s"%(group_id,attachment['file_id'],gm_access_token)
                     print(TempURL)
-                    FileName = str(message['created_at']) + '.pdf'
-                    BeforeDir = os.listdir(os.path.curdir)
-                    print(FileName)
-                    with urllib.request.urlopen(TempURL) as response, open(FileName, 'wb') as TempFile:
-                        shutil.copyfileobj(response, TempFile)##                    AfterDir = os.listdir(os.path.curdir)
+                    
+                    response = urllib.request.urlopen(TempURL)
+                    print(response)
+                    Desc = magic.from_buffer(response,mime=True)
+                    FileType = Desc.split('/')[1]
+
+                    FileName = str(message['created_at']) + '.' + FileType 
+                    TempFile = open(FileName, 'wb')
+                    shutil.copyfileobj(response, TempFile)
+                    
+##                    AfterDir = os.listdir(os.path.curdir)
 ##                    print(AfterDir)
 ##                    for item in BeforeDir:
 ##                        AfterDir.remove(item)
@@ -65,7 +71,7 @@ def webhook():
                         FolderName = message['text'].upper().split()[1]
                     else:
                         FolderName = None
-                    GD.SortFile(drive,FileName,message['created_at'],FolderName)
+                    GD.SortFile(drive,FileName,message['created_at'],Root,FolderName)
                     LikeMessage(message)
         elif Invoked and not ('' == message['text'].lower().replace(InvokeType,'')):
             #Implement Text Saving
