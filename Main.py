@@ -55,7 +55,7 @@ def webhook():
                     BeforeDir = os.listdir(os.path.curdir)
                     print(FileName)
                     with urllib.request.urlopen(TempURL) as response, open(FileName, 'wb') as TempFile:
-                        FilePath = shutil.copyfileobj(response, TempFile)
+                        shutil.copyfileobj(response, TempFile)
                     print(FilePath)
 ##                    AfterDir = os.listdir(os.path.curdir)
 ##                    print(AfterDir)
@@ -67,7 +67,7 @@ def webhook():
                         FolderName = message['text'].upper().split()[1]
                     else:
                         FolderName = None
-                    GD.SortFile(drive,FilePath,message['created_at'],FolderName)
+                    GD.SortFile(drive,FileName,message['created_at'],FolderName)
                     LikeMessage(message)
         elif Invoked and not ('' == message['text'].lower().replace(InvokeType,'')):
             #Implement Text Saving
