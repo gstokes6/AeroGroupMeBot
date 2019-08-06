@@ -53,6 +53,7 @@ def webhook():
                     TempURL = "https://file.groupme.com/v1/%s/files/%s?token=%s"%(group_id,attachment['file_id'],gm_access_token)
                     r = requests.get(TempURL)
                     FileType = r.headers['content-type'].split('/')[1]
+                    print(r.headers['content-type'])
                     FileName = str(message['created_at']) + '.' + FileType
                     TempFile = open(FileName, 'wb').write(r.content)
                     
