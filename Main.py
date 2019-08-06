@@ -54,19 +54,15 @@ def webhook():
                     response = urllib.request.urlopen(TempURL)
                     FileName = str(message['created_at'])
                     TempFile = open(FileName, 'wb')
+                    print(response)
+                    print(TempFile)
                     shutil.copyfileobj(response, TempFile)
-                    
+                    print(TempFile)
                     Desc = magic.from_file(TempFile,mime=True)
                     FileType = Desc.split('/')[1]
 
                     os.rename(FileName,FileName + '.' + FileType)
-                    
-##                    AfterDir = os.listdir(os.path.curdir)
-##                    print(AfterDir)
-##                    for item in BeforeDir:
-##                        AfterDir.remove(item)
-##                    NewFile = AfterDir[0]
-##                    print(NewFile)
+
                     if len(message['text'].upper().split()) > 1:
                         FolderName = message['text'].upper().split()[1]
                     else:
