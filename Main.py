@@ -54,20 +54,20 @@ def webhook():
                     response = urllib.request.urlopen(TempURL)
                     FileName = str(message['created_at'])
                     TempFile = open(FileName, 'wb')
-                    print(response)
-                    print(TempFile)
                     shutil.copyfileobj(response, TempFile)
-                    print(TempFile)
                     Desc = magic.from_file(FileName,mime=True)
                     FileType = Desc.split('/')[1]
-
-                    os.rename(FileName,FileName + '.' + FileType)
+                    FileName = FileName + '.' + FileType
+                    
+                    TempFile = open(FileName, 'wb')
+                    shutil.copyfileobj(response, TempFile)
 
                     if len(message['text'].upper().split()) > 1:
                         FolderName = message['text'].upper().split()[1]
                     else:
                         FolderName = None
-                    GD.SortFile(drive,FileName + '.' + FileType,message['created_at'],Root,FolderName)
+                    FolderName = 'TEST1000'
+                    GD.SortFile(drive,FileName,message['created_at'],Root,FolderName)
                     LikeMessage(message)
         elif Invoked and not ('' == message['text'].lower().replace(InvokeType,'')):
             #Implement Text Saving
