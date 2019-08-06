@@ -51,8 +51,9 @@ def webhook():
                     print(TempURL)
                     FileName = str(message['created_at']) + '.pdf'
                     BeforeDir = os.listdir(os.path.curdir)
-                    print(BeforeDir)
-                    tempfile = wget.download(TempURL,FileName)
+                    print(FileName)
+                    with urllib.request.urlopen(TempURL) as response, open(FileName, 'wb') as TempFile:
+                        shutil.copyfileobj(response, TempFile)
                     print(tempfile)
 ##                    AfterDir = os.listdir(os.path.curdir)
 ##                    print(AfterDir)
