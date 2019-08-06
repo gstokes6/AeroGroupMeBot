@@ -58,7 +58,7 @@ def webhook():
                     print(TempFile)
                     shutil.copyfileobj(response, TempFile)
                     print(TempFile)
-                    Desc = magic.from_file(TempFile,mime=True)
+                    Desc = magic.from_file(FileName,mime=True)
                     FileType = Desc.split('/')[1]
 
                     os.rename(FileName,FileName + '.' + FileType)
