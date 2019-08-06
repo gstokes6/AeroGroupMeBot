@@ -52,8 +52,8 @@ def webhook():
                 if (attachment['type'] == 'file'):
                     TempURL = "https://file.groupme.com/v1/%s/files/%s?token=%s"%(group_id,attachment['file_id'],gm_access_token)
                     r = requests.get(TempURL)
-                    print(r.headers['content-type'])
-                    FileName = str(message['created_at']) + '.pdf'
+                    FileType = r.headers['content-type'].split('/')[1]
+                    FileName = str(message['created_at']) + '.' + FileType
                     TempFile = open(FileName, 'wb').write(r.content)
                     
 
