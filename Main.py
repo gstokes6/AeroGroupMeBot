@@ -51,17 +51,26 @@ def webhook():
                     LikeMessage(message)
                 if (attachment['type'] == 'file'):
                     TempURL = "https://file.groupme.com/v1/%s/files/%s?token=%s"%(group_id,attachment['file_id'],gm_access_token)
-                    response = urllib.request.urlopen(TempURL)
-                    FileName = str(message['created_at'])
+                    r = requests.get(TempURL)
+                    print(r.headers['content-type'])
+                    FileName = str(message['created_at']) + '.pdf'
                     TempFile = open(FileName, 'wb')
-                    shutil.copyfileobj(response, TempFile)
-                    Desc = magic.from_file(FileName,mime=True)
-                    FileType = Desc.split('/')[1]
-                    FileName = FileName + '.' + FileType
+                    shutil.copyfileobj(r.content,TempFile)
+                    
 
-                    response = urllib.request.urlopen(TempURL)
-                    TempFile = open(FileName, 'wb')
-                    shutil.copyfileobj(response, TempFile)
+
+                    
+##                    response = urllib.request.urlopen(TempURL)
+##                    FileName = str(message['created_at'])
+##                    TempFile = open(FileName, 'wb')
+##                    shutil.copyfileobj(response, TempFile)
+##                    Desc = magic.from_file(FileName,mime=True)
+##                    FileType = Desc.split('/')[1]
+##                    FileName = FileName + '.' + FileType
+##
+##                    response = urllib.request.urlopen(TempURL)
+##                    TempFile = open(FileName, 'wb')
+##                    shutil.copyfileobj(response, TempFile)
 
                     if len(message['text'].upper().split()) > 1:
                         FolderName = message['text'].upper().split()[1]
