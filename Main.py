@@ -54,23 +54,20 @@ def webhook():
                     r = requests.get(TempURL)
                     FileType = r.headers['content-type'].split('/')[1]
                     print(r.headers['content-type'])
+                    if FileType == 'vnd.openxmlformats-officedocument.presentationml.presentation':
+                        FileType = 'pptx'
+                    elif FileType == 'vnd.ms-powerpoint':
+                        FileType = 'ppt'
+                    elif FileType == 'vnd.openxmlformats-officedocument.wordprocessingml.document':
+                        FileType = 'docx'
+                    elif FileType == 'msword':
+                        FileType = 'doc'
+                    elif FileType == 'vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                        FileType = 'xlsx'
+                    elif FileType == 'vnd.ms-excel':
+                        FileType = 'xls'
                     FileName = str(message['created_at']) + '.' + FileType
                     TempFile = open(FileName, 'wb').write(r.content)
-                    
-
-
-                    
-##                    response = urllib.request.urlopen(TempURL)
-##                    FileName = str(message['created_at'])
-##                    TempFile = open(FileName, 'wb')
-##                    shutil.copyfileobj(response, TempFile)
-##                    Desc = magic.from_file(FileName,mime=True)
-##                    FileType = Desc.split('/')[1]
-##                    FileName = FileName + '.' + FileType
-##
-##                    response = urllib.request.urlopen(TempURL)
-##                    TempFile = open(FileName, 'wb')
-##                    shutil.copyfileobj(response, TempFile)
 
                     if len(message['text'].upper().split()) > 1:
                         FolderName = message['text'].upper().split()[1]
@@ -82,8 +79,14 @@ def webhook():
         elif Invoked and not ('' == message['text'].lower().replace(InvokeType,'')):
             #Implement Text Saving
             print("Text saving case found")
+            if "update" in message['text'].lower():
+                UpdateID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','Update'])
+                UpdateTextFile = drive.CreateFile({'id':UpdateID})
+                UpdateText = UpdateTextFile.GetContentString()
+                reply(UpdateText, bot_id)
+                LikeMessage(message)
             if "are you with me?" in message['text'].lower():
-                CounterID = GD.FindOrCreateFolder(drive,[Root,'HartCounter.txt'])
+                CounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','HartCounter.txt'])
                 Counter = drive.CreateFile({'id':CounterID})
                 Iteration = int(Counter.GetContentString())
                 Memes.GetHart(Iteration)
