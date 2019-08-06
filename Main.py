@@ -51,8 +51,11 @@ def webhook():
                     print(TempURL)
                     FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
                     BeforeDir = os.listdir(os.path.curdir)
-                    tempfile = requests.get(TempURL, allow_redirects=True)
+                    print(BeforeDir)
+                    tempfile = wget.download(TempURL)
+                    print(tempfile)
                     AfterDir = os.listdir(os.path.curdir)
+                    print(AfterDir)
                     for item in BeforeDir:
                         AfterDir.remove(item)
                     NewFile = AfterDir[0]
