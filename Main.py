@@ -49,22 +49,22 @@ def webhook():
                 if (attachment['type'] == 'file'):
                     TempURL = "https://file.groupme.com/v1/%s/files/%s?token=%s"%(group_id,attachment['file_id'],gm_access_token)
                     print(TempURL)
-                    FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
+                    FileName = str(message['created_at']) + '.pdf'
                     BeforeDir = os.listdir(os.path.curdir)
                     print(BeforeDir)
-                    tempfile = wget.download(TempURL)
+                    tempfile = wget.download(TempURL,FileName)
                     print(tempfile)
-                    AfterDir = os.listdir(os.path.curdir)
-                    print(AfterDir)
-                    for item in BeforeDir:
-                        AfterDir.remove(item)
-                    NewFile = AfterDir[0]
-                    print(NewFile)
+##                    AfterDir = os.listdir(os.path.curdir)
+##                    print(AfterDir)
+##                    for item in BeforeDir:
+##                        AfterDir.remove(item)
+##                    NewFile = AfterDir[0]
+##                    print(NewFile)
                     if len(message['text'].upper().split()) > 1:
                         FolderName = message['text'].upper().split()[1]
                     else:
                         FolderName = None
-                    GD.SortFile(drive,NewFile,message['created_at'],FolderName)
+                    GD.SortFile(drive,tempfile,message['created_at'],FolderName)
                     LikeMessage(message)
         elif Invoked and not ('' == message['text'].lower().replace(InvokeType,'')):
             #Implement Text Saving
