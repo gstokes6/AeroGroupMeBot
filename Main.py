@@ -4,6 +4,7 @@ import json
 import requests
 import wget
 import Memes
+import urllib
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
