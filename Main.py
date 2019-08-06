@@ -55,9 +55,7 @@ def webhook():
                     BeforeDir = os.listdir(os.path.curdir)
                     print(FileName)
                     with urllib.request.urlopen(TempURL) as response, open(FileName, 'wb') as TempFile:
-                        shutil.copyfileobj(response, TempFile)
-                    print(FilePath)
-##                    AfterDir = os.listdir(os.path.curdir)
+                        shutil.copyfileobj(response, TempFile)##                    AfterDir = os.listdir(os.path.curdir)
 ##                    print(AfterDir)
 ##                    for item in BeforeDir:
 ##                        AfterDir.remove(item)
