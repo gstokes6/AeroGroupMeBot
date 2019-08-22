@@ -81,18 +81,20 @@ def AddZeros(MsgList,TypeList):
     return MsgList
 
 def GetCommandType(Msg,TypeResult,Attachment):
-    if Attachment == 'image':
-        return "ImageUpload"
-    elif Attachment == 'file':
-        return "FileUpload"
-    elif ("are you with me" in Msg)or ("is everbody with me" in Msg):
-        return "Hartfield"
-    elif TypeResult == []:
-        return "Nonsense"
-    elif TypeResult[0] == 'Update':
-        return "Update"
+    if Attachment != []:
+        if Attachment[0]['type'] == 'image':
+            return "ImageUpload"
+        elif Attachment[0]['type'] == 'file':
+            return "FileUpload"
     else:
-        return "Nonsense"
+        if ("are you with me" in Msg)or ("is everbody with me" in Msg):
+            return "Hartfield"
+        elif TypeResult == []:
+            return "Nonsense"
+        elif TypeResult[0] == 'Update':
+            return "Update"
+        else:
+            return "Nonsense"
 
 def AttachSan(Attach):
     NewAttach = []
@@ -104,6 +106,7 @@ def AttachSan(Attach):
 
 def Main(Msg,Attach):
     Attach = AttachSan(Attach)
+    print(Attach)
     if ((Msg.replace(' ','') == "@academic") or (Msg.replace(' ','') == "[[academic]]")) and (Attach==[]):
         return [],[],'PostLink'
     FirstPassResult = FirstPass(Msg)
@@ -116,7 +119,7 @@ def Main(Msg,Attach):
 ##Test
 if __name__ == "__main__":
     Test1 = "@Academic AERO 4140-1 Other unrelated things"
-    Test1Msg = {'attachments': [{'loci': [[0, 9]], 'type': 'mentions', 'user_ids': ['73362029']}], 'avatar_url': 'https://i.groupme.com/800x800.jpeg.079750da115c4d3baae220c371654878', 'created_at': 1566494147, 'group_id': '52068192', 'id': '156649414794852476', 'name': 'Gavin Stokes', 'sender_id': '73358488', 'sender_type': 'user', 'source_guid': '8fc8fccc9bcb6dda68927b1ed0d18a12', 'system': False, 'text': '@Academic ', 'user_id': '73358488'}
+    Test1Msg = {'attachments': [{'type': 'image', 'url': 'https://i.groupme.com/663x593.jpeg.2b7b5e940cdd4c53bc580de5c93098bb'}, {'loci': [[0, 9]], 'type': 'mentions', 'user_ids': ['73362029']}], 'avatar_url': 'https://i.groupme.com/800x800.jpeg.079750da115c4d3baae220c371654878', 'created_at': 1566495571, 'group_id': '52068192', 'id': '156649557132492476', 'name': 'Gavin Stokes', 'sender_id': '73358488', 'sender_type': 'user', 'source_guid': 'ac67b98e9d4317b924772ccd64c2504b', 'system': False, 'text': '@Academic ', 'user_id': '73358488'}
     Test1Attach = Test1Msg['attachments']
     Test2 = "@academic update"
     Test2Attach = []
