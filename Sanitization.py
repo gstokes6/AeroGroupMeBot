@@ -90,7 +90,14 @@ def GetCommandType(Msg,TypeResult,Attachment):
     elif TypeResult[0] == 'Update':
         return "Update"
 
+def AttachSan(Attach):
+    Attach[:] = [attach for attach in Attach if attach['type'] == 'mentions']
+    return Attach
+
 def Main(Msg,Attach):
+    if Msg == "@academic":
+        return [],[],'PostLink"
+    Attach = AttachSan(Attach)
     FirstPassResult = FirstPass(Msg)
     RegPassResult = RegPass(FirstPassResult)
     CondenseResult,TypeResult = Condense(FirstPassResult,RegPassResult)
@@ -102,8 +109,8 @@ def Main(Msg,Attach):
 if __name__ == "__main__":
     Test1 = "@Academic AERO 4140-1 Other unrelated things"
     Test1Attach = "file"
-    Test2 = "[[Academic]] Update Aero 4140-00 1 Other unrelated things Update"
-    Test2Attach = None
+    Test2 = "Other unrelated things Update"
+    Test2Attach = []
 
     ReturnMsg1,ReturnType1,CommandType1 = Main(Test1,Test1Attach)
     ReturnMsg2,ReturnType2,CommandType2 = Main(Test2,Test2Attach)
