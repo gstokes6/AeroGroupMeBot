@@ -33,6 +33,7 @@ def webhook():
     # 'message' is an object that represents a single GroupMe message.
     message = request.get_json()
     print(message)
+    print(IsInClass(drive,message['created_at']))s
     if (not sender_is_bot(message)) and (message['text']):
         message['text'] = message['text'].lower()
         CondenseResult,TypeResult,CommandType,attachment = san.Main(message['text'],message['attachments'])
@@ -82,7 +83,7 @@ def webhook():
             reply(UpdateText, bot_id)
             LikeMessage(message)
 
-        if (CommandType == 'Hartfield'):
+        if (CommandType == 'Hartfield') and (IsInClass(drive,message['created_at']) == 'Aero4610'):
             CounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','HartCounter.txt'])
             Counter = drive.CreateFile({'id':CounterID})
             Iteration = int(Counter.GetContentString())
