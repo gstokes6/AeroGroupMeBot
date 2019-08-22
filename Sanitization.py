@@ -83,18 +83,18 @@ def AddZeros(MsgList,TypeList):
 def GetCommandType(Msg,TypeResult,Attachment):
     if Attachment != []:
         if Attachment[0]['type'] == 'image':
-            return "ImageUpload"
+            return "ImageUpload",Attachment[0]
         elif Attachment[0]['type'] == 'file':
-            return "FileUpload"
+            return "FileUpload",Attachment[0]
     else:
         if ("are you with me" in Msg)or ("is everbody with me" in Msg):
-            return "Hartfield"
+            return "Hartfield",None
         elif TypeResult == []:
-            return "Nonsense"
+            return "Nonsense",None
         elif TypeResult[0] == 'Update':
-            return "Update"
+            return "Update",None
         else:
-            return "Nonsense"
+            return "Nonsense",None
 
 def AttachSan(Attach):
     NewAttach = []

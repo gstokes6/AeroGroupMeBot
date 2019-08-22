@@ -35,7 +35,7 @@ def webhook():
     print(message)
     if (not sender_is_bot(message)) and (message['text']):
         message['text'] = message['text'].lower()
-        CondenseResult,TypeResult,CommandType = san.Main(message['text'],message['attachments'])
+        CondenseResult,TypeResult,CommandType,attachment = san.Main(message['text'],message['attachments'])
         if CommandType == 'ImageUpload':
             TempURL = attachment['url']
             FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
