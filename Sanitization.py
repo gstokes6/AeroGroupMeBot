@@ -108,7 +108,7 @@ def Main(Msg,Attach):
     Attach = AttachSan(Attach)
     print(Attach)
     if ((Msg.replace(' ','') == "@academic") or (Msg.replace(' ','') == "[[academic]]")) and (Attach==[]):
-        return [],[],'PostLink'
+        return [],[],'PostLink',None
     FirstPassResult = FirstPass(Msg)
     RegPassResult = RegPass(FirstPassResult)
     CondenseResult,TypeResult = Condense(FirstPassResult,RegPassResult)
