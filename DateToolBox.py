@@ -1,8 +1,10 @@
 import time
 import datetime
 import openpyxl
+import pytz
 import GoogleDrive as GD
 import re
+
 
 def GetSpreadsheet(Path):
     wb = openpyxl.load_workbook(Path)
@@ -40,6 +42,8 @@ def IsInClass(drive,root,timestamp):
     DataSheet = UpdateDataSheet(drive,root)
     Classes,MeetingDays,TimeStart,TimeEnd = GetSpreadsheetContents(DataSheet)
     Time = datetime.datetime.fromtimestamp(timestamp)
+    TimeZone = pytz.timezone("America/Chicago")
+    Time = TimeZone.localize(Time)
     AdjMeeting = []
     AdjStart = []
     AdjEnd = []
