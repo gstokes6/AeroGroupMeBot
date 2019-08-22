@@ -96,7 +96,7 @@ def AttachSan(Attach):
 
 def Main(Msg,Attach):
     if Msg == "@academic":
-        return [],[],'PostLink"
+        return [],[],'PostLink'
     Attach = AttachSan(Attach)
     FirstPassResult = FirstPass(Msg)
     RegPassResult = RegPass(FirstPassResult)
