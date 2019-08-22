@@ -104,8 +104,8 @@ def SortFile(drive,path,timestamp,Root,FolderName=None):
         folder_id = FindOrCreateFolder(drive,[Root,'Uploads',FolderName])
         f = UploadFile(drive,path,folder_id)
         return f
-    elif DTB.IsInClass(drive,timestamp):
-        FolderName = DTB.IsInClass(drive,timestamp);
+    elif DTB.IsInClass(drive,root,timestamp):
+        FolderName = DTB.IsInClass(drive,root,timestamp);
         folder_id = FindOrCreateFolder(drive,[Root,'Uploads',FolderName])
         f = UploadFile(drive,path,folder_id)
         return f

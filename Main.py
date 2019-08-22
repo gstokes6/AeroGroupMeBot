@@ -84,7 +84,7 @@ def webhook():
             reply(UpdateText, bot_id)
             LikeMessage(message)
 
-        if (CommandType == 'Hartfield') and (IsInClass(drive,message['created_at']) == 'Aero4610'):
+        if (CommandType == 'Hartfield') and (IsInClass(drive,Root,message['created_at']) == 'Aero4610'):
             CounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','HartCounter.txt'])
             Counter = drive.CreateFile({'id':CounterID})
             Iteration = int(Counter.GetContentString())

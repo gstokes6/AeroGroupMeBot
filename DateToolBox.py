@@ -23,20 +23,20 @@ def GetSpreadsheetContents(DataSheet):
         Row = Row + 1
     return Classes,MeetingDays,TimeStart,TimeEnd
 
-def UpdateDataSheet(drive):
-    SpreadsheetID = GD.FindOrCreateFolder(drive,['Python Bot','Classes.xlsx'])
+def UpdateDataSheet(drive,root):
+    SpreadsheetID = GD.FindOrCreateFolder(drive,[root,'Classes.xlsx'])
     Spreadsheet = drive.CreateFile({'id':SpreadsheetID})
     Spreadsheet.GetContentFile('Classes.xlsx')
     DataSheet,wb = GetSpreadsheet('Classes.xlsx')
     return DataSheet
     
-def AddClassFolders(drive):
-    DataSheet = UpdateDataSheet(drive)
+def AddClassFolders(drive,root):
+    DataSheet = UpdateDataSheet(drive,root)
     Classes,MeetingDays,TimeStart,TimeEnd = GetSpreadsheetContents(DataSheet)
     for Class in Classes:
         GD.FindOrCreateFolder(drive,['Python Bot','Uploads',Class])
 
-def IsInClass(drive,timestamp):
+def IsInClass(drive,root,timestamp):
     DataSheet = UpdateDataSheet(drive)
     Classes,MeetingDays,TimeStart,TimeEnd = GetSpreadsheetContents(DataSheet)
     Time = datetime.datetime.fromtimestamp(timestamp)
