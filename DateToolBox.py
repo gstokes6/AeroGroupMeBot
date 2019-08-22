@@ -41,9 +41,11 @@ def AddClassFolders(drive,root):
 def IsInClass(drive,root,timestamp):
     DataSheet = UpdateDataSheet(drive,root)
     Classes,MeetingDays,TimeStart,TimeEnd = GetSpreadsheetContents(DataSheet)
+    print(Time)
     Time = datetime.datetime.fromtimestamp(timestamp)
     TimeZone = pytz.timezone("America/Chicago")
     Time = TimeZone.localize(Time)
+    print(Time)
     AdjMeeting = []
     AdjStart = []
     AdjEnd = []
