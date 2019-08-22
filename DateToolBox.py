@@ -64,6 +64,7 @@ def IsInClass(drive,root,timestamp):
                 temp[temp.index(day)] = 7
         AdjMeeting.append(temp)
     for i in range(0,len(Classes)):
+        print(Classes[i],AdjMeeting[i],TimeStart[i],Time.time(),TimeEnd[i])
         if (Time.weekday() in AdjMeeting[i]) and (TimeStart[i] < Time.time() < TimeEnd[i]):
             return Classes[i]
     return None
