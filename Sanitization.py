@@ -81,6 +81,8 @@ def AddZeros(MsgList,TypeList):
     return MsgList
 
 def GetCommandType(Msg,TypeResult,Attachment):
+    if TypeResult == []:
+        return "Nonsense"
     if Attachment == 'image':
         return "ImageUpload"
     elif Attachment == 'file':
@@ -89,15 +91,19 @@ def GetCommandType(Msg,TypeResult,Attachment):
         return "Hartfield"
     elif TypeResult[0] == 'Update':
         return "Update"
+    else:
+        return "Nonsense"
 
 def AttachSan(Attach):
-    Attach[:] = [attach for attach in Attach if attach['type'] == 'mentions']
-    return Attach
+    NewAttach = []
+    for attach in Attach:
+        if attach['type'] != 'mentions':
+            NewAttach.append(attach)
+    #Attach[:] = [attach for attach in Attach if attach['type'] == 'mentions']
+    return NewAttach
 
 def Main(Msg,Attach):
-    print(Attach)
     Attach = AttachSan(Attach)
-    print(Attach)
     if (Msg == "@academic ") and (Attach==[]):
         return [],[],'PostLink'
     FirstPassResult = FirstPass(Msg)
@@ -110,8 +116,9 @@ def Main(Msg,Attach):
 ##Test
 if __name__ == "__main__":
     Test1 = "@Academic AERO 4140-1 Other unrelated things"
-    Test1Attach = "file"
-    Test2 = "Other unrelated things Update"
+    Test1Msg = {'attachments': [{'loci': [[0, 9]], 'type': 'mentions', 'user_ids': ['73362029']}], 'avatar_url': 'https://i.groupme.com/800x800.jpeg.079750da115c4d3baae220c371654878', 'created_at': 1566494147, 'group_id': '52068192', 'id': '156649414794852476', 'name': 'Gavin Stokes', 'sender_id': '73358488', 'sender_type': 'user', 'source_guid': '8fc8fccc9bcb6dda68927b1ed0d18a12', 'system': False, 'text': '@Academic ', 'user_id': '73358488'}
+    Test1Attach = Test1Msg['attachments']
+    Test2 = "@academic update"
     Test2Attach = []
 
     ReturnMsg1,ReturnType1,CommandType1 = Main(Test1,Test1Attach)
