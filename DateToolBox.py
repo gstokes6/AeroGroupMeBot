@@ -37,7 +37,7 @@ def AddClassFolders(drive,root):
         GD.FindOrCreateFolder(drive,['Python Bot','Uploads',Class])
 
 def IsInClass(drive,root,timestamp):
-    DataSheet = UpdateDataSheet(drive)
+    DataSheet = UpdateDataSheet(drive,root)
     Classes,MeetingDays,TimeStart,TimeEnd = GetSpreadsheetContents(DataSheet)
     Time = datetime.datetime.fromtimestamp(timestamp)
     AdjMeeting = []
