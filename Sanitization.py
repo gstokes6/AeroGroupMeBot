@@ -81,14 +81,14 @@ def AddZeros(MsgList,TypeList):
     return MsgList
 
 def GetCommandType(Msg,TypeResult,Attachment):
-    if TypeResult == []:
-        return "Nonsense"
     if Attachment == 'image':
         return "ImageUpload"
     elif Attachment == 'file':
         return "FileUpload"
     elif ("are you with me" in Msg)or ("is everbody with me" in Msg):
         return "Hartfield"
+    elif TypeResult == []:
+        return "Nonsense"
     elif TypeResult[0] == 'Update':
         return "Update"
     else:
@@ -104,7 +104,7 @@ def AttachSan(Attach):
 
 def Main(Msg,Attach):
     Attach = AttachSan(Attach)
-    if (Msg == "@academic ") and (Attach==[]):
+    if ((Msg.replace(' ','') == "@academic") or (Msg.replace(' ','') == "[[academic]]")) and (Attach==[]):
         return [],[],'PostLink'
     FirstPassResult = FirstPass(Msg)
     RegPassResult = RegPass(FirstPassResult)
