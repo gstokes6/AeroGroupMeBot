@@ -113,8 +113,8 @@ def Main(Msg,Attach):
     RegPassResult = RegPass(FirstPassResult)
     CondenseResult,TypeResult = Condense(FirstPassResult,RegPassResult)
     CondenseResult = AddZeros(CondenseResult,TypeResult)
-    CommandType = GetCommandType(Msg,TypeResult,Attach)
-    return CondenseResult,TypeResult,CommandType
+    CommandType,RelevantAttach = GetCommandType(Msg,TypeResult,Attach)
+    return CondenseResult,TypeResult,CommandType,RelevantAttach
 
 ##Test
 if __name__ == "__main__":
