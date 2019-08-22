@@ -85,7 +85,7 @@ def GetCommandType(Msg,TypeResult,Attachment):
         return "ImageUpload"
     elif Attachment == 'file':
         return "FileUpload"
-    elif "are you with me?" in Msg:
+    elif ("are you with me" in Msg)or ("is everbody with me" in Msg):
         return "Hartfield"
     elif TypeResult[0] == 'Update':
         return "Update"
@@ -95,9 +95,9 @@ def AttachSan(Attach):
     return Attach
 
 def Main(Msg,Attach):
-    if Msg == "@academic ":
-        return [],[],'PostLink'
     Attach = AttachSan(Attach)
+    if (Msg == "@academic ") and (Attach==[]):
+        return [],[],'PostLink'
     FirstPassResult = FirstPass(Msg)
     RegPassResult = RegPass(FirstPassResult)
     CondenseResult,TypeResult = Condense(FirstPassResult,RegPassResult)
