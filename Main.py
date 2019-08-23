@@ -73,7 +73,6 @@ def webhook():
                 FolderName = message['text'].upper().split()[1]
             else:
                 FolderName = None
-            FolderName = 'TEST1000'
             GD.SortFile(drive,FileName,message['created_at'],Root,FolderName)
             LikeMessage(message)
             
@@ -84,7 +83,7 @@ def webhook():
             reply(UpdateText, bot_id)
             LikeMessage(message)
 
-        if (CommandType == 'Hartfield') and (IsInClass(drive,Root,message['created_at']) == 'Aero4610'):
+        if (CommandType == 'Hartfield') and (IsInClass(drive,Root,message['created_at']) == 'TEST1000'):
             CounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','HartCounter.txt'])
             Counter = drive.CreateFile({'id':CounterID})
             Iteration = int(Counter.GetContentString())
