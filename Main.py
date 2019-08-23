@@ -93,15 +93,22 @@ def webhook():
             date_time_obj = datetime.datetime.strptime(Counter['modifiedDate'], '%Y-%m-%dT%H:%M:%S.%fZ')            
             print(date_time_obj)
             print(datetime.datetime.fromtimestamp(message['created_at']).date())
-            if (date_time_obj.date() != datetime.datetime.fromtimestamp(message['created_at']).date()):
+            if ((date_time_obj.date()+datetime.timedelta(days=1)) != datetime.datetime.fromtimestamp(message['created_at']).date()):
                 Iteration = 0
             else:
                 Iteration = int(Counter.GetContentString())
             Memes.GetHart(Iteration)
             HartPath = 'ModifiedHart.jpg'
-            reply_with_image('Time for a 5 min lecture.', HartPath)
+            reply_with_image("Time for a 5 min lecture. Today's count: " + str(Iteration), HartPath)
             Counter.SetContentString(str(Iteration+1))
             Counter.Upload()
+
+            TotalCounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','TotalHartCounter.txt'])
+            TotalCounter = drive.CreateFile({'id':TotalCounterID})
+            TotalIteration = int(TotalCounter.GetContentString())
+            TotalCounter.SetContentString(str(TotalIteration+1))
+            TotalCounter.Upload()
+
             LikeMessage(message)
         elif (CommandType == 'PostLink'):
             SharingLink = GD.FindOrCreateFolderLink(drive,[Root])['alternateLink']

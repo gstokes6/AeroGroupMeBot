@@ -32,8 +32,8 @@ def zoom(im,zoom):
 
 def GetHart(i):
     im = Image.open("centered-hartfield-roy.jpg")
-    ZoomIntensity = 1+.25*i
-    RedIntensity = .006*i*i
+    ZoomIntensity = 1+.15*i
+    RedIntensity = .004*i*i
     print(ZoomIntensity,RedIntensity)
     z = zoom(im,ZoomIntensity)
     out = colorize(z,RedIntensity)
