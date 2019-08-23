@@ -49,7 +49,7 @@ def webhook():
             GD.SortFile(drive,tempfile,message['created_at'],Root,FolderName)
             LikeMessage(message)
 
-        if (CommandType == 'FileUpload'):
+        elif (CommandType == 'FileUpload'):
             TempURL = "https://file.groupme.com/v1/%s/files/%s?token=%s"%(group_id,attachment['file_id'],gm_access_token)
             r = requests.get(TempURL)
             FileType = r.headers['content-type'].split('/')[1]
@@ -76,17 +76,24 @@ def webhook():
             GD.SortFile(drive,FileName,message['created_at'],Root,FolderName)
             LikeMessage(message)
             
-        if (CommandType == 'Update'):
+        elif (CommandType == 'Update'):
             UpdateID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','Update.txt'])
             UpdateTextFile = drive.CreateFile({'id':UpdateID})
             UpdateText = UpdateTextFile.GetContentString()
             reply(UpdateText, bot_id)
             LikeMessage(message)
 
-        if (CommandType == 'Hartfield') and (dtb.IsInClass(drive,Root,message['created_at']) == 'TEST1000'):
+        elif (CommandType == 'Hartfield') and (dtb.IsInClass(drive,Root,message['created_at']) == 'TEST1000'):
             CounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','HartCounter.txt'])
             Counter = drive.CreateFile({'id':CounterID})
-            Iteration = int(Counter.GetContentString())
+            
+            date_time_obj = datetime.datetime.strptime(Counter['modifiedDate'], '%Y-%m-%dT%H:%M:%S.%fZ')            
+            print(date_time_obj)
+            print(atetime.datetime.fromtimestamp(message['created_at']).date())
+            if (date_time_obj.date != datetime.datetime.fromtimestamp(message['created_at']).date()):
+                Iteration = 0
+            else:
+                Iteration = int(Counter.GetContentString())
             Memes.GetHart(Iteration)
             HartPath = 'ModifiedHart.jpg'
             reply_with_image('Time for a 5 min lecture.', HartPath)

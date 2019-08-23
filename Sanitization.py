@@ -104,9 +104,21 @@ def AttachSan(Attach):
     #Attach[:] = [attach for attach in Attach if attach['type'] == 'mentions']
     return NewAttach
 
+def IsInvoked(Msg,Attach):
+    Result = False
+    for attachment in Attach:
+        #Check for Mention of @academic here
+        if attachment['type'] == 'mentions':
+            if '73362029' in attachment['user_ids']:
+                Result = True
+    if ('[[academic]]' in Msg):
+        Result = True
+
+
 def Main(Msg,Attach):
+    if not (('[[academic]]' in Msg) or ('@academic' in Msg)):
+        return [],[],None,None
     Attach = AttachSan(Attach)
-    print(Attach)
     if ((Msg.replace(' ','') == "@academic") or (Msg.replace(' ','') == "[[academic]]")) and (Attach==[]):
         return [],[],'PostLink',None
     FirstPassResult = FirstPass(Msg)

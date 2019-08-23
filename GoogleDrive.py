@@ -124,8 +124,8 @@ def UploadFile(drive,path,folder_id):
 
 if __name__ == "__main__":
     drive = GetDrive()
-    path = 'C:\\Users\\gstok\\Desktop\\2vi3ju.jpg'
-    SortFile(drive,path,FolderName=None)
+    f = drive.CreateFile({'id': '1Ar5Nx4jRt2AJ5p5xaUIaLyCHTSQEliUF'})
+    print(f['modifiedDate'])
 
 
 

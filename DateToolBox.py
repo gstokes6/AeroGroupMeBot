@@ -42,11 +42,9 @@ def IsInClass(drive,root,timestamp):
     DataSheet = UpdateDataSheet(drive,root)
     Classes,MeetingDays,TimeStart,TimeEnd = GetSpreadsheetContents(DataSheet)
     Time = datetime.datetime.fromtimestamp(timestamp)
-    print(Time)
     TimeZone = pytz.timezone("America/Chicago")
     Time = pytz.utc.localize(Time)
     Time = Time.astimezone(TimeZone)
-    print(Time)
     AdjMeeting = []
     AdjStart = []
     AdjEnd = []
@@ -71,7 +69,6 @@ def IsInClass(drive,root,timestamp):
                 temp[temp.index(day)] = 7
         AdjMeeting.append(temp)
     for i in range(0,len(Classes)):
-        print(Classes[i],AdjMeeting[i],TimeStart[i],Time.time(),TimeEnd[i])
         if (Time.weekday() in AdjMeeting[i]) and (TimeStart[i] < Time.time() < TimeEnd[i]):
             return Classes[i]
     return None
