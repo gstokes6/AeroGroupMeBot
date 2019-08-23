@@ -92,8 +92,8 @@ def webhook():
             
             date_time_obj = datetime.datetime.strptime(Counter['modifiedDate'], '%Y-%m-%dT%H:%M:%S.%fZ')            
             print(date_time_obj)
-            print(atetime.datetime.fromtimestamp(message['created_at']).date())
-            if (date_time_obj.date != datetime.datetime.fromtimestamp(message['created_at']).date()):
+            print(datetime.datetime.fromtimestamp(message['created_at']).date())
+            if (date_time_obj.date() != datetime.datetime.fromtimestamp(message['created_at']).date()):
                 Iteration = 0
             else:
                 Iteration = int(Counter.GetContentString())
