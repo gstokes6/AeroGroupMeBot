@@ -3,16 +3,18 @@ import os
 import json
 import requests
 import wget
-import Memes
 import urllib
 import shutil
-import magic
+import datetime
+
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
+
 import GoogleDrive as GD
 import Sanitization as san
 import DateToolBox as dtb
+import Memes
 
 app = Flask(__name__)
 Root = os.getenv('ROOT')
@@ -20,6 +22,7 @@ bot_id = os.getenv('GROUPME_BOT_ID')
 group_id = os.getenv('GROUPME_GROUP_ID')
 gm_access_token = os.getenv('GROUPME_ACCESS_TOKEN')
 print(bot_id)
+print('Update 2 code')
 url = 'https://api.groupme.com/v3/bots/post'
 
 mycreds = GD.MakeCreds(os.getenv('GD_ACCESS_TOKEN'),os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'),os.getenv('GD_REFRESH_TOKEN'),os.getenv('GD_TOKEN_EXPIRY'))
