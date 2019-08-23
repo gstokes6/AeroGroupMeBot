@@ -86,7 +86,7 @@ def webhook():
             reply(UpdateText, bot_id)
             LikeMessage(message)
 
-        elif (CommandType == 'Hartfield') and (dtb.IsInClass(drive,Root,message['created_at']) == 'TEST1000'):
+        elif (CommandType == 'Hartfield') and (dtb.IsInClass(drive,Root,message['created_at']) == 'AERO4510'):
             CounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','HartCounter.txt'])
             Counter = drive.CreateFile({'id':CounterID})
             
@@ -99,7 +99,7 @@ def webhook():
                 Iteration = int(Counter.GetContentString())
             Memes.GetHart(Iteration)
             HartPath = 'ModifiedHart.jpg'
-            reply_with_image("Time for a 5 min lecture. Today's count: " + str(Iteration), HartPath)
+            reply_with_image("Time for a 5 min lecture. Today's count: " + str(Iteration+1), HartPath)
             Counter.SetContentString(str(Iteration+1))
             Counter.Upload()
 
