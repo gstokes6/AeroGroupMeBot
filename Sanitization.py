@@ -87,7 +87,7 @@ def GetCommandType(Msg,TypeResult,Attachment):
         elif Attachment[0]['type'] == 'file':
             return "FileUpload",Attachment[0]
     else:
-        if ("are you with me" in Msg)or ("is everbody with me" in Msg):
+        if ("are you with me" in Msg)or ("everbody with me" in Msg):
             return "Hartfield",None
         elif TypeResult == []:
             return "Nonsense",None
