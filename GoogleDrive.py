@@ -99,7 +99,7 @@ def FindOrCreateFolderLink(drive,Titles):
 
 def SortFile(drive,path,timestamp,Root,FolderName=None):
     Setup(drive,Root)
-    DTB.AddClassFolders(drive)
+    DTB.AddClassFolders(drive,Root)
     if FolderName:
         folder_id = FindOrCreateFolder(drive,[Root,'Uploads',FolderName])
         f = UploadFile(drive,path,folder_id)
