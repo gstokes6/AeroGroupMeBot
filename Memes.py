@@ -21,6 +21,18 @@ def colorize(im,weight):
         for Y in range(0,normY):
             out.putpixel((X,Y),TupleMulti(im.getpixel((X,Y)),t2))
     return out
+def colorizeGreen(im,weight):
+    """
+    Colorize PIL image `original` with the given
+    'red weight', 0-1; returns another PIL image.
+    """
+    normX,normY = im.size
+    out = Image.new('RGB',(normX,normY))
+    t2 = (1-weight,1+weight*2,1-weight)
+    for X in range(0,normX):
+        for Y in range(0,normY):
+            out.putpixel((X,Y),TupleMulti(im.getpixel((X,Y)),t2))
+    return out
 
 def zoom(im,zoom):
     normX,normY = im.size
@@ -45,7 +57,7 @@ def GetMailen(i):
     RedIntensity = .004*i*i
     print(ZoomIntensity,RedIntensity)
     z = zoom(im,ZoomIntensity)
-    out = colorize(z,RedIntensity)
+    out = colorizeGreen(z,RedIntensity)
     out.save('ModifiedMailen.jpg')
 
 if __name__ == "__main__":
