@@ -109,7 +109,7 @@ def webhook():
             HartStat = drive.CreateFile({'id':HartDateID})
             HartStat.Upload()
             Stats = HartStat.GetContentString()
-            Stats = Stats + '\n' + message['created_at']
+            Stats = Stats + '\n' + str(message['created_at'])
             HartStat.SetContentString(Stats)
             HartStats.Upload()
 
