@@ -22,7 +22,7 @@ bot_id = os.getenv('GROUPME_BOT_ID')
 group_id = os.getenv('GROUPME_GROUP_ID')
 gm_access_token = os.getenv('GROUPME_ACCESS_TOKEN')
 print(bot_id)
-print('Update 2 code')
+print('Update 3 code')
 url = 'https://api.groupme.com/v3/bots/post'
 
 mycreds = GD.MakeCreds(os.getenv('GD_ACCESS_TOKEN'),os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'),os.getenv('GD_REFRESH_TOKEN'),os.getenv('GD_TOKEN_EXPIRY'))
@@ -111,7 +111,7 @@ def webhook():
             Stats = HartStat.GetContentString()
             Stats = Stats + '\n' + str(message['created_at'])
             HartStat.SetContentString(Stats)
-            HartStats.Upload()
+            HartStat.Upload()
 
             TotalCounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','TotalHartCounter.txt'])
             TotalCounter = drive.CreateFile({'id':TotalCounterID})
