@@ -104,7 +104,7 @@ def webhook():
             Counter.SetContentString(str(Iteration+1))
             Counter.Upload()
 
-            HartDate = datetime.datetime.fromtimestamp(message['created_at']).date()
+            HartDate = str(datetime.datetime.fromtimestamp(message['created_at']).date())
             HartDateID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','HartStats',(HartDate)+'.txt'])
             HartStat = drive.CreateFile({'id':HartDateID})
             Stats = HartStat.GetContentString()
