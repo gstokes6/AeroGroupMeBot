@@ -119,7 +119,7 @@ def webhook():
             TotalCounter.Upload()
 
             LikeMessage(message)
-        elif ('69' in message['text']):
+        elif ('6' in message['text']) and ('9' in message['text']):
             reply('Nice.',bot_id)
         elif (CommandType == 'PostLink'):
             SharingLink = GD.FindOrCreateFolderLink(drive,[Root])['alternateLink']
