@@ -119,8 +119,9 @@ def webhook():
             TotalCounter.Upload()
 
             LikeMessage(message)
-        elif ('6' in message['text']) and ('9' in message['text']):
-            reply('Nice.',bot_id)
+        elif len(message['text'].split('6',maxsplit=1))>1 and len(message['text'])>15:
+            if '9' in message['text'].split('6',maxsplit=1)[-1]:
+                reply('Nice.',bot_id)
         elif (CommandType == 'PostLink'):
             SharingLink = GD.FindOrCreateFolderLink(drive,[Root])['alternateLink']
             reply(SharingLink,bot_id)
