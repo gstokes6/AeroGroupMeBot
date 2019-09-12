@@ -142,6 +142,7 @@ def webhook():
             TotalIteration = int(TotalCounter.GetContentString())
             TotalCounter.SetContentString(str(TotalIteration+1))
             TotalCounter.Upload()
+            LikeMessage(message)
 
         elif len(message['text'].split('6',maxsplit=1))>1 and len(message['text'])>15:
             if '9' in message['text'].split('6',maxsplit=1)[-1]:
