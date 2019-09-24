@@ -100,7 +100,7 @@ def webhook():
                 Iteration = int(Counter.GetContentString())
             Memes.GetHart(Iteration)
             HartPath = 'ModifiedHart.jpg'
-            reply_with_image("Time for a 5 min lecture. Today's count: " + str(Iteration+1), HartPath)
+            reply_with_image("Time for a (4)5 min lecture. Today's count: " + str(Iteration+1), HartPath)
             Counter.SetContentString(str(Iteration+1))
             Counter.Upload()
 
