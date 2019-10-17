@@ -52,7 +52,7 @@ def GetHart(i):
     out.save('ModifiedHart.jpg')
 
 def GetGulfstream(i):
-    im = Image.open("Gulfstream.jpg")
+    im = Image.open("GulfStream.jpg")
     ZoomIntensity = 1+.15*i
     RedIntensity = .004*i*i
     print(ZoomIntensity,RedIntensity)

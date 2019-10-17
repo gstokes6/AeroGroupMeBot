@@ -148,14 +148,8 @@ def webhook():
         elif (CommandType == 'Gulfstream') and (dtb.IsInClass(drive,Root,message['created_at']) == 'AERO4510'):
             CounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','GulfstreamCounter.txt'])
             Counter = drive.CreateFile({'id':CounterID})
-
+            print(CounterID)
             date_time_obj = datetime.datetime.strptime(Counter['modifiedDate'], '%Y-%m-%dT%H:%M:%S.%fZ')            
-            print(date_time_obj)
-            print(datetime.datetime.fromtimestamp(message['created_at']).date())
-            if (date_time_obj.date() != datetime.datetime.fromtimestamp(message['created_at']).date()):
-                Iteration = 0
-            else:
-                Iteration = int(Counter.GetContentString())
             Memes.GetGulfstream(Iteration)
             HartPath = 'GulfstreamMod.jpg'
             reply_with_image("You see, I was at Gulfstream the other day. Today's count: " + str(Iteration+1), HartPath)
