@@ -149,12 +149,14 @@ def webhook():
             CounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','GulfstreamCounter.txt'])
             Counter = drive.CreateFile({'id':CounterID})
             print(CounterID)
+            Iteration = int(Counter.GetContentString())
             date_time_obj = datetime.datetime.strptime(Counter['modifiedDate'], '%Y-%m-%dT%H:%M:%S.%fZ')            
             Memes.GetGulfstream(Iteration)
             HartPath = 'GulfstreamMod.jpg'
             reply_with_image("You see, I was at Gulfstream the other day. Today's count: " + str(Iteration+1), HartPath)
             Counter.SetContentString(str(Iteration+1))
             Counter.Upload()
+            LikeMessage(message)
 
 
         elif len(message['text'].split('6',maxsplit=1))>1 and len(message['text'])>15:
