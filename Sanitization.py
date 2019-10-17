@@ -89,6 +89,8 @@ def GetCommandType(Msg,TypeResult,Attachment):
     else:
         if ("are you with me" in Msg)or ("everybody with me" in Msg):
             return "Hartfield",None
+        if ("gulfstream" in Msg):
+            return "Gulfstream",None
         elif "69" in Msg:
             return "Nice.",None
         elif TypeResult == []:

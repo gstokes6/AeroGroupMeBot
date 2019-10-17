@@ -51,6 +51,15 @@ def GetHart(i):
     out = colorize(z,RedIntensity)
     out.save('ModifiedHart.jpg')
 
+def GetGulfstream(i):
+    im = Image.open("Gulfstream.jpg")
+    ZoomIntensity = 1+.15*i
+    RedIntensity = .004*i*i
+    print(ZoomIntensity,RedIntensity)
+    z = zoom(im,ZoomIntensity)
+    out = colorize(z,RedIntensity)
+    out.save('GulfstreamMod.jpg')
+    
 def GetMailen(i):
     im = Image.open("centered-mailen.jpg")
     ZoomIntensity = 1+.15*i
