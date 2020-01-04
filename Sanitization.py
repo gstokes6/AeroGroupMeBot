@@ -1,5 +1,6 @@
 ##imports
 import re
+import OCR
 
 ##Functions
 def FirstPass(msg):
@@ -83,20 +84,23 @@ def AddZeros(MsgList,TypeList):
 def GetCommandType(Msg,TypeResult,Attachment):
     if Attachment != []:
         if Attachment[0]['type'] == 'image':
-            return "ImageUpload",Attachment[0]
+            if '69' in OCR.main(Attachment[0]):
+                return "ImageUpload",True,Attachment[0]
+            else:
+                return "ImageUpload",False,Attachment[0]
         elif Attachment[0]['type'] == 'file':
-            return "FileUpload",Attachment[0]
+            return "FileUpload",False,Attachment[0]
     else:
         if ("are you with me" in Msg)or ("everybody with me" in Msg):
-            return "Hartfield",None
+            return "Hartfield",False,None
         elif "69" in Msg:
-            return "Nice.",None
+            return "Nonsense",True,None
         elif TypeResult == []:
-            return "Nonsense",None
+            return "Nonsense",False,None
         elif TypeResult[0] == 'Update':
-            return "Update",None
+            return "Update",False,None
         else:
-            return "Nonsense",None
+            return "Nonsense",False,None
 
 def AttachSan(Attach):
     NewAttach = []
@@ -119,16 +123,16 @@ def IsInvoked(Msg,Attach):
 
 def Main(Msg,Attach):
     if not (('[[academic]]' in Msg) or ('@academic' in Msg)):
-        return [],[],None,None
+        return [],False,[],None,None
     Attach = AttachSan(Attach)
     if ((Msg.replace(' ','') == "@academic") or (Msg.replace(' ','') == "[[academic]]")) and (Attach==[]):
-        return [],[],'PostLink',None
+        return [],False,[],'PostLink',None
     FirstPassResult = FirstPass(Msg)
     RegPassResult = RegPass(FirstPassResult)
     CondenseResult,TypeResult = Condense(FirstPassResult,RegPassResult)
     CondenseResult = AddZeros(CondenseResult,TypeResult)
-    CommandType,RelevantAttach = GetCommandType(Msg,TypeResult,Attach)
-    return CondenseResult,TypeResult,CommandType,RelevantAttach
+    CommandType,Nice,RelevantAttach = GetCommandType(Msg,TypeResult,Attach)
+    return CondenseResult,TypeResult,Nice,CommandType,RelevantAttach
 
 ##Test
 if __name__ == "__main__":

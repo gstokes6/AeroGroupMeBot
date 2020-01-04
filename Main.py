@@ -16,6 +16,7 @@ import Sanitization as san
 import DateToolBox as dtb
 import Memes
 
+
 app = Flask(__name__)
 Root = os.getenv('ROOT')
 bot_id = os.getenv('GROUPME_BOT_ID')
@@ -40,7 +41,7 @@ def webhook():
     print(dtb.IsInClass(drive,Root,message['created_at']))
     if (not sender_is_bot(message)) and (message['text']):
         message['text'] = message['text'].lower()
-        CondenseResult,TypeResult,CommandType,attachment = san.Main(message['text'],message['attachments'])
+        CondenseResult,TypeResult,Nice,CommandType,attachment = san.Main(message['text'],message['attachments'])
         print(CommandType)
         if CommandType == 'ImageUpload':
             TempURL = attachment['url']
@@ -52,6 +53,7 @@ def webhook():
                 FolderName = None
             GD.SortFile(drive,tempfile,message['created_at'],Root,FolderName)
             LikeMessage(message)
+            
 
         elif (CommandType == 'FileUpload'):
             TempURL = "https://file.groupme.com/v1/%s/files/%s?token=%s"%(group_id,attachment['file_id'],gm_access_token)
@@ -135,12 +137,12 @@ def webhook():
             TotalCounter.Upload()
 
             LikeMessage(message)
-        elif (CommandType == 'Nice.'):
-            reply('Nice.',bot_id)
         elif (CommandType == 'PostLink'):
             SharingLink = GD.FindOrCreateFolderLink(drive,[Root])['alternateLink']
             reply(SharingLink,bot_id)
             LikeMessage(message)
+        if (Nice):
+            reply('Nice.',bot_id)
     GD.UpdateEnvVars()
     return "ok", 200
 
