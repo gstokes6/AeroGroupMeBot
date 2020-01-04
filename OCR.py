@@ -10,5 +10,6 @@ def main(Picture):
     f = open('ocrTemp')
     string = f.read()
     f.close()
+    print('OCR String:')
     print(string)
     return string

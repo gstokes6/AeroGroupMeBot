@@ -23,7 +23,7 @@ bot_id = os.getenv('GROUPME_BOT_ID')
 group_id = os.getenv('GROUPME_GROUP_ID')
 gm_access_token = os.getenv('GROUPME_ACCESS_TOKEN')
 print(bot_id)
-print('Update 3 code')
+print('Update 2 code')
 url = 'https://api.groupme.com/v3/bots/post'
 
 mycreds = GD.MakeCreds(os.getenv('GD_ACCESS_TOKEN'),os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'),os.getenv('GD_REFRESH_TOKEN'),os.getenv('GD_TOKEN_EXPIRY'))
@@ -38,6 +38,7 @@ def webhook():
     # 'message' is an object that represents a single GroupMe message.
     message = request.get_json()
     print(message)
+    print('Current Class:')
     print(dtb.IsInClass(drive,Root,message['created_at']))
     if (not sender_is_bot(message)) and (message['text']):
         message['text'] = message['text'].lower()
@@ -105,15 +106,6 @@ def webhook():
             reply_with_image("Time for a 5 min lecture. Today's count: " + str(Iteration+1), HartPath)
             Counter.SetContentString(str(Iteration+1))
             Counter.Upload()
-
-            HartDate = str(datetime.datetime.fromtimestamp(message['created_at']).date())
-            HartDateID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','HartStats',(HartDate)+'.txt'])
-            HartStat = drive.CreateFile({'id':HartDateID})
-            HartStat.Upload()
-            Stats = HartStat.GetContentString()
-            Stats = Stats + '\n' + str(message['created_at'])
-            HartStat.SetContentString(Stats)
-            HartStat.Upload()
 
             TotalCounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','TotalHartCounter.txt'])
             TotalCounter = drive.CreateFile({'id':TotalCounterID})
