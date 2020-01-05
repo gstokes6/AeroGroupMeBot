@@ -82,7 +82,6 @@ def AddZeros(MsgList,TypeList):
     return MsgList
 
 def GetCommandType(Msg,TypeResult,Attachment):
-    print('Attachement List: '+Attachment)
     if Attachment != []:
         print('attachment found')
         if Attachment[0]['type'] == 'image':
