@@ -83,6 +83,7 @@ def AddZeros(MsgList,TypeList):
 
 def GetCommandType(Msg,TypeResult,Attachment):
     if Attachment != []:
+        print('attachment found')
         if Attachment[0]['type'] == 'image':
             if '69' in OCR.main(Attachment[0]):
                 return "ImageUpload",True,Attachment[0]
