@@ -5,7 +5,7 @@ import wget
 
 def main(Picture):
     PictureFile = wget.download(Picture['url'],'OCRtemp.png')
-    Outputfile =  'ocrTemp'
+    Outputfile =  'ocrTemp.txt'
     command = ['tesseract', PictureFile, Outputfile]
     proc = subprocess.Popen(command, stderr=subprocess.PIPE)
     proc.wait()
