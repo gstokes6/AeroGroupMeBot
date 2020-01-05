@@ -5,9 +5,10 @@ import wget
 
 def main(Picture):
     PictureFile = wget.download(Picture['url'],'OCRtemp.png')
-    command = ['tesseract', PictureFile, 'ocrTemp']
+    Outputfile =  os.path.join(str(os.getpid()),'ocrTemp')
+    command = ['tesseract', PictureFile, Outputfile]
     proc = subprocess.Popen(command, stderr=subprocess.PIPE)
-    f = open('ocrTemp')
+    f = open(Outputfile)
     string = f.read()
     f.close()
     print('OCR String:')
