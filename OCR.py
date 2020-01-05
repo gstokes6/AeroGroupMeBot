@@ -6,13 +6,6 @@ import pytesseract
 
 def main(Picture):
     PictureFile = wget.download(Picture['url'],'OCRtemp.png')
-    Outputfile =  'ocrTemp.txt'
-    command = ['tesseract', PictureFile, Outputfile]
-    proc = subprocess.Popen(command, stderr=subprocess.PIPE)
-    proc.wait()
-    f = open(Outputfile)
-    string = f.read()
-    f.close()
-    print('OCR String:')
-    print(string)
-    return string
+    Output =  pytesseract.image_to_string('OCRtemp.png', timeout=2)
+    print(Output)
+    return Output
