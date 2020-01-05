@@ -8,6 +8,7 @@ def main(Picture):
     Outputfile =  os.path.join(str(os.getpid()),'ocrTemp')
     command = ['tesseract', PictureFile, Outputfile]
     proc = subprocess.Popen(command, stderr=subprocess.PIPE)
+    proc.wait()
     f = open(Outputfile)
     string = f.read()
     f.close()
