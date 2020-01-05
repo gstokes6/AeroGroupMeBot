@@ -123,8 +123,6 @@ def IsInvoked(Msg,Attach):
 
 
 def Main(Msg,Attach):
-    if not (('[[academic]]' in Msg) or ('@academic' in Msg)):
-        return [],False,[],None,None
     Attach = AttachSan(Attach)
     if ((Msg.replace(' ','') == "@academic") or (Msg.replace(' ','') == "[[academic]]")) and (Attach==[]):
         return [],False,[],'PostLink',None
@@ -133,6 +131,8 @@ def Main(Msg,Attach):
     CondenseResult,TypeResult = Condense(FirstPassResult,RegPassResult)
     CondenseResult = AddZeros(CondenseResult,TypeResult)
     CommandType,Nice,RelevantAttach = GetCommandType(Msg,TypeResult,Attach)
+    if not (('[[academic]]' in Msg) or ('@academic' in Msg)):
+        return [],Nice,[],None,None
     return CondenseResult,TypeResult,Nice,CommandType,RelevantAttach
 
 ##Test
