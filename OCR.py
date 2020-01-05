@@ -2,6 +2,7 @@ import subprocess
 import os
 import sys
 import wget
+import pytesseract
 
 def main(Picture):
     PictureFile = wget.download(Picture['url'],'OCRtemp.png')
