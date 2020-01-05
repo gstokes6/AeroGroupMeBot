@@ -40,10 +40,12 @@ def webhook():
     print(message)
     print('Current Class:')
     print(dtb.IsInClass(drive,Root,message['created_at']))
-    if (not sender_is_bot(message)) and (message['text']):
+    
+    if (not sender_is_bot(message)):
         message['text'] = message['text'].lower()
         CondenseResult,TypeResult,Nice,CommandType,attachment = san.Main(message['text'],message['attachments'])
         print(CommandType)
+        print(Nice)
         if CommandType == 'ImageUpload':
             TempURL = attachment['url']
             FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
