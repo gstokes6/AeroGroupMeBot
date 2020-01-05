@@ -6,8 +6,11 @@ import pytesseract
 from PIL import Image
 
 def main(Picture):
-    PictureFile = wget.download(Picture['url'],'OCRtemp.jpg')
-    image = Image.open('OCRtemp.jpg')
-    Output =  pytesseract.image_to_string('OCRtemp.png', timeout=2)
+    TempfilePath = 'OCRtemp.jpg'
+    PictureFile = wget.download(Picture['url'],TempfilePath)
+    
+    image = Image.open(TempfilePath)
+    #Output =  pytesseract.image_to_string(TempfilePath, timeout=2)
+    Output =  pytesseract.image_to_string(image, timeout=2)
     print(Output)
     return Output
