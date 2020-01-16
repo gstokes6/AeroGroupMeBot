@@ -116,6 +116,10 @@ def webhook():
             TotalCounter.Upload()
 
             LikeMessage(message)
+
+        elif (CommandType == 'Vibrations') and (dtb.IsInClass(drive,Root,message['created_at']) == 'AERO4630'):
+            reply(Memes.Vibrations(),bot_id)
+            
         elif (CommandType == 'Hartfield') and (dtb.IsInClass(drive,Root,message['created_at']) == 'AERO4620'):
             CounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','MailenCounter.txt'])
             Counter = drive.CreateFile({'id':CounterID})

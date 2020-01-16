@@ -1,6 +1,6 @@
 ##imports
 import re
-import OCR
+##import OCR
 
 ##Functions
 def FirstPass(msg):
@@ -85,7 +85,7 @@ def GetCommandType(Msg,TypeResult,Attachment):
     if Attachment != []:
         print('attachment found')
         if Attachment[0]['type'] == 'image':
-            if '69' in OCR.main(Attachment[0]):
+            if False('69' in OCR.main(Attachment[0])):
                 return "ImageUpload",True,Attachment[0]
             else:
                 return "ImageUpload",False,Attachment[0]
@@ -94,6 +94,8 @@ def GetCommandType(Msg,TypeResult,Attachment):
     else:
         if ("are you with me" in Msg)or ("everybody with me" in Msg):
             return "Hartfield",False,None
+        elif ("spin the wheel" in Msg):
+            return "Vibrations",False,None
         elif "69" in Msg:
             return "Nonsense",True,None
         elif TypeResult == []:
