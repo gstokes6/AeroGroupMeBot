@@ -40,6 +40,21 @@ def webhook():
     print(message)
     print('Current Class:')
     print(dtb.IsInClass(drive,Root,message['created_at']))
+
+    Attach = message['attachments']
+    Gavin = False
+    for attachment in Attach:
+        if attachment['type'] == 'mentions':
+            if '73358488' in attachment['user_ids']:
+                loci = attachment['loci']
+                Gavin = True
+    if Gavin:
+        name = message['name']
+        nameID = message['']
+        newtext = Mock(message['text'].replace('@Gavin Stokes 2','@'+name))
+        replyMention(newtext,nameID,(loci[0],len(nameID)),bot_id)
+        
+    
     
     if (not sender_is_bot(message)):
         message['text'] = message['text'].lower()
@@ -169,6 +184,21 @@ def reply(msg,bot_id):
     request = Request(url, urlencode(data).encode())
     json = urlopen(request).read().decode()
     print('Posted!')
+
+def replyMention(msg,ID,loci,bot_id):
+    url = 'https://api.groupme.com/v3/bots/post'
+    data = {
+                    'text'                  : msg,
+                    'bot_id'                : bot_id,
+                    'attachments':[{'loci':loci,'type':mentions,'user_ids':[str(ID)]}]
+
+    } 
+    #PostRequest = "https://api.groupme.com/v3/bots/post?bot_id=%s&text=%s&token=%s"%(bot_id,msg,gm_access_token)
+    #requests.post(PostRequest)
+    
+    request = Request(url, urlencode(data).encode())
+    json = urlopen(request).read().decode()
+    print('Posted!')
     
 def reply_with_image(msg, imgPath):
 	url = 'https://api.groupme.com/v3/bots/post'
@@ -200,5 +230,19 @@ def LikeMessage(message):
 # Checks whether the message sender is a bot
 def sender_is_bot(message):
     return message['sender_type'] == "bot"
+
+def Mock(string):
+    newString = ''
+    num = 0
+    for letter in string:
+        
+        if (num % 2) == 0:
+            newString = newString + string[num].lower()
+        else:
+            newString = newString + string[num].upper()
+        num = num+1
+    return newString
+
+
 
 
