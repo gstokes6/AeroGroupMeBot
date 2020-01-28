@@ -54,7 +54,7 @@ def webhook():
         nameID = message['sender_id']
         #newtext = Mock(message['text'].replace('@Gavin Stokes 2','@'+name))
         newtext = Mock(message['text'].replace('@Academic','@'+name))
-        replyMention(newtext,nameID,(loci[0],len(nameID)),bot_id)
+        replyMention(newtext,nameID,[loci[0],len(nameID}],bot_id)
         
     
     
@@ -192,7 +192,7 @@ def replyMention(msg,ID,loci,bot_id):
     data = {
                     'text'                  : msg,
                     'bot_id'                : bot_id,
-                    'attachments':[{'loci':loci,'type':'mentions','user_ids':[str(ID)]}]
+                    'attachments':[{'loci':[loci],'type':'mentions','user_ids':[str(ID)]}]
 
     } 
     #PostRequest = "https://api.groupme.com/v3/bots/post?bot_id=%s&text=%s&token=%s"%(bot_id,msg,gm_access_token)
