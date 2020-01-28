@@ -45,13 +45,15 @@ def webhook():
     Gavin = False
     for attachment in Attach:
         if attachment['type'] == 'mentions':
-            if '73358488' in attachment['user_ids']:
+            if '73362029' in attachment['user_ids']:
+            #if '73358488' in attachment['user_ids']:
                 loci = attachment['loci']
                 Gavin = True
     if Gavin:
         name = message['name']
-        nameID = message['']
-        newtext = Mock(message['text'].replace('@Gavin Stokes 2','@'+name))
+        nameID = message['sender_id']
+        #newtext = Mock(message['text'].replace('@Gavin Stokes 2','@'+name))
+        newtext = Mock(message['text'].replace('@Academic','@'+name))
         replyMention(newtext,nameID,(loci[0],len(nameID)),bot_id)
         
     
