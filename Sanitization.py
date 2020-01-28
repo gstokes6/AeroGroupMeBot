@@ -85,11 +85,12 @@ def GetCommandType(Msg,TypeResult,Attachment):
     if Attachment != []:
         print('attachment found')
         if Attachment[0]['type'] == 'image':
-            1+1
+            
 ##            if False('69' in OCR.main(Attachment[0])):
 ##                return "ImageUpload",True,Attachment[0]
-            else:
-                return "ImageUpload",False,Attachment[0]
+##            else:
+##                return "ImageUpload",False,Attachment[0]
+            return "ImageUpload",False,Attachment[0]
         elif Attachment[0]['type'] == 'file':
             return "FileUpload",False,Attachment[0]
     else:
