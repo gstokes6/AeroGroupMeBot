@@ -54,7 +54,7 @@ def webhook():
         nameID = message['sender_id']
         newtext = Mock(message['text'].replace('@Gavin Stokes 2','@'+name))
         #newtext = Mock(message['text'].replace('@Academic','@'+name))
-        replyMention(newtext,nameID,[loci[0],len(nameID}],bot_id)
+        replyMention(newtext,nameID,[loci[0],len(nameID)],bot_id)
         
     
     
