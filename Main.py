@@ -49,7 +49,7 @@ def webhook():
             if '73358488' in attachment['user_ids']:
                 loci = attachment['loci']
                 Gavin = True
-    if Gavin and (True):
+    if Gavin and (False):
         name = message['name']
         nameID = message['sender_id']
         newtext = Mock(message['text'].replace('@Gavin Stokes 2','@'+name))
