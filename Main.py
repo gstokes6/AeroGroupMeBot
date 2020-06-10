@@ -6,6 +6,7 @@ import wget
 import urllib
 import shutil
 import datetime
+import random
 
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -59,7 +60,8 @@ def webhook():
     
     
     if (not sender_is_bot(message)):
-        LikeMessage(message)
+        if random.random() < .33:
+            LikeMessage(message)
         message['text'] = message['text'].lower()
         CondenseResult,TypeResult,Nice,CommandType,attachment = san.Main(message['text'],message['attachments'])
         print(CommandType)
