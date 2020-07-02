@@ -60,7 +60,9 @@ def webhook():
     
     
     if (not sender_is_bot(message)):
-        if random.random() < .33:
+        if '22852771' in attachment['user_ids']:
+            LikeMessage(message)
+        elif random.random() < .33:
             LikeMessage(message)
         message['text'] = message['text'].lower()
         CondenseResult,TypeResult,Nice,CommandType,attachment = san.Main(message['text'],message['attachments'])
