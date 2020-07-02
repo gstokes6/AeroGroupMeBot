@@ -100,6 +100,8 @@ def GetCommandType(Msg,TypeResult,Attachment):
             return "Vibrations",False,None
         elif "69" in Msg:
             return "Nonsense",True,None
+        elif("f in the chat" in Msg) or ("get an f" in Msg):
+            return "F",False,None
         elif TypeResult == []:
             return "Nonsense",False,None
         elif TypeResult[0] == 'Update':

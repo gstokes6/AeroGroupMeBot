@@ -60,7 +60,7 @@ def webhook():
     
     
     if (not sender_is_bot(message)):
-        if '22852771' in attachment['user_ids']:
+        if '22852771' in message['sender_id']:
             LikeMessage(message)
         elif random.random() < .33:
             LikeMessage(message)
@@ -166,6 +166,10 @@ def webhook():
             TotalCounter.Upload()
 
             LikeMessage(message)
+            
+        elif (CommandType == 'F'):
+            reply('F', bot_id)
+            
         elif (CommandType == 'PostLink'):
             SharingLink = GD.FindOrCreateFolderLink(drive,[Root])['alternateLink']
             reply(SharingLink,bot_id)
