@@ -84,7 +84,7 @@ def AddZeros(MsgList,TypeList):
 def GetCommandType(Msg,TypeResult,Attachment):
 
     if("f in the chat" in Msg) or ("get an f" in Msg) or ("get a f" in Msg):
-        return "F",True,None
+        return "F",False,None
 
     if Attachment != []:
         print('attachment found')
@@ -103,7 +103,7 @@ def GetCommandType(Msg,TypeResult,Attachment):
         elif ("spin the wheel" in Msg):
             return "Vibrations",False,None
         elif "69" in Msg:
-            return "Nonsense",False,None
+            return "Nonsense",True,None
         elif TypeResult == []:
             return "Nonsense",False,None
         elif TypeResult[0] == 'Update':
