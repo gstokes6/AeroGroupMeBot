@@ -138,8 +138,6 @@ def Main(Msg,Attach):
     CondenseResult,TypeResult = Condense(FirstPassResult,RegPassResult)
     CondenseResult = AddZeros(CondenseResult,TypeResult)
     CommandType,Nice,RelevantAttach = GetCommandType(Msg,TypeResult,Attach)
-    if not (('[[academic]]' in Msg) or ('@academic' in Msg)):
-            return [],Nice,[],None,None
     return CondenseResult,TypeResult,Nice,CommandType,RelevantAttach
 
 ##Test
