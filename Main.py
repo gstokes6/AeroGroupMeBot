@@ -60,7 +60,7 @@ def webhook():
     
     
     if (not sender_is_bot(message)):
-        if '22852771' in message['sender_id']:
+        if '22852771' in attachment['user_ids']:
             LikeMessage(message)
         elif random.random() < .33:
             LikeMessage(message)
