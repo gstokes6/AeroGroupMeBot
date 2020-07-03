@@ -82,6 +82,10 @@ def AddZeros(MsgList,TypeList):
     return MsgList
 
 def GetCommandType(Msg,TypeResult,Attachment):
+
+    if("f in the chat" in Msg) or ("get an f" in Msg) or ("get a f" in Msg):
+        return "F",True,None
+
     if Attachment != []:
         print('attachment found')
         if Attachment[0]['type'] == 'image':
@@ -99,9 +103,7 @@ def GetCommandType(Msg,TypeResult,Attachment):
         elif ("spin the wheel" in Msg):
             return "Vibrations",False,None
         elif "69" in Msg:
-            return "Nonsense",True,None
-        elif("f in the chat" in Msg) or ("get an f" in Msg):
-            return "F",False,None
+            return "Nonsense",False,None
         elif TypeResult == []:
             return "Nonsense",False,None
         elif TypeResult[0] == 'Update':
@@ -137,7 +139,7 @@ def Main(Msg,Attach):
     CondenseResult = AddZeros(CondenseResult,TypeResult)
     CommandType,Nice,RelevantAttach = GetCommandType(Msg,TypeResult,Attach)
     if not (('[[academic]]' in Msg) or ('@academic' in Msg)):
-        return [],Nice,[],None,None
+            return [],Nice,[],None,None
     return CondenseResult,TypeResult,Nice,CommandType,RelevantAttach
 
 ##Test
