@@ -13,5 +13,6 @@ class is69(messageFlag.messageFlag):
                 self.isTrue = True
 
     def response(self):
-        groupMe.reply("Nice.")
+        if self.isTrue:
+            groupMe.reply("Nice.")
         
