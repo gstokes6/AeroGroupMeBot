@@ -26,6 +26,6 @@ class isLinkRequest(messageFlag.messageFlag):
             self.isTrue = True
         
     def response(self):
-        updateText = "Placeholder link for link flag until GD is re-implemented"
+        SharingLink = LOAD_ENV_VARS.gDrive.FindOrCreateFolderLink([])['alternateLink']
         groupMe.reply(updateText)
     

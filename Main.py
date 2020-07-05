@@ -7,7 +7,6 @@ import urllib
 import shutil
 import random
 
-##import GoogleDrive as GD
 ##import Sanitization as san
 ##import DateToolBox as dtb
 ##import Memes
@@ -19,16 +18,8 @@ LOAD_ENV_VARS.init()
 
 import classMessage
 
-
 print('Update 4 code')
-
 app = Flask(__name__)
-url = 'https://api.groupme.com/v3/bots/post'
-
-##mycreds = GD.MakeCreds(os.getenv('GD_ACCESS_TOKEN'),os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'),os.getenv('GD_REFRESH_TOKEN'),os.getenv('GD_TOKEN_EXPIRY'))
-##client_secrets = GD.MakeClient(os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'))
-##drive = GD.GetDrive()
-##GD.Setup(drive,Root)
 
 # Called whenever the app's callback URL receives a POST request
 # That'll happen every time a message is sent in the group
@@ -37,9 +28,14 @@ def webhook():
     # 'message' is an object that represents a single GroupMe message.
     message = request.get_json()
     print(message)
-    print('Current Class:')
+    if (not ( message['sender_type'] == "bot" )):
+        messageClass = classMessage.message(message)
+        messageClass.printDiagnostics()
+        messageClass.response()
+##        if random.random() < .33:
+##            LikeMessage(message)
     ##print(dtb.IsInClass(drive,Root,message['created_at']))
-
+        
 ##    Attach = message['attachments']
 ##    Gavin = False
 ##    for attachment in Attach:
@@ -57,16 +53,6 @@ def webhook():
 ##        
 ##    
 ##    
-
-
-    if (not ( message['sender_type'] == "bot" )):
-##        if random.random() < .33:
-##            LikeMessage(message)
-        messageClass = classMessage.message(message)
-        messageClass.printDiagnostics()
-        text = messageClass.response()
-
-
 ##        if CommandType == 'ImageUpload':
 ##            TempURL = attachment['url']
 ##            FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]

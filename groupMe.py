@@ -1,48 +1,61 @@
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+
 import requests
+import os
 
 import LOAD_ENV_VARS
 
 def reply(msg):
     url = 'https://api.groupme.com/v3/bots/post'
+    bot_id = LOAD_ENV_VARS.ENV_VARS['bot_id']
     data = {
                     'text'                  : msg,
-                    'bot_id'                : LOAD_ENV_VARS.ENV_VARS['bot_id']
+                    'bot_id'                : bot_id
 
     } 
-    #PostRequest = "https://api.groupme.com/v3/bots/post?bot_id=%s&text=%s&token=%s"%(bot_id,msg,gm_access_token)
-    #requests.post(PostRequest)
-    
-    request = Request(url, urlencode(data).encode())
-    json = urlopen(request).read().decode()
-    print('Posted!')
+    if bot_id:
+        request = Request(url, urlencode(data).encode())
+        json = urlopen(request).read().decode()
+        print('Posted!')
+    else:
+        print('bot_id not found, bypassing')
 
 def replyMention(msg,ID,loci):
     url = 'https://api.groupme.com/v3/bots/post'
+    bot_id = LOAD_ENV_VARS.ENV_VARS['bot_id']
     data = {
                     'text'                  : msg,
-                    'bot_id'                : LOAD_ENV_VARS.ENV_VARS['bot_id'],
+                    'bot_id'                : bot_id,
                     'attachments':[{'loci':[loci],'type':'mentions','user_ids':[str(ID)]}]
 
     } 
     #PostRequest = "https://api.groupme.com/v3/bots/post?bot_id=%s&text=%s&token=%s"%(bot_id,msg,gm_access_token)
     #requests.post(PostRequest)
-    
-    request = Request(url, urlencode(data).encode())
-    json = urlopen(request).read().decode()
-    print('Posted!')
+    if bot_id:
+        request = Request(url, urlencode(data).encode())
+        json = urlopen(request).read().decode()
+        print('Posted!')
+    else:
+        print('bot_id not found, bypassing')
     
 def reply_with_image(msg, imgPath):
-	url = 'https://api.groupme.com/v3/bots/post'
-	urlOnGroupMeService = upload_image_to_groupme(imgPath)
-	data = {
-		'bot_id'		: LOAD_ENV_VARS.ENV_VARS['bot_id'],
-		'text'			: msg,
-		'picture_url'		: urlOnGroupMeService
+    bot_id = LOAD_ENV_VARS.ENV_VARS['bot_id']
+    if bot_id:
+        url = 'https://api.groupme.com/v3/bots/post'
+        urlOnGroupMeService = upload_image_to_groupme(imgPath)
+        data = {
+            'bot_id'        	: bot_id,
+	    'text'      	: msg,
+	    'picture_url'       : urlOnGroupMeService
 	}
-	request = Request(url, urlencode(data).encode())
-	json = urlopen(request).read().decode()
+        request = Request(url, urlencode(data).encode())
+        json = urlopen(request).read().decode()
+        print('Posted!')
+    else:
+        print('bot_id not found, bypassing')
 
 
 def upload_image_to_groupme(imgPath):
@@ -61,4 +74,8 @@ def likeMessage(message):
     group_id = LOAD_ENV_VARS.ENV_VARS['group_id']
     gm_access_token = LOAD_ENV_VARS.ENV_VARS['gm_access_token']
     message_id = message['id']
-    requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message_id,gm_access_token))
+    if group_id:
+        requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message_id,gm_access_token))
+        print("Liked!")
+    else:
+        print('bot_id not found, bypassing')
