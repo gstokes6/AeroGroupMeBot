@@ -2,6 +2,7 @@ from MESSAGE_FLAGS import messageFlag
 
 ##for seeing if academic is invoked
 from MESSAGE_FLAGS import isAcademicInvoked
+import groupMe
 
 
 class isLinkRequest(messageFlag.messageFlag):
