@@ -39,7 +39,7 @@ def webhook():
     message = request.get_json()
     print(message)
     print('Current Class:')
-    print(dtb.IsInClass(drive,Root,message['created_at']))
+    ##print(dtb.IsInClass(drive,Root,message['created_at']))
 
 ##    Attach = message['attachments']
 ##    Gavin = False
