@@ -27,6 +27,6 @@ class isLinkRequest(messageFlag.messageFlag):
             self.isTrue = True
         
     def response(self):
-        SharingLink = LOAD_ENV_VARS.gDrive.FindOrCreateFolderLink([])['alternateLink']
+        SharingLink = LOAD_ENV_VARS.gDrive.FindOrCreateFolder( [] )['alternateLink']
         groupMe.reply(updateText)
     
