@@ -63,7 +63,7 @@ def webhook():
     if (not sender_is_bot(message)):
         if random.random() < .33:
             LikeMessage(message)
-        messageClass = classMessage(message)
+        messageClass = classMessage.message(message)
         messageClass.printDiagnostics()
         text = messageClass.response()
 ##        if not ( text == "" ):
