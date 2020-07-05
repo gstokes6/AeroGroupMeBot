@@ -10,7 +10,7 @@ class message:
     def __init__(self,messageClass):
         ##add new flag names here, must have class definition python file in MESSAGE_FLAGS folder.
         self.MESSAGE_FLAG_LIST = ["isAcademicInvoked","is69","isF","isHartfield","isWheelSpin","isSender",
-                                  "isFileUpload","isUpdate","isLinkRequest"]
+                                  "isFileUpload","isUpdate","isLinkRequest","isSaturday"]
 
         ##Initialize the flag list and GroupMe message holder containers
         self.messageFlagsList = []
