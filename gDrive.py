@@ -61,7 +61,7 @@ class gDrive:
         folderNames.insert(0,self.root)
         for folderName in folderNames:
             search_list = []
-            file_list = drive.ListFile({'q': "'%s' in parents and trashed=false"%(parent_id)}).GetList()
+            file_list = self.drive.ListFile({'q': "'%s' in parents and trashed=false"%(parent_id)}).GetList()
             for file in file_list:
                     if (file['title'] == folderName):
                             search_list.append(file)
@@ -73,7 +73,7 @@ class gDrive:
                     'mimeType' : 'application/vnd.google-apps.folder',
                     "parents"  : [{"kind": "drive#fileLink", "id": parent_id}]
                 }
-                folder = drive.CreateFile(folder_metadata)
+                folder = self.drive.CreateFile(folder_metadata)
                 folder.Upload()
                 
             else:
