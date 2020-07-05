@@ -35,10 +35,10 @@ class message:
          self.messageFlagsList = messageFlagsList
 
     def printDiagnostics(self):
-        for i in range(len(testMessage.messageFlagsList)):
-            print(testMessage.messageFlagsList[i])
-            print("testMessage.messageFlagsList[" + str(i) + "].isTrue: ")
-            print(testMessage.messageFlagsList[i].isTrue)
+        for i in range(len(self.messageFlagsList)):
+            print(self.messageFlagsList[i])
+            print("self.messageFlagsList[" + str(i) + "].isTrue: ")
+            print(self.messageFlagsList[i].isTrue)
             print("")
 
 if __name__ == "__main__":

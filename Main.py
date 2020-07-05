@@ -5,12 +5,7 @@ import json
 import wget
 import urllib
 import shutil
-import datetime
 import random
-
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen
-
 
 ##import GoogleDrive as GD
 ##import Sanitization as san
@@ -18,6 +13,8 @@ from urllib.request import Request, urlopen
 ##import Memes
 
 from flask import Flask, request
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 import requests
 import LOAD_ENV_VARS
 LOAD_ENV_VARS.init()
