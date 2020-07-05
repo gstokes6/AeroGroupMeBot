@@ -21,7 +21,6 @@ import classMessage
 import LOAD_ENV_VARS
 LOAD_ENV_VARS.init()
 
-print(bot_id)
 print('Update 4 code')
 
 app = Flask(__name__)
