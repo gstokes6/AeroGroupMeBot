@@ -10,16 +10,20 @@ import random
 
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
-from flask import Flask, request
+
 
 ##import GoogleDrive as GD
 ##import Sanitization as san
 ##import DateToolBox as dtb
 ##import Memes
 
-import classMessage
+from flask import Flask, request
+import requests
 import LOAD_ENV_VARS
 LOAD_ENV_VARS.init()
+
+import classMessage
+
 
 print('Update 4 code')
 
