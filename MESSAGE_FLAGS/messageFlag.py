@@ -12,11 +12,7 @@ class messageFlag:
         print("You've found the base class somehow")
 
     def response(self):
-        if self.isTrue:
-            groupMe.reply("You've found the base class somehow")
-            print("You've found the base class somehow")
-            ##do thing
-            
+        groupMe.reply("You've found the base class somehow")            
         
     
 

@@ -1,5 +1,6 @@
 import importlib
 from MESSAGE_FLAGS import *
+import groupMe
 
 ##README
 ##Run this file locally before pushing to master in order to test
@@ -9,7 +10,7 @@ class message:
     def __init__(self,messageClass):
         ##add new flag names here, must have class definition python file in MESSAGE_FLAGS folder.
         self.MESSAGE_FLAG_LIST = ["isAcademicInvoked","is69","isF","isHartfield","isWheelSpin","isSender",
-                                  "isFileUpload"]
+                                  "isFileUpload","isUpdate","isLinkRequest"]
 
         ##Initialize the flag list and GroupMe message holder containers
         self.messageFlagsList = []
@@ -35,8 +36,17 @@ class message:
          self.messageFlagsList = messageFlagsList
 
     def response(self):
+        ##are we liking first?
+        willLike = False
         for flag in self.messageFlagsList:
-            flag.response()
+            willLike = (willLike or flag.willLike)
+        if willLike:
+            groupMe.like(self.message)
+
+        ##now do reply
+        for flag in self.messageFlagsList:
+            if flag.isTrue:
+                flag.response()
 
 
     def printDiagnostics(self):

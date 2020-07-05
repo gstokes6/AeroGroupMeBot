@@ -1,5 +1,6 @@
 from MESSAGE_FLAGS import messageFlag
 
+##meant to help other functions determine if academic is invoked
 class isAcademicInvoked(messageFlag.messageFlag):
     def __init__(self,message):
         super().__init__(message)
@@ -10,5 +11,5 @@ class isAcademicInvoked(messageFlag.messageFlag):
             self.isTrue = True
 
     def response(self):
-        print("This is a flag for if Academic invoked")
+        1+1 #lol
         

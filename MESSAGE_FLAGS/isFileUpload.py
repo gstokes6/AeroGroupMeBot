@@ -59,5 +59,5 @@ class isFileUpload(messageFlag.messageFlag):
 ##            FolderName = None
 ##        GD.SortFile(drive,FileName,message['created_at'],Root,FolderName)
 ##        LikeMessage(message)
-        print("This is a flag for if WheelSpin")
+        print("This is a flag for if File Upload")
         

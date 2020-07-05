@@ -59,5 +59,6 @@ def upload_image_to_groupme(imgPath):
 
 def LikeMessage(message):
     group_id = LOAD_ENV_VARS.ENV_VARS['group_id']
-    gm_access_token = LOAD_ENV_VARS.ENV_VARS['gm_access_token']    
-    requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message['id'],gm_access_token))
+    gm_access_token = LOAD_ENV_VARS.ENV_VARS['gm_access_token']
+    message_id = message['id']
+    requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message_id,gm_access_token))

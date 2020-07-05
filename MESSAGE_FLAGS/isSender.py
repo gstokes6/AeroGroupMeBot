@@ -1,8 +1,8 @@
 from MESSAGE_FLAGS import messageFlag
-
 ##for seeing if academic is invoked
 from MESSAGE_FLAGS import isAcademicInvoked
 
+##Helper flag for other flags
 class isSender(messageFlag.messageFlag):
     ##default "checkTrue" to satisfy polymorphism and find name of sender
     def __init__(self,message,usernameToCheck=None):
@@ -22,5 +22,6 @@ class isSender(messageFlag.messageFlag):
 
         
     def response(self):
-        print("This is a flag for if WheelSpin")
+        1+1 #lol
+
         
