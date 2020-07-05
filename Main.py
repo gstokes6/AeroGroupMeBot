@@ -240,7 +240,9 @@ def upload_image_to_groupme(imgPath):
 
 
 def LikeMessage(message):
-    requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message['id'],LOAD_ENV_VARS.ENV_VARS['gm_access_token']))
+    group_id = LOAD_ENV_VARS.ENV_VARS['group_id']
+    gm_access_token = LOAD_ENV_VARS.ENV_VARS['gm_access_token']    
+    requests.post("https://api.groupme.com/v3/messages/%s/%s/like?token=%s"%(group_id,message['id'],gm_access_token))
 
 # Checks whether the message sender is a bot
 def sender_is_bot(message):
