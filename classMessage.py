@@ -41,7 +41,7 @@ class message:
         for flag in self.messageFlagsList:
             willLike = (willLike or flag.willLike)
         if willLike:
-            groupMe.like(self.message)
+            groupMe.likeMessage(self.message)
 
         ##now do reply
         for flag in self.messageFlagsList:
