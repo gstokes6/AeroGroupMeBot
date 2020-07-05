@@ -1,4 +1,5 @@
 from MESSAGE_FLAGS import messageFlag
+import groupMe
 
 class is69(messageFlag.messageFlag):
     def __init__(self,message):
@@ -12,6 +13,5 @@ class is69(messageFlag.messageFlag):
                 self.isTrue = True
 
     def response(self):
-        print("Nice")
-        return "Nice"
+        groupMe.reply("Nice.")
         

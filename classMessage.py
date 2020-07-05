@@ -34,6 +34,11 @@ class message:
          ##push the updated list back to message class
          self.messageFlagsList = messageFlagsList
 
+    def response(self):
+        for flag in messageFlagList:
+            flag.response()
+
+
     def printDiagnostics(self):
         for i in range(len(self.messageFlagsList)):
             print(self.messageFlagsList[i])
