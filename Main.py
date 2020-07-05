@@ -12,10 +12,10 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from flask import Flask, request
 
-import GoogleDrive as GD
-import Sanitization as san
-import DateToolBox as dtb
-import Memes
+##import GoogleDrive as GD
+##import Sanitization as san
+##import DateToolBox as dtb
+##import Memes
 
 import classMessage
 import LOAD_ENV_VARS
@@ -26,10 +26,10 @@ print('Update 4 code')
 app = Flask(__name__)
 url = 'https://api.groupme.com/v3/bots/post'
 
-mycreds = GD.MakeCreds(os.getenv('GD_ACCESS_TOKEN'),os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'),os.getenv('GD_REFRESH_TOKEN'),os.getenv('GD_TOKEN_EXPIRY'))
-client_secrets = GD.MakeClient(os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'))
-drive = GD.GetDrive()
-GD.Setup(drive,Root)
+##mycreds = GD.MakeCreds(os.getenv('GD_ACCESS_TOKEN'),os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'),os.getenv('GD_REFRESH_TOKEN'),os.getenv('GD_TOKEN_EXPIRY'))
+##client_secrets = GD.MakeClient(os.getenv('GD_CLIENT_SECRET'),os.getenv('GD_CLIENT_ID'))
+##drive = GD.GetDrive()
+##GD.Setup(drive,Root)
 
 # Called whenever the app's callback URL receives a POST request
 # That'll happen every time a message is sent in the group
@@ -58,11 +58,19 @@ def webhook():
 ##        
 ##    
 ##    
-##    if (not sender_is_bot(message)):
-##        if random.random() < .33:
-##            LikeMessage(message)
-##        messageClass = classMessage(message)
-##        messageClass.printDiagnostics()
+
+
+    if (not sender_is_bot(message)):
+        if random.random() < .33:
+            LikeMessage(message)
+        messageClass = classMessage(message)
+        messageClass.printDiagnostics()
+        text = messageClass.response()
+##        if not ( text == "" ):
+##            reply(text)
+
+
+
 ##        if CommandType == 'ImageUpload':
 ##            TempURL = attachment['url']
 ##            FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
@@ -171,7 +179,7 @@ def webhook():
 ##            LikeMessage(message)
 ##        if (Nice):
 ##            reply('Nice.',bot_id)
-    GD.UpdateEnvVars()
+##    GD.UpdateEnvVars()
     return "ok", 200
 
 ################################################################################

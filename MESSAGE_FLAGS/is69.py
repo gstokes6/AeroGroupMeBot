@@ -12,5 +12,6 @@ class is69(messageFlag.messageFlag):
                 self.isTrue = True
 
     def response(self):
-        print("This is a flag for if 69")
+        print("Nice")
+        return "Nice"
         
