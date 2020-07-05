@@ -35,7 +35,7 @@ class message:
          self.messageFlagsList = messageFlagsList
 
     def response(self):
-        for flag in messageFlagList:
+        for flag in self.messageFlagList:
             flag.response()
 
 
