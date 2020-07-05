@@ -64,7 +64,7 @@ def webhook():
 ##            LikeMessage(message)
         messageClass = classMessage.message(message)
         messageClass.printDiagnostics()
-##        text = messageClass.response()
+        text = messageClass.response()
 ##        if not ( text == "" ):
 ##            reply(text)
 
