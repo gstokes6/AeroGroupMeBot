@@ -18,7 +18,7 @@ class isUpdate(messageFlag.messageFlag):
         ##see if keyword is in message
         Msg = message['text'].lower()
         Msg = Msg.replace('@academic','').replace('[[academic]]','')
-        isKeyPhrase = ( "update" == Msg )
+        isKeyPhrase = ( "update" in Msg )
 
         if (isKeyPhrase and isInvoked):
             self.willLike = True

@@ -17,7 +17,7 @@ class isLinkRequest(messageFlag.messageFlag):
         
         ##see if keyword is in message
         Msg = message['text'].lower()
-        Msg = Msg.replace('@academic','').replace('[[academic]]','')
+        Msg = Msg.replace('@academic','').replace('[[academic]]','').replace(' ','')
         isKeyPhrase = ( "" == Msg )
 
         if (isKeyPhrase and isInvoked):

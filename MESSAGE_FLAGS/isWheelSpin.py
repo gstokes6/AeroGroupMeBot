@@ -5,6 +5,7 @@ from MESSAGE_FLAGS import isAcademicInvoked
 
 ##some needed modules
 import random
+import groupMe
 
 class isWheelSpin(messageFlag.messageFlag):
     def __init__(self,message):
