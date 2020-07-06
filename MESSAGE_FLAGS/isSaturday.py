@@ -9,7 +9,13 @@ class isSaturday(messageFlag.messageFlag):
         ##Logic to find if flag is set
         Msg = message['text'].lower()
         if("saturdays are made for dads" in Msg):
+            if "SAT" in message['scheduleList']:
+                retort = 'And Dad\'s car!'
+            else:
+                retort = 'You fool, it\'s not Saturday!'
+            
             self.isTrue = True
+            
     def response(self):
-        groupMe.reply('And Dad\'s car!')
+        groupMe.reply(retort)
         
