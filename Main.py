@@ -144,31 +144,13 @@ def webhook():
 ##            TotalIteration = int(TotalCounter.GetContentString())
 ##            TotalCounter.SetContentString(str(TotalIteration+1))
 ##            TotalCounter.Upload()
-##
-##            LikeMessage(message)
 
-##            
-##        elif (CommandType == 'PostLink'):
-##            SharingLink = GD.FindOrCreateFolderLink(drive,[Root])['alternateLink']
-##            reply(SharingLink,bot_id)
-##            LikeMessage(message)
-##    GD.UpdateEnvVars()
+
     return "ok", 200
 
 ################################################################################
 
 
-def Mock(string):
-    newString = ''
-    num = 0
-    for letter in string:
-        
-        if (num % 2) == 0:
-            newString = newString + string[num].lower()
-        else:
-            newString = newString + string[num].upper()
-        num = num+1
-    return newString
 
 
 
