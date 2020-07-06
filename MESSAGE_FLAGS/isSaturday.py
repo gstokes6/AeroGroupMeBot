@@ -9,7 +9,7 @@ class isSaturday(messageFlag.messageFlag):
         ##Logic to find if flag is set
         Msg = message['text'].lower()
         if("saturdays are made for dads" in Msg):
-            if (dtb.IsInClass(drive,Root,message['created_at']) == 'SAT'):
+            if "SAT" in message['scheduleList']:
                 retort = 'And Dad\'s car!'
             else:
                 retort = 'You fool, it\'s not Saturday!'
