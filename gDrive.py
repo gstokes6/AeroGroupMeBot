@@ -48,7 +48,9 @@ class gDrive:
     def loadSchedule(self):
         self.lastScheduleUpdateTime = datetime.datetime.now()
         SpreadsheetFile = self.FindOrCreateFolder( ['Classes.xlsx'] )
+        
         Spreadsheet = self.drive.CreateFile( { 'id':SpreadsheetFile['id'] } )
+        print(Spreadsheet)
         Spreadsheet.GetContentFile('Classes.xlsx')
         wb = openpyxl.load_workbook(Path)
         Datasheet = wb['Classes']
