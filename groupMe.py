@@ -60,6 +60,7 @@ def upload_image_to_groupme(imgPath):
     # Send Image
     headers = {'content-type': 'application/json'}
     url = 'https://image.groupme.com/pictures'
+    gm_access_token = LOAD_ENV_VARS.ENV_VARS['gm_access_token']
     files = {'file': open(imgPath, 'rb')}
     payload = {'access_token': gm_access_token}
     r = requests.post(url, files=files, params=payload)
