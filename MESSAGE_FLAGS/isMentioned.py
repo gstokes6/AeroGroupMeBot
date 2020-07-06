@@ -11,7 +11,7 @@ class isMentioned(messageFlag.messageFlag):
         
 
     def checkTrue(self,message,userIdToCheck=None):
-        usernIds = []
+        userIds = []
         for attachment in message['attachments']:
             if attachment['type'] == 'mentions':
                 self.mentionAttachments.append(attachment)
