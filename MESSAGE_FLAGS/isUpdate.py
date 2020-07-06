@@ -25,6 +25,8 @@ class isUpdate(messageFlag.messageFlag):
             self.isTrue = True
         
     def response(self):
-        updateText = "Placeholder text for update flag until GD is re-implemented"
+        updateFile = LOAD_ENV_VARS.gDrive.FindOrCreateFolder(drive,['Bot Guts','Update.txt'])
+        updateTextFile = drive.CreateFile({'id':updateFile['id']})
+        updateText = updateTextFile.GetContentString()
         groupMe.reply(updateText)
         
