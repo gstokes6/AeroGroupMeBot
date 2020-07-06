@@ -1,6 +1,7 @@
 import importlib
 from MESSAGE_FLAGS import *
 import groupMe
+import LOAD_ENV_VARS
 
 ##README
 ##Run this file locally before pushing to master in order to test
@@ -10,13 +11,15 @@ class message:
     def __init__(self,messageClass):
         ##add new flag names here, must have class definition python file in MESSAGE_FLAGS folder.
         self.MESSAGE_FLAG_LIST = ["isAcademicInvoked","is69","isF","isHartfield","isWheelSpin","isSender",
-                                  "isFileUpload","isUpdate","isLinkRequest","isSaturday"]
+                                  "isFileUpload","isUpdate","isLinkRequest",'isRandomLike']
 
         ##Initialize the flag list and GroupMe message holder containers
         self.messageFlagsList = []
+        ##add schedule to message
+        messageClass['scheduleList'] = LOAD_ENV_VARS.gDriveInstance.checkClasses(message)
+        print(messageClass['scheduleList'])
         self.message = messageClass
 
-        
         self.getMessageFlagsList()
 
     def getMessageFlagsList(self):
@@ -57,7 +60,6 @@ class message:
             print("")
 
 if __name__ == "__main__":
-    import LOAD_ENV_VARS
     LOAD_ENV_VARS.init()
     testMsg = "@Academic are you with me AERO 4140-1 Other unrelated things 69"
     testMessageInput = {'attachments': [{'type': 'image', 'url': 'https://i.groupme.com/663x593.jpeg.2b7b5e940cdd4c53bc580de5c93098bb'}, {'loci': [[0, 9]], 'type': 'mentions', 'user_ids': ['73362029']}], 'avatar_url': 'https://i.groupme.com/800x800.jpeg.079750da115c4d3baae220c371654878', 'created_at': 1566495571, 'group_id': '52068192', 'id': '156649557132492476', 'name': 'Gavin Stokes', 'sender_id': '73358488', 'sender_type': 'user', 'source_guid': 'ac67b98e9d4317b924772ccd64c2504b', 'system': False, 'text': testMsg, 'user_id': '73358488'}
