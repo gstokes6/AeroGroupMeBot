@@ -24,11 +24,6 @@ class gDrive:
         f = open("client_secrets.json","w+")
         f.write(Text)
         f.close()
-        ##make client credentials from enviromental variables
-        Text = """{"access_token": %s, "client_id": %s, "client_secret": %s, "refresh_token": %s, "token_expiry": %s, "token_uri": "https://oauth2.googleapis.com/token", "user_agent": null, "revoke_uri": "https://oauth2.googleapis.com/revoke", "id_token": null, "id_token_jwt": null, "token_response": {"access_token": %s, "expires_in": 3600, "refresh_token": %s, "scope": "https://www.googleapis.com/auth/drive", "token_type": "Bearer"}, "scopes": ["https://www.googleapis.com/auth/drive"], "token_info_uri": "https://oauth2.googleapis.com/tokeninfo", "invalid": false, "_class": "OAuth2Credentials", "_module": "oauth2client.client"}"""%(self.access_token,self.client_id,self.client_secret,self.refresh_token,self.token_expiry,self.access_token,self.refresh_token)
-        f = open("mycreds.txt","w+")
-        f.write(Text)
-        f.close()
         
         # Try to load saved client credentials
         gauth = GoogleAuth()
