@@ -2,6 +2,7 @@ from MESSAGE_FLAGS import messageFlag
 
 ##for seeing if academic is invoked
 from MESSAGE_FLAGS import isAcademicInvoked
+import LOAD_ENV_VARS
 import groupMe
 
 class isUpdate(messageFlag.messageFlag):
@@ -25,6 +26,8 @@ class isUpdate(messageFlag.messageFlag):
             self.isTrue = True
         
     def response(self):
-        updateText = "Placeholder text for update flag until GD is re-implemented"
+        updateFile = LOAD_ENV_VARS.gDriveInstance.FindOrCreateFolder(['Bot Guts','Update.txt'])
+        updateTextFile = LOAD_ENV_VARS.gDriveInstance.drive.CreateFile({'id':updateFile['id']})
+        updateText = updateTextFile.GetContentString()
         groupMe.reply(updateText)
         

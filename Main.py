@@ -5,7 +5,6 @@ import json
 import wget
 import urllib
 import shutil
-import random
 
 ##import Sanitization as san
 ##import DateToolBox as dtb
@@ -25,6 +24,7 @@ app = Flask(__name__)
 # That'll happen every time a message is sent in the group
 @app.route('/', methods=['POST'])
 def webhook():
+    
     # 'message' is an object that represents a single GroupMe message.
     message = request.get_json()
     print(message)
@@ -32,9 +32,6 @@ def webhook():
         messageClass = classMessage.message(message)
         messageClass.printDiagnostics()
         messageClass.response()
-##        if random.random() < .33:
-##            LikeMessage(message)
-    ##print(dtb.IsInClass(drive,Root,message['created_at']))
         
 ##    Attach = message['attachments']
 ##    Gavin = False
