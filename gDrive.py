@@ -91,6 +91,7 @@ class gDrive:
     def UpdateEnvVars(self):
         f = open('mycreds.txt','r')
         c = f.read()
+        print(c)
         s = c.split('"')
         self.gd_access_token = s[3]
         self.gd_client_secret = s[11]
