@@ -1,7 +1,5 @@
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
 
 import requests
 import os
