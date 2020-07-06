@@ -20,7 +20,7 @@ class gDrive:
         self.refresh_token = LOAD_ENV_VARS.ENV_VARS['gd_refresh_token']
         self.token_expiry = LOAD_ENV_VARS.ENV_VARS['gd_token_expiry']
         ##make client secrets from enviromental variables
-        Text = '''{"installed":{"client_id":%s,"project_id":"quickstart-1564436220867","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":%s,"redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}'''%(client_id,client_secret)
+        Text = '''{"installed":{"client_id":%s,"project_id":"quickstart-1564436220867","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":%s,"redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}'''%(self.client_id,self.client_secret)
         f = open("client_secrets.json","w+")
         f.write(Text)
         f.close()
