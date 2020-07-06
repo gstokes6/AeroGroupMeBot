@@ -49,6 +49,7 @@ class gDrive:
         gauth.SaveCredentialsFile("mycreds.txt")
         self.UpdateEnvVars()
         #initialize drive object
+        print(gauth)
         self.drive = GoogleDrive(gauth)
         ##Setup sechdule
         self.loadSchedule()
