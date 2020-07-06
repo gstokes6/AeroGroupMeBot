@@ -19,7 +19,11 @@ class gDrive:
         self.client_id = LOAD_ENV_VARS.ENV_VARS['gd_client_id']
         self.refresh_token = LOAD_ENV_VARS.ENV_VARS['gd_refresh_token']
         self.token_expiry = LOAD_ENV_VARS.ENV_VARS['gd_token_expiry']
-        
+        ##make client secrets from enviromental variables
+        Text = '''{"installed":{"client_id":%s,"project_id":"quickstart-1564436220867","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":%s,"redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}'''%(client_id,client_secret)
+        f = open("client_secrets.json","w+")
+        f.write(Text)
+        f.close()
         ##make client credentials from enviromental variables
         Text = """{"access_token": %s, "client_id": %s, "client_secret": %s, "refresh_token": %s, "token_expiry": %s, "token_uri": "https://oauth2.googleapis.com/token", "user_agent": null, "revoke_uri": "https://oauth2.googleapis.com/revoke", "id_token": null, "id_token_jwt": null, "token_response": {"access_token": %s, "expires_in": 3600, "refresh_token": %s, "scope": "https://www.googleapis.com/auth/drive", "token_type": "Bearer"}, "scopes": ["https://www.googleapis.com/auth/drive"], "token_info_uri": "https://oauth2.googleapis.com/tokeninfo", "invalid": false, "_class": "OAuth2Credentials", "_module": "oauth2client.client"}"""%(self.access_token,self.client_id,self.client_secret,self.refresh_token,self.token_expiry,self.access_token,self.refresh_token)
         f = open("mycreds.txt","w+")
