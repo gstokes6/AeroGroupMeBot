@@ -9,7 +9,7 @@ import LOAD_ENV_VARS
 class gDrive:
     def __init__(self):
         ##vars to use later
-        self.lastScheduleUpdateTime = None
+        self.lastScheduleUpdateTime = datetime.datetime.min
         self.scheduleData = []
         
         ##load important stuff
@@ -66,7 +66,7 @@ class gDrive:
             Row = Row + 1
 
     def checkClasses(self,message):
-        if ( (datetime.datetime.now()-self.lastScheduleUpdateTime) < datetime.timedelta(days=0,hours=1,minutes=0) ):
+        if ( (datetime.datetime.now()-self.lastScheduleUpdateTime) > datetime.timedelta(days=0,hours=1,minutes=0) ):
             self.loadSchedule()
 
         messageScheduleList = []
