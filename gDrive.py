@@ -1,5 +1,5 @@
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
+from pydrive2.auth import GoogleAuth
+from pydrive2.drive import GoogleDrive
 import os
 import datetime
 import openpyxl
@@ -19,37 +19,36 @@ class gDrive:
         self.client_id = LOAD_ENV_VARS.ENV_VARS['gd_client_id']
         self.refresh_token = LOAD_ENV_VARS.ENV_VARS['gd_refresh_token']
         self.token_expiry = LOAD_ENV_VARS.ENV_VARS['gd_token_expiry']
-        ##make client creds
-        Text = """{"access_token": %s, "client_id": %s, "client_secret": %s, "refresh_token": %s, "token_expiry": %s, "token_uri": "https://oauth2.googleapis.com/token", "user_agent": null, "revoke_uri": "https://oauth2.googleapis.com/revoke", "id_token": null, "id_token_jwt": null, "token_response": {"access_token": %s, "expires_in": 3600, "refresh_token": %s, "scope": "https://www.googleapis.com/auth/drive", "token_type": "Bearer"}, "scopes": ["https://www.googleapis.com/auth/drive"], "token_info_uri": "https://oauth2.googleapis.com/tokeninfo", "invalid": false, "_class": "OAuth2Credentials", "_module": "oauth2client.client"}"""%(self.access_token,self.client_id,self.client_secret,self.refresh_token,self.token_expiry,self.access_token,self.refresh_token)
-        f = open("mycreds.txt","w+")
-        f.write(Text)
-        f.close()
-        ##make client secrets from enviromental variables
-        Text = '''{"installed":{"client_id":%s,"project_id":"quickstart-1564436220867","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":%s,"redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}'''%(self.client_id,self.client_secret)
-        f = open("client_secrets.json","w+")
-        f.write(Text)
-        f.close()
+        if True:
+            ##make client creds
+            Text = """{"access_token": %s, "client_id": %s, "client_secret": %s, "refresh_token": %s, "token_expiry": %s, "token_uri": "https://oauth2.googleapis.com/token", "user_agent": null, "revoke_uri": "https://oauth2.googleapis.com/revoke", "id_token": null, "id_token_jwt": null, "token_response": {"access_token": %s, "expires_in": 3600, "refresh_token": %s, "scope": "https://www.googleapis.com/auth/drive", "token_type": "Bearer"}, "scopes": ["https://www.googleapis.com/auth/drive"], "token_info_uri": "https://oauth2.googleapis.com/tokeninfo", "invalid": false, "_class": "OAuth2Credentials", "_module": "oauth2client.client"}"""%(self.access_token,self.client_id,self.client_secret,self.refresh_token,self.token_expiry,self.access_token,self.refresh_token)
+            f = open("mycreds.txt","w+")
+            f.write(Text)
+            f.close()
+            ##make client secrets from enviromental variables
+            Text = '''{"installed":{"client_id":%s,"project_id":"quickstart-1564436220867","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":%s,"redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}'''%(self.client_id,self.client_secret)
+            f = open("client_secrets.json","w+")
+            f.write(Text)
+            f.close()
+        else:
+            self.root = 'Python Bot Test'
         
         # Try to load saved client credentials
         gauth = GoogleAuth()
         gauth.LoadCredentialsFile("mycreds.txt")
         if gauth.credentials is None:
-            print('None creditials')
             # Authenticate if they're not there
             gauth.LocalWebserverAuth()
         elif gauth.access_token_expired:
-            print('refreshing creditials')
             # Refresh them if expired
             gauth.Refresh()
         else:
-            print('authorizing')
             # Initialize the saved creds
             gauth.Authorize()
         # Save the current credentials to a file
         gauth.SaveCredentialsFile("mycreds.txt")
         self.UpdateEnvVars()
         #initialize drive object
-        print(gauth)
         self.drive = GoogleDrive(gauth)
         ##Setup sechdule
         self.loadSchedule()
@@ -61,10 +60,10 @@ class gDrive:
         Spreadsheet = self.drive.CreateFile( { 'id':SpreadsheetFile['id'] } )
         print(Spreadsheet)
         Spreadsheet.GetContentFile('Classes.xlsx')
-        wb = openpyxl.load_workbook(Path)
-        Datasheet = wb['Classes']
+        wb = openpyxl.load_workbook('Classes.xlsx')
+        DataSheet = wb['Classes']
         Row = 2
-        self.ClassList = []
+        self.scheduleData = []
         while DataSheet.cell(row = Row, column = 1).value:
             classDays = DataSheet.cell(row = Row, column = 2).value
             struct = {
@@ -73,26 +72,28 @@ class gDrive:
                 'endTime':(DataSheet.cell(row = Row, column = 4).value),
                 'classDays':classDays.replace('Su','0').replace('M','1').replace('Tu','2').replace('W','3').replace('Th','4').replace('F','5').replace('Sa','6')
                 }
-            self.classList.append(struct)
+            self.scheduleData.append(struct)
             Row = Row + 1
 
     def checkClasses(self,message):
-        if ( (datetime.datetime.now()-self.lastScheduleUpdateTime) > datetime.timedelta(days=0,hours=1,minutes=0) ):
+        now = datetime.datetime.now()
+        timeNow = now.time()
+        if ( (now-self.lastScheduleUpdateTime) > datetime.timedelta(days=0,hours=1,minutes=0) ):
             self.loadSchedule()
 
         messageScheduleList = []
-        for Class in self.scheduleList:
-            startTime = datetime.time(int(Class['startTime'].split(':')[0]), int(Class['startTime'].split(':')[1]) )
-            endTime = datetime.time(int(Class['endTime'].split(':')[0]), int(Class['endTime'].split(':')[1]) )
-            inClassTime = ( (startTime<now) and (now<endTime) )
+        for Class in self.scheduleData:
+            print(Class)
+            inClassTime = ( (Class['startTime']<timeNow) and (timeNow<Class['endTime']) )
             onClassDay = ( str(datetime.date.today().weekday()) in Class['classDays'] )
-            if inClassTime and inClassDay:
+            if inClassTime and onClassDay:
                 messageScheduleList.append(Class['className'])
+        print(messageScheduleList)
+        return messageScheduleList
         
     def UpdateEnvVars(self):
         f = open('mycreds.txt','r')
         c = f.read()
-        print(c)
         s = c.split('"')
         self.gd_access_token = s[3]
         self.gd_client_secret = s[11]
@@ -111,7 +112,6 @@ class gDrive:
         for folderName in folderNames:
             search_list = []
             file_list = self.drive.ListFile({'q': "'%s' in parents and trashed=false"%(parent_id)}).GetList()
-            print(len(file_list))
             for file in file_list:
                     if (file['title'] == folderName):
                             search_list.append(file)
@@ -128,7 +128,8 @@ class gDrive:
                 
             else:
                 folder = search_list[0]
-        print(search_list)
+            ##now look in that folder
+            parent_id = folder['id']
         return (folder)
     
     def UploadFile(self,path,folderNames):
