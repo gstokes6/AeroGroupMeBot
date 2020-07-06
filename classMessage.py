@@ -20,7 +20,6 @@ class message:
         print(messageClass['scheduleList'])
         self.message = messageClass
 
-        
         self.getMessageFlagsList()
 
     def getMessageFlagsList(self):
