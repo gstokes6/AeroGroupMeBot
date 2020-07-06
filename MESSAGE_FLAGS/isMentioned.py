@@ -1,0 +1,26 @@
+from MESSAGE_FLAGS import messageFlag
+##for seeing if academic is invoked
+
+##Helper flag for other flags
+class isMentioned(messageFlag.messageFlag):
+    ##default "checkTrue" to satisfy polymorphism and find name of sender
+    def __init__(self,message,userIdToCheck=None):
+        self.mentionAttachments = []
+        super().__init__(message)
+        self.checkTrue(message,usernameToCheck)
+        
+
+    def checkTrue(self,message,userIdToCheck=None):
+        usernIds = []
+        for attachment in message['attachments']:
+            if attachment['type'] == 'mentions':
+                self.mentionAttachments.append(attachment)
+                userIds.append(attachment['user_ids'])
+        if userIdToCheck in userIds:
+            self.isTrue = True
+
+        
+    def response(self):
+        1+1 #lol
+
+        
