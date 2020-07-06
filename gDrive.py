@@ -34,12 +34,15 @@ class gDrive:
         gauth = GoogleAuth()
         gauth.LoadCredentialsFile("mycreds.txt")
         if gauth.credentials is None:
+            print('None creditials')
             # Authenticate if they're not there
             gauth.LocalWebserverAuth()
         elif gauth.access_token_expired:
+            print('refreshing creditials')
             # Refresh them if expired
             gauth.Refresh()
         else:
+            print('authorizing')
             # Initialize the saved creds
             gauth.Authorize()
         # Save the current credentials to a file
