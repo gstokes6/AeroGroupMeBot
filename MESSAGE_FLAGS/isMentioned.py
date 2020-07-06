@@ -1,5 +1,4 @@
 from MESSAGE_FLAGS import messageFlag
-##for seeing if academic is invoked
 
 ##Helper flag for other flags
 class isMentioned(messageFlag.messageFlag):
