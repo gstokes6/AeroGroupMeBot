@@ -44,6 +44,7 @@ class gDrive:
         #initialize drive object
         self.drive = GoogleDrive(gauth)
         ##Setup sechdule
+        self.loadSchedule()
 
     def loadSchedule(self):
         self.lastScheduleUpdateTime = datetime.datetime.now()
