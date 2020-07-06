@@ -101,7 +101,7 @@ class gDrive:
         for folderName in folderNames:
             search_list = []
             file_list = self.drive.ListFile({'q': "'%s' in parents and trashed=false"%(parent_id)}).GetList()
-            print(file_list)
+            print(len(file_list))
             for file in file_list:
                     if (file['title'] == folderName):
                             search_list.append(file)
@@ -118,6 +118,7 @@ class gDrive:
                 
             else:
                 folder = search_list[0]
+        print(search_list)
         return (folder)
     
     def UploadFile(self,path,folderNames):
