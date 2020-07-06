@@ -26,7 +26,7 @@ class isUpdate(messageFlag.messageFlag):
             self.isTrue = True
         
     def response(self):
-        updateFile = LOAD_ENV_VARS.gDrive.FindOrCreateFolder(drive,['Bot Guts','Update.txt'])
+        updateFile = LOAD_ENV_VARS.gDrive.FindOrCreateFolder(['Bot Guts','Update.txt'])
         updateTextFile = drive.CreateFile({'id':updateFile['id']})
         updateText = updateTextFile.GetContentString()
         groupMe.reply(updateText)
