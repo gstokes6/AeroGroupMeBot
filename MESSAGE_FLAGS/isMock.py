@@ -6,7 +6,7 @@ import LOAD_ENV_VARS
 import groupMe
 
 
-class isLinkRequest(messageFlag.messageFlag):
+class isMock(messageFlag.messageFlag):
     def __init__(self,message):
         super().__init__(message)
         
