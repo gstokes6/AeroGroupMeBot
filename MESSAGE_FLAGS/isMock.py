@@ -26,7 +26,7 @@ class isMock(messageFlag.messageFlag):
         #newtext = Mock(message['text'].replace('@Academic','@'+name))
         replyMention(newtext,nameID,[loci[0],len(nameID)],bot_id)
 
-    def Mock(self.string):
+    def Mock(self,string):
         newString = ''
         num = 0
         for letter in string:
