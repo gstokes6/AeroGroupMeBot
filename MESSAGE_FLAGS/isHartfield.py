@@ -5,7 +5,7 @@ import colorsys
 
 ##for seeing if academic is invoked
 from MESSAGE_FLAGS import isAcademicInvoked
-import LOAD_ENV_VAR
+import LOAD_ENV_VARS
 import groupMe
 
 class isHartfield(messageFlag.messageFlag):
