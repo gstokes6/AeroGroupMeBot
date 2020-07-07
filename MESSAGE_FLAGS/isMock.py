@@ -25,7 +25,7 @@ class isMock(messageFlag.messageFlag):
         print(loci)
         newtext = self.Mock(self.message['text'].replace('@Gavin Stokes 2','@'+name))
         #newtext = Mock(message['text'].replace('@Academic','@'+name))
-        groupMe.replyMention(newtext,nameID,[loci[0],len(nameID)],bot_id)
+        groupMe.replyMention(newtext,nameID,[loci[0],len(nameID)])
 
     def Mock(self,string):
         newString = ''
