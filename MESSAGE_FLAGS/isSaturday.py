@@ -19,12 +19,12 @@ class isSaturday(messageFlag.messageFlag):
             if (len(splitText)>1) and ("dads" in splitText[1]):
                 self.retort = 'You fool, it\'s not Saturday!'
             
-        self.isTrue = False
+        self.isTrue = True
             
     def response(self):
-        if self.satCheck:
+        if self.satCheck == True:
             groupMe.reply_with_image(self.retort, 'and_dads_car.png')
-        else:
+        elif self.satCheck == False:
             groupMe.reply(self.retort)
         
 
