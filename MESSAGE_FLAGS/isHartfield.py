@@ -25,7 +25,8 @@ class isHartfield(messageFlag.messageFlag):
         Msg = message['text'].lower()
         isKeyPhrase = ( ("are you with me" in Msg) or ("everybody with me" in Msg) )
 
-        if (isKeyPhrase and isInvoked):
+        #if (isKeyPhrase and isInvoked):
+        if (isKeyPhrase):
             self.isTrue = True
         
     def response(self):

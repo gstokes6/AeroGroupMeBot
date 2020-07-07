@@ -23,9 +23,10 @@ class isMailen(messageFlag.messageFlag):
         
         ##see if keyword is in message
         Msg = message['text'].lower()
-        isKeyPhrase = ( ("are you with me" in Msg) or ("everybody with me" in Msg) )
+        isKeyPhrase = ( ("i need more coffee" in Msg) )
 
-        if (isKeyPhrase and isInvoked):
+#        if (isKeyPhrase and isInvoked):
+        if (isKeyPhrase):
             self.isTrue = True
         
     def response(self):
@@ -38,7 +39,7 @@ class isMailen(messageFlag.messageFlag):
         else:
             Iteration = int(Counter.GetContentString())
         self.GetHart(Iteration)
-        groupMe.reply_with_image("I need more coffee. Today's count: " + str(Iteration+1),"ModifiedMailen.jpg")
+        groupMe.reply_with_image("Ole Relatable Russell. Today's count: " + str(Iteration+1),"ModifiedMailen.jpg")
         Counter.SetContentString(str(Iteration+1))
         Counter.Upload()
 
