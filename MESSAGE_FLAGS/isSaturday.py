@@ -10,12 +10,12 @@ class isSaturday(messageFlag.messageFlag):
         Msg = message['text'].lower()
         if("saturdays are made for dads" in Msg):
             if "SAT" in message['scheduleList']:
-                retort = 'And Dad\'s car!'
+                self.retort = 'And Dad\'s car!'
             else:
-                retort = 'You fool, it\'s not Saturday!'
+                self.retort = 'You fool, it\'s not Saturday!'
             
             self.isTrue = True
             
     def response(self):
-        groupMe.reply(retort)
+        groupMe.reply(self.retort)
         
