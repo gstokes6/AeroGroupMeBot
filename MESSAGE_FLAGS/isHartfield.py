@@ -2,6 +2,7 @@ from MESSAGE_FLAGS import messageFlag
   
 from PIL import Image
 import colorsys
+import datetime
 
 ##for seeing if academic is invoked
 from MESSAGE_FLAGS import isAcademicInvoked
