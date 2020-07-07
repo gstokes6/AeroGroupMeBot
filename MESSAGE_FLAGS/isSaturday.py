@@ -15,7 +15,7 @@ class isSaturday(messageFlag.messageFlag):
         elif ('saturdays' in message['text']) and (len(splitText)>1) and ("dads" in splitText[1]):
             self.satCheck = False
                 
-        else
+        else:
             self.satCheck = 'Nonsense'
             
         self.isTrue = True
