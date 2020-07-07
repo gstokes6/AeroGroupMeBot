@@ -12,6 +12,7 @@ import groupMe
 class isHartfield(messageFlag.messageFlag):
     def __init__(self,message):
         super().__init__(message)
+        self.message = message
         
     def checkTrue(self,message):
         ##Logic to find if flag is set
@@ -32,7 +33,7 @@ class isHartfield(messageFlag.messageFlag):
         Counter = LOAD_ENV_VARS.gDriveInstance.drive.CreateFile({'id':CounterFile['id']})
         
         date_time_obj = datetime.datetime.strptime(Counter['modifiedDate'], '%Y-%m-%dT%H:%M:%S.%fZ')            
-        if (date_time_obj.date() != datetime.datetime.fromtimestamp(message['created_at']).date()):
+        if (date_time_obj.date() != datetime.datetime.fromtimestamp(self.message['created_at']).date()):
             Iteration = 0
         else:
             Iteration = int(Counter.GetContentString())
