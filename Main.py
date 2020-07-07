@@ -32,8 +32,12 @@ def webhook():
         messageClass = classMessage.message(message)
         messageClass.printDiagnostics()
         messageClass.response()
-        
-  
+    return "ok", 200
+
+################################################################################
+
+##LEGACY CODE
+
 ##        if CommandType == 'ImageUpload':
 ##            TempURL = attachment['url']
 ##            FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
@@ -72,64 +76,6 @@ def webhook():
 ##                FolderName = None
 ##            GD.SortFile(drive,FileName,message['created_at'],Root,FolderName)
 ##            LikeMessage(message)
-##            
-##
-##        elif (CommandType == 'Hartfield') and (dtb.IsInClass(drive,Root,message['created_at']) in ['AERO4510','AERO5530']):
-##            CounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','HartCounter.txt'])
-##            Counter = drive.CreateFile({'id':CounterID})
-##            
-##            date_time_obj = datetime.datetime.strptime(Counter['modifiedDate'], '%Y-%m-%dT%H:%M:%S.%fZ')            
-##            print(date_time_obj)
-##            print(datetime.datetime.fromtimestamp(message['created_at']).date())
-##            if (date_time_obj.date() != datetime.datetime.fromtimestamp(message['created_at']).date()):
-##                Iteration = 0
-##            else:
-##                Iteration = int(Counter.GetContentString())
-##            Memes.GetHart(Iteration)
-##            HartPath = 'ModifiedHart.jpg'
-##            reply_with_image("Time for a 5 min lecture. Today's count: " + str(Iteration+1), HartPath)
-##            Counter.SetContentString(str(Iteration+1))
-##            Counter.Upload()
-##
-##            TotalCounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','TotalHartCounter.txt'])
-##            TotalCounter = drive.CreateFile({'id':TotalCounterID})
-##            TotalIteration = int(TotalCounter.GetContentString())
-##            TotalCounter.SetContentString(str(TotalIteration+1))
-##            TotalCounter.Upload()
-##
-##            LikeMessage(message)
-##
-##            
-##        elif (CommandType == 'Hartfield') and (dtb.IsInClass(drive,Root,message['created_at']) == 'AERO4620'):
-##            CounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','MailenCounter.txt'])
-##            Counter = drive.CreateFile({'id':CounterID})
-##            
-##            date_time_obj = datetime.datetime.strptime(Counter['modifiedDate'], '%Y-%m-%dT%H:%M:%S.%fZ')            
-##            print(date_time_obj)
-##            print(datetime.datetime.fromtimestamp(message['created_at']).date())
-##            if (date_time_obj.date() != datetime.datetime.fromtimestamp(message['created_at']).date()):
-##                Iteration = 0
-##            else:
-##                Iteration = int(Counter.GetContentString())
-##            Memes.GetMailen(Iteration)
-##            HartPath = 'ModifiedMailen.jpg'
-##            reply_with_image("I need more coffee. Today's count: " + str(Iteration+1), HartPath)
-##            Counter.SetContentString(str(Iteration+1))
-##            Counter.Upload()
-##
-##            TotalCounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','TotalMailenCounter.txt'])
-##            TotalCounter = drive.CreateFile({'id':TotalCounterID})
-##            TotalIteration = int(TotalCounter.GetContentString())
-##            TotalCounter.SetContentString(str(TotalIteration+1))
-##            TotalCounter.Upload()
-
-
-    return "ok", 200
-
-################################################################################
-
-
-
 
 
 

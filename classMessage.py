@@ -3,16 +3,12 @@ from MESSAGE_FLAGS import *
 import groupMe
 import LOAD_ENV_VARS
 
-##README
-##Run this file locally before pushing to master in order to test
-##Otherwise live enviroment is subject to crashing
-
 class message:
     def __init__(self,messageClass):
         ##add new flag names here, must have class definition python file in MESSAGE_FLAGS folder.
         self.MESSAGE_FLAG_LIST = ["isAcademicInvoked","is69","isF","isHartfield","isWheelSpin","isSender",
                                   "isFileUpload","isUpdate","isLinkRequest",'isRandomLike','isMentioned',
-                                  'isMock','isSaturday']
+                                  'isMock','isSaturday','isMailen']
 
         ##Initialize the flag list and GroupMe message holder containers
         self.messageFlagsList = []
