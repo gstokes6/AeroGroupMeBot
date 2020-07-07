@@ -25,7 +25,7 @@ class isSaturday(messageFlag.messageFlag):
             groupMe.reply_with_image('And Dad\'s car!', 'and_dads_car.png')
         elif self.satCheck == False:
             groupMe.reply('You fool, it\'s not Saturday!')
-        else
+        else:
             1+1
         
 
