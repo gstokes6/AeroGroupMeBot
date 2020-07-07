@@ -8,23 +8,24 @@ class isSaturday(messageFlag.messageFlag):
         
     def checkTrue(self,message):
         ##Logic to find if flag is set
-        if ('saturdays' in message['text']) and ("SAT" in message['scheduleList']):
+        splitText = message['text'].lower().split('saturdays',1)
+        if ('saturdays' in message['text']) and ("SAT" in message['scheduleList']) and (len(splitText)>1) and ("dads" in splitText[1]):
             self.satCheck = True
-            splitText = message['text'].lower().split('saturdays',1)
-            if (len(splitText)>1) and ("dads" in splitText[1]):
-                self.retort = 'And Dad\'s car!'
-        elif ('saturdays' in message['text']) and ("SAT" not in message['scheduleList']):
+        
+        elif ('saturdays' in message['text']) and (len(splitText)>1) and ("dads" in splitText[1]):
             self.satCheck = False
-            splitText = message['text'].lower().split('saturdays',1)
-            if (len(splitText)>1) and ("dads" in splitText[1]):
-                self.retort = 'You fool, it\'s not Saturday!'
+                
+        else
+            self.satCheck = 'Nonsense'
             
         self.isTrue = True
             
     def response(self):
         if self.satCheck == True:
-            groupMe.reply_with_image(self.retort, 'and_dads_car.png')
+            groupMe.reply_with_image('And Dad\'s car!', 'and_dads_car.png')
         elif self.satCheck == False:
-            groupMe.reply(self.retort)
+            groupMe.reply('You fool, it\'s not Saturday!')
+        else
+            1+1
         
 
