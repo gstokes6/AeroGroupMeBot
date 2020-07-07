@@ -58,7 +58,6 @@ class gDrive:
         SpreadsheetFile = self.FindOrCreateFolder( ['Classes.xlsx'] )
         
         Spreadsheet = self.drive.CreateFile( { 'id':SpreadsheetFile['id'] } )
-        print(Spreadsheet)
         Spreadsheet.GetContentFile('Classes.xlsx')
         wb = openpyxl.load_workbook('Classes.xlsx')
         DataSheet = wb['Classes']
@@ -76,15 +75,16 @@ class gDrive:
             Row = Row + 1
 
     def checkClasses(self,message):
-        now = datetime.datetime.now()
+        now = datetime.datetime.fromtimestamp(message['created_at'])
         timeNow = now.time()
+        dateNow = now.date()
         if ( (now-self.lastScheduleUpdateTime) > datetime.timedelta(days=0,hours=1,minutes=0) ):
             self.loadSchedule()
 
         messageScheduleList = []
         for Class in self.scheduleData:
             inClassTime = ( (Class['startTime']<timeNow) and (timeNow<Class['endTime']) )
-            onClassDay = ( str(datetime.date.today().weekday()) in Class['classDays'] )
+            onClassDay = ( str(dateNow.weekday()) in Class['classDays'] )
             if inClassTime and onClassDay:
                 messageScheduleList.append(Class['className'])
         return messageScheduleList
