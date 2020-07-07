@@ -38,7 +38,7 @@ class isMailen(messageFlag.messageFlag):
             Iteration = 0
         else:
             Iteration = int(Counter.GetContentString())
-        self.GetHart(Iteration)
+        self.GetMailen(Iteration)
         groupMe.reply_with_image("Ole Relatable Russell. Today's count: " + str(Iteration+1),"ModifiedMailen.jpg")
         Counter.SetContentString(str(Iteration+1))
         Counter.Upload()

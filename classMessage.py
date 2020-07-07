@@ -50,18 +50,16 @@ class message:
 
 
     def printDiagnostics(self):
-        for i in range(len(self.messageFlagsList)):
-            print(self.messageFlagsList[i])
-            print("self.messageFlagsList[" + str(i) + "].isTrue: ")
-            print(self.messageFlagsList[i].isTrue)
-            print("")
+        DiagnosticList = []
+        for messageFlag in self.messageFlagsList:
+            DiagnosticList.append({type(messageFlag).__name__:messageFlag.isTrue})
+        print(DiagnosticList)
 
 if __name__ == "__main__":
     LOAD_ENV_VARS.init()
     testMsg = "@Academic are you with me AERO 4140-1 Other unrelated things 69"
     testMessageInput = {'attachments': [{'type': 'image', 'url': 'https://i.groupme.com/663x593.jpeg.2b7b5e940cdd4c53bc580de5c93098bb'}, {'loci': [[0, 9]], 'type': 'mentions', 'user_ids': ['73362029']}], 'avatar_url': 'https://i.groupme.com/800x800.jpeg.079750da115c4d3baae220c371654878', 'created_at': 1566495571, 'group_id': '52068192', 'id': '156649557132492476', 'name': 'Gavin Stokes', 'sender_id': '73358488', 'sender_type': 'user', 'source_guid': 'ac67b98e9d4317b924772ccd64c2504b', 'system': False, 'text': testMsg, 'user_id': '73358488'}
     testMessage = message(testMessageInput)
-
     testMessage.printDiagnostics()
     testMessage.response()
     
