@@ -27,8 +27,8 @@ class isHartfield(messageFlag.messageFlag):
             self.isTrue = True
         
     def response(self):
-        CounterFile = LOAD_ENV_VAR.gDriveInstance.FindOrCreateFolder(['Bot Guts','HartCounter.txt'])
-        Counter = LOAD_ENV_VAR.gDriveInstance.drive.CreateFile({'id':CounterDile['id']})
+        CounterFile = LOAD_ENV_VARS.gDriveInstance.FindOrCreateFolder(['Bot Guts','HartCounter.txt'])
+        Counter = LOAD_ENV_VARS.gDriveInstance.drive.CreateFile({'id':CounterDile['id']})
         
         date_time_obj = datetime.datetime.strptime(Counter['modifiedDate'], '%Y-%m-%dT%H:%M:%S.%fZ')            
         if (date_time_obj.date() != datetime.datetime.fromtimestamp(message['created_at']).date()):
