@@ -12,19 +12,20 @@ class isMock(messageFlag.messageFlag):
         
     def checkTrue(self,message):
         ##Logic to find if flag is set
-        
+        self.message = message
         ##first see if invoked
-        invokedFlag = isMentioned.isMentioned(message,'73358488')
-        isInvoked = invokedFlag.isTrue
-        if (isInvoked):
-            self.isTrue = True
+        #invokedFlag = isMentioned.isMentioned(message,'73358488')#Gavin
+        invokedFlag = isMentioned.isMentioned(message,'73362029')#Academic
+        self.isTrue = invokedFlag.isTrue
         
     def response(self):
-        name = message['name']
-        nameID = message['sender_id']
-        newtext = self.Mock(message['text'].replace('@Gavin Stokes 2','@'+name))
+        name = self.message['name']
+        nameID = self.message['sender_id']
+        loci = self.message['attachments'][0]['loci']
+        print(loci)
+        newtext = self.Mock(self.message['text'].replace('@Gavin Stokes 2','@'+name))
         #newtext = Mock(message['text'].replace('@Academic','@'+name))
-        replyMention(newtext,nameID,[loci[0],len(nameID)],bot_id)
+        groupMe.replyMention(newtext,nameID,[loci[0],len(nameID)])
 
     def Mock(self,string):
         newString = ''
