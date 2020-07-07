@@ -17,7 +17,7 @@ class message:
         ##Initialize the flag list and GroupMe message holder containers
         self.messageFlagsList = []
         ##add schedule to message
-        messageClass['scheduleList'] = LOAD_ENV_VARS.gDriveInstance.checkClasses(message)
+        messageClass['scheduleList'] = LOAD_ENV_VARS.gDriveInstance.checkClasses(messageClass)
         print(messageClass['scheduleList'])
         self.message = messageClass
 
