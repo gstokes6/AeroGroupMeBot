@@ -4,7 +4,8 @@ import groupMe
 class isSaturday(messageFlag.messageFlag):
     def __init__(self,message):
         super().__init__(message)
-
+        self. retort = ""
+        
     def checkTrue(self,message):
         ##Logic to find if flag is set
         if "SAT" in message['scheduleList']:

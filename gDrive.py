@@ -58,7 +58,6 @@ class gDrive:
         SpreadsheetFile = self.FindOrCreateFolder( ['Classes.xlsx'] )
         
         Spreadsheet = self.drive.CreateFile( { 'id':SpreadsheetFile['id'] } )
-        print(Spreadsheet)
         Spreadsheet.GetContentFile('Classes.xlsx')
         wb = openpyxl.load_workbook('Classes.xlsx')
         DataSheet = wb['Classes']
