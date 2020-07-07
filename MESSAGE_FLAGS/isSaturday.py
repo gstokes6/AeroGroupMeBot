@@ -9,7 +9,7 @@ class isSaturday(messageFlag.messageFlag):
         ##Logic to find if flag is set
         splitText = message['text'].lower().split('saturdays',1)
         if len(splitText)>1:
-            if("dads" in splitText[1]):
+            if("dads" in splitText[1:]):
                 if "SAT" in message['scheduleList']:
                     self.retort = 'And Dad\'s car!'
                     self.satCheck = True
