@@ -7,6 +7,7 @@ class isMentioned(messageFlag.messageFlag):
         self.mentionAttachments = []
         super().__init__(message)
         self.checkTrue(message,userIdToCheck)
+        self.mentionAttachments = []
         
 
     def checkTrue(self,message,userIdToCheck=None):
