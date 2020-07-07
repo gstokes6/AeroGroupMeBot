@@ -18,7 +18,7 @@ class isSaturday(messageFlag.messageFlag):
             self.satCheck = False
             self.retort = 'You fool, it\'s not Saturday!'
             
-        self.isTrue = True
+        self.isTrue = False
             
     def response(self):
         if self.satCheck:

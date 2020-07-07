@@ -64,8 +64,8 @@ def upload_image_to_groupme(imgPath):
     files = {'file': open(imgPath, 'rb')}
     payload = {'access_token': gm_access_token}
     r = requests.post(url, files=files, params=payload)
-    #imageurl = r.json()['payload']['url']
-    os.remove(imgPath)
+    imageurl = r.json()['payload']['url']
+    #os.remove(imgPath)
     return imageurl
 
 
