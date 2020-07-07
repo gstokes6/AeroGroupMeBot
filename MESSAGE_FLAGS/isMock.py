@@ -14,7 +14,8 @@ class isMock(messageFlag.messageFlag):
         ##Logic to find if flag is set
         
         ##first see if invoked
-        invokedFlag = isMentioned.isMentioned(message,'73358488')
+        #invokedFlag = isMentioned.isMentioned(message,'73358488')#Gavin
+        invokedFlag = isMentioned.isMentioned(message,'73362029')#Academic
         self.isTrue = invokedFlag.isTrue
         
     def response(self):
