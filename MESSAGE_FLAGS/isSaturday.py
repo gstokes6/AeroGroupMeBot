@@ -8,7 +8,7 @@ class isSaturday(messageFlag.messageFlag):
     def checkTrue(self,message):
         ##Logic to find if flag is set
         splitText = message['text'].lower().split('saturdays',1)
-        if len(splitText)>4:
+        if len(splitText)>1:
             if("dads" in splitText[1]):
                 if "SAT" in message['scheduleList']:
                     self.retort = 'And Dad\'s car!'
@@ -22,7 +22,7 @@ class isSaturday(messageFlag.messageFlag):
     def response(self):
         if self.satCheck:
             groupMe.reply_with_image(self.retort, 'and_dads_car.png')
-        elif not self.satCheck:
+        else:
             groupMe.reply(self.retort)
         
 
