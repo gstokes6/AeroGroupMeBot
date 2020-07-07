@@ -5,6 +5,7 @@ import colorsys
 
 ##for seeing if academic is invoked
 from MESSAGE_FLAGS import isAcademicInvoked
+import LOAD_ENV_VAR
 import groupMe
 
 class isHartfield(messageFlag.messageFlag):
@@ -26,9 +27,18 @@ class isHartfield(messageFlag.messageFlag):
             self.isTrue = True
         
     def response(self):
-        self.GetHart(10)
-        groupMe.reply_with_image("This is where I would put my hartfield code, IF I HAD ONE","ModifiedHart.jpg")
-
+        CounterFile = LOAD_ENV_VAR.gDriveInstance.FindOrCreateFolder(['Bot Guts','HartCounter.txt'])
+        Counter = LOAD_ENV_VAR.gDriveInstance.drive.CreateFile({'id':CounterDile['id']})
+        
+        date_time_obj = datetime.datetime.strptime(Counter['modifiedDate'], '%Y-%m-%dT%H:%M:%S.%fZ')            
+        if (date_time_obj.date() != datetime.datetime.fromtimestamp(message['created_at']).date()):
+            Iteration = 0
+        else:
+            Iteration = int(Counter.GetContentString())
+        self.GetHart(Iteration)
+        groupMe.reply_with_image("Time for a 5 min lecture. Today's count: " + str(Iteration+1),"ModifiedHart.jpg")
+        Counter.SetContentString(str(Iteration+1))
+        Counter.Upload()
 
 ##Supporting Functions        
     def TupleMulti(self,t1,t2):

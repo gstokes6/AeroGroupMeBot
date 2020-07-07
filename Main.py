@@ -33,23 +33,7 @@ def webhook():
         messageClass.printDiagnostics()
         messageClass.response()
         
-##    Attach = message['attachments']
-##    Gavin = False
-##    for attachment in Attach:
-##        if attachment['type'] == 'mentions':
-##            #if '73362029' in attachment['user_ids']:
-##            if '73358488' in attachment['user_ids']:
-##                loci = attachment['loci']
-##                Gavin = True
-##    if Gavin and (False):
-##        name = message['name']
-##        nameID = message['sender_id']
-##        newtext = Mock(message['text'].replace('@Gavin Stokes 2','@'+name))
-##        #newtext = Mock(message['text'].replace('@Academic','@'+name))
-##        replyMention(newtext,nameID,[loci[0],len(nameID)],bot_id)
-##        
-##    
-##    
+  
 ##        if CommandType == 'ImageUpload':
 ##            TempURL = attachment['url']
 ##            FileName = str(message['created_at']) + '.' + TempURL.split('.')[-2]
@@ -89,12 +73,6 @@ def webhook():
 ##            GD.SortFile(drive,FileName,message['created_at'],Root,FolderName)
 ##            LikeMessage(message)
 ##            
-##        elif (CommandType == 'Update'):
-##            UpdateID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','Update.txt'])
-##            UpdateTextFile = drive.CreateFile({'id':UpdateID})
-##            UpdateText = UpdateTextFile.GetContentString()
-##            reply(UpdateText, bot_id)
-##            LikeMessage(message)
 ##
 ##        elif (CommandType == 'Hartfield') and (dtb.IsInClass(drive,Root,message['created_at']) in ['AERO4510','AERO5530']):
 ##            CounterID = GD.FindOrCreateFolder(drive,[Root,'Bot Guts','HartCounter.txt'])
