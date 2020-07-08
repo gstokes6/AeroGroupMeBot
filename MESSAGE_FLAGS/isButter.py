@@ -1,7 +1,7 @@
 from MESSAGE_FLAGS import messageFlag
 import groupMe
 
-class isF(messageFlag.messageFlag):
+class isButter(messageFlag.messageFlag):
     def __init__(self,message):
         super().__init__(message)
         
