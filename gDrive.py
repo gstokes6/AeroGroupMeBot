@@ -78,6 +78,8 @@ class gDrive:
         now = datetime.datetime.fromtimestamp(message['created_at'])
         timeNow = now.time()
         dateNow = now.date()
+        print(self.scheduleData)
+        print(now)
         if ( (now-self.lastScheduleUpdateTime) > datetime.timedelta(days=0,hours=1,minutes=0) ):
             self.loadSchedule()
 
@@ -85,8 +87,10 @@ class gDrive:
         for Class in self.scheduleData:
             inClassTime = ( (Class['startTime']<timeNow) and (timeNow<Class['endTime']) )
             onClassDay = ( str(dateNow.weekday()) in Class['classDays'] )
+            print(inClassTime,onClassDay)
             if inClassTime and onClassDay:
                 messageScheduleList.append(Class['className'])
+            
         return messageScheduleList
         
     def UpdateEnvVars(self):
