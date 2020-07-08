@@ -69,7 +69,7 @@ class gDrive:
                 'className':(DataSheet.cell(row = Row, column = 1).value),
                 'startTime':(DataSheet.cell(row = Row, column = 3).value),
                 'endTime':(DataSheet.cell(row = Row, column = 4).value),
-                'classDays':classDays.replace('Su','0').replace('M','1').replace('Tu','2').replace('W','3').replace('Th','4').replace('F','5').replace('Sa','6')
+                'classDays':classDays.replace('Su','6').replace('M','0').replace('Tu','1').replace('W','2').replace('Th','3').replace('F','4').replace('Sa','5')
                 }
             self.scheduleData.append(struct)
             Row = Row + 1
