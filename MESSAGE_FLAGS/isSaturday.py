@@ -9,16 +9,15 @@ class isSaturday(messageFlag.messageFlag):
     def checkTrue(self,message):
         ##Logic to find if flag is set
         splitText = message['text'].lower().split('saturdays',1)
-        if ('saturdays' in message['text']) and ("SAT" in message['scheduleList']) and ("dads" in splitText[1]):
-            self.satCheck = True
+        if ('saturdays' in message['text'].lower()) and ("dads" in splitText[1]):
             self.isTrue = True
-        
-        elif ('saturdays' in message['text']) and ("dads" in splitText[1]):
-            self.satCheck = False
-            self.isTrue = True
+            if ("SAT" in message['scheduleList']):
+                self.satCheck = True
+            else:
+                self.satCheck = False
                 
         else:
-            self.satCheck = False
+            self.isTrue = False
             
     def response(self):
         if self.satCheck:
