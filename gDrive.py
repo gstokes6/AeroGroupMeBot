@@ -87,6 +87,7 @@ class gDrive:
         for Class in self.scheduleData:
             inClassTime = ( (Class['startTime']<timeNow) and (timeNow<Class['endTime']) )
             onClassDay = ( str(dateNow.weekday()) in Class['classDays'] )
+            print(inClassTime,onClassDay)
             if inClassTime and onClassDay:
                 messageScheduleList.append(Class['className'])
             
