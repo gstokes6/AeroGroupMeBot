@@ -15,7 +15,7 @@ class isSaturday(messageFlag.messageFlag):
         if ('saturdays' in message['text'].lower()) and ("dads" in splitText[1]):
             self.isTrue = True
             ## if weekDay == 2:    ## Saturday
-            if ("SAT" in message['scheduleList'):
+            if ("SAT" in message['scheduleList']):
                 self.satCheck = True
             else:
                 self.satCheck = False
