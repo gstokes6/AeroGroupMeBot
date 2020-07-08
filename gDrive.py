@@ -73,7 +73,7 @@ class gDrive:
                 }
             self.scheduleData.append(struct)
             Row = Row + 1
-        print(scheduleData)
+        print(self.scheduleData)
 
     def checkClasses(self,message):
         now = datetime.datetime.fromtimestamp(message['created_at'])
