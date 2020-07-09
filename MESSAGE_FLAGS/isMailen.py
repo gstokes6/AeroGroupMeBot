@@ -9,7 +9,7 @@ from MESSAGE_FLAGS import isAcademicInvoked
 import LOAD_ENV_VARS
 import groupMe
 
-class isHartfield(messageFlag.messageFlag):
+class isMailen(messageFlag.messageFlag):
     def __init__(self,message):
         super().__init__(message)
         self.message = message
@@ -23,14 +23,14 @@ class isHartfield(messageFlag.messageFlag):
         
         ##see if keyword is in message
         Msg = message['text'].lower()
-        isKeyPhrase = ( ("are you with me" in Msg) or ("everybody with me" in Msg) )
+        isKeyPhrase = ( ("i need more coffee" in Msg) )
 
-        #if (isKeyPhrase and isInvoked):
+#        if (isKeyPhrase and isInvoked):
         if (isKeyPhrase):
             self.isTrue = True
         
     def response(self):
-        CounterFile = LOAD_ENV_VARS.gDriveInstance.FindOrCreateFolder(['Bot Guts','HartCounter.txt'])
+        CounterFile = LOAD_ENV_VARS.gDriveInstance.FindOrCreateFolder(['Bot Guts','MailenCounter.txt'])
         Counter = LOAD_ENV_VARS.gDriveInstance.drive.CreateFile({'id':CounterFile['id']})
         
         date_time_obj = datetime.datetime.strptime(Counter['modifiedDate'], '%Y-%m-%dT%H:%M:%S.%fZ')            
@@ -38,8 +38,8 @@ class isHartfield(messageFlag.messageFlag):
             Iteration = 0
         else:
             Iteration = int(Counter.GetContentString())
-        self.GetHart(Iteration)
-        groupMe.reply_with_image("Time for a 5 min lecture. Today's count: " + str(Iteration+1),"ModifiedHart.jpg")
+        self.GetMailen(Iteration)
+        groupMe.reply_with_image("Ole Relatable Russell. Today's count: " + str(Iteration+1),"ModifiedMailen.jpg")
         Counter.SetContentString(str(Iteration+1))
         Counter.Upload()
 
@@ -57,7 +57,7 @@ class isHartfield(messageFlag.messageFlag):
         """
         normX,normY = im.size
         out = Image.new('RGB',(normX,normY))
-        t2 = (1+weight*2,1-weight,1-weight)
+        t2 = (1-weight,1+weight*2,1-weight)
         for X in range(0,normX):
             for Y in range(0,normY):
                 out.putpixel((X,Y),self.TupleMulti(im.getpixel((X,Y)),t2))
@@ -71,10 +71,10 @@ class isHartfield(messageFlag.messageFlag):
         out = out.resize((normX,normY))
         return out
 
-    def GetHart(self,i):
-        im = Image.open("centered-hartfield-roy.jpg")
+    def GetMailen(self,i):
+        im = Image.open("centered-mailen.jpg")
         ZoomIntensity = 1+.15*i
-        RedIntensity = .004*i*i
+        GreenIntensity = .004*i*i
         z = self.zoom(im,ZoomIntensity)
-        out = self.colorize(z,RedIntensity)
-        out.save('ModifiedHart.jpg')
+        out = self.colorize(z,GreenIntensity)
+        out.save('ModifiedMailen.jpg')

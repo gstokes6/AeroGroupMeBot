@@ -13,6 +13,7 @@ def init():
     gd_refresh_token = os.getenv('GD_REFRESH_TOKEN')
     gd_token_expiry = os.getenv('GD_TOKEN_EXPIRY')
 
+
     global ENV_VARS
     ENV_VARS = {
                 'bot_id':bot_id,
