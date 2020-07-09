@@ -9,8 +9,10 @@ class isF(messageFlag.messageFlag):
         ##Logic to find if flag is set
         splitF = message['text'].lower().split(' ')
         Msg = message['text'].lower()
-        if(("f" in splitF)): ## and ("get" in splitF)) or (("f" in splitF) and ("chat" in splitF)):
-            self.isTrue = True
+        if("f" in splitF):
+            split2 = message['text'].lower().split('f', 1)
+            if ("chat" in split2[1]) or ("get" in split2[0]):
+                self.isTrue = True
     def response(self):
         groupMe.reply('F')
         
