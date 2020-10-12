@@ -9,3 +9,4 @@ numpy==1.17.0
 python-magic==0.4.15
 pytz==2019.1
 pytesseract==0.3.1
+markovify==0.8.3
