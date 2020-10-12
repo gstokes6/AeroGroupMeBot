@@ -8,11 +8,7 @@ class message:
         ##add new flag names here, must have class definition python file in MESSAGE_FLAGS folder.
         self.MESSAGE_FLAG_LIST = ["isAcademicInvoked","is69","isF","isHartfield","isWheelSpin","isSender",
                                   "isFileUpload","isUpdate","isLinkRequest",'isRandomLike','isMentioned',
-<<<<<<< Updated upstream
-                                  'isMock','isMailen','isSaturday','isButter']
-=======
                                   'isMock','isMailen','isSaturday','isButter', 'isFlat','isAutomation','isMarkov']
->>>>>>> Stashed changes
 
         ##Initialize the flag list and GroupMe message holder containers
         self.messageFlagsList = []
