@@ -11,17 +11,15 @@ class isBirthday(messageFlag.messageFlag):
         
     def checkTrue(self, message):
         ##Logic to find if flag is set
+        gavinID = 73358488
         currentDate = datetime.datetime.today() - timedelta(hours=5)
         self.month = str(currentDate.month)
         self.day = str(currentDate.day)
         self.hour = str(currentDate.hour)
         self.minute = str(currentDate.minute)
-        if ('special' in message['text'].lower()) and ('day' in message['text'].lower()) and (currentDate.month == 10) and (currentDate.day == 12):
+        if ('special' in message['text'].lower()) and ('day' in message['text'].lower()):# and (currentDate.month == 10) and (currentDate.day == 12):
             self.name = 'Gavin Stokes'
             self.isTrue = True
-            # if (currentDate.day == 12) and (currentDate.month == 10):
-
-                # self.chrisCheck = True
             
     def response(self):
-        groupMe.reply('happy birthday to the absolute lad @'+self.name)
+        groupMe.replyMention('happy birthday to the absolute lad @'+self.name, gavinID,[35, 13])
