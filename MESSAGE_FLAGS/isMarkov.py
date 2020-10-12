@@ -42,4 +42,6 @@ class isMarkov(messageFlag.messageFlag):
         for i in range(5):
             try:
                 response = response + reconstituted_model.make_sentence() + '\n\n'
+            except:
+                print("got a none, whoops")
         return response
