@@ -10,6 +10,7 @@ import groupMe
 class isMarkov(messageFlag.messageFlag):
     def __init__(self,message):
         super().__init__(message)
+        self.sender_id = message['sender_id']
         
     def checkTrue(self,message):
         ##Logic to find if flag is set
@@ -29,10 +30,10 @@ class isMarkov(messageFlag.messageFlag):
             self.isTrue = True
         
     def response(self):
-        groupMe.reply(self.Markov(message['sender_id']))
+        groupMe.reply(self.Markov())
 
-    def Markov(sender_id):
-        path = 'json_models/' + sender_id + '.json'
+    def Markov():
+        path = 'json_models/' + self.sender_id + '.json'
         with open(path,'r',encoding="utf-8") as f:
             text = f.read()  
         reconstituted_model = markovify.Text.from_json(model_json)
