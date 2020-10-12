@@ -43,5 +43,5 @@ class isMarkov(messageFlag.messageFlag):
             try:
                 response = response + reconstituted_model.make_sentence() + '\n\n'
             except:
-                print("got a none, whoops)
+                print("got a none, whoops")
         return response
