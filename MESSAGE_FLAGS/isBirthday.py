@@ -11,7 +11,7 @@ class isBirthday(messageFlag.messageFlag):
         
     def checkTrue(self, message):
         ##Logic to find if flag is set
-        gavinID = 73358488
+        self.gavinID = 73358488
         currentDate = datetime.datetime.today() - timedelta(hours=5)
         self.month = str(currentDate.month)
         self.day = str(currentDate.day)
@@ -22,4 +22,4 @@ class isBirthday(messageFlag.messageFlag):
             self.isTrue = True
             
     def response(self):
-        groupMe.replyMention('happy birthday to the absolute lad @'+self.name, gavinID,[35, 13])
+        groupMe.replyMention('happy birthday to the absolute lad @'+self.name, self.gavinID,[35, 13])
