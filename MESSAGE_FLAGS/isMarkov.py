@@ -40,5 +40,6 @@ class isMarkov(messageFlag.messageFlag):
 
         response = ''
         for i in range(5):
-            response = response + reconstituted_model.make_sentence() + '\n\n'
+            try:
+                response = response + reconstituted_model.make_sentence() + '\n\n'
         return response
