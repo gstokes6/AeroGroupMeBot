@@ -35,7 +35,7 @@ class isMarkov(messageFlag.messageFlag):
     def Markov(self):
         path = 'json_models/' + self.sender_id + '.json'
         with open(path,'r',encoding="utf-8") as f:
-            text = f.read()  
+            model_json = f.read()  
         reconstituted_model = markovify.Text.from_json(model_json)
 
         response = ''
