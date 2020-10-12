@@ -18,8 +18,8 @@ class isBirthday(messageFlag.messageFlag):
         self.hour = str(currentDate.hour)
         self.minute = str(currentDate.minute)
         if ('special' in message['text'].lower()) and ('day' in message['text'].lower()):# and (currentDate.month == 10) and (currentDate.day == 12):
-            self.name = 'Gavin Stokes'
+            self.name = '@Gavin Stokes'
             self.isTrue = True
             
     def response(self):
-        groupMe.replyMention('happy birthday to the absolute lad @'+self.name, self.gavinID,[35, 13])
+        groupMe.replyMention('happy birthday to the absolute lad '+self.name, self.gavinID, [35, len(self.name)])
