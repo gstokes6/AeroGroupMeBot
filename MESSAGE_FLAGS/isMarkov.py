@@ -32,7 +32,7 @@ class isMarkov(messageFlag.messageFlag):
         groupMe.reply(self.Markov())
 
     def Markov(sender_id):
-        path = 'json_models/' + self.message['sender_id'] + '.json'
+        path = 'json_models/' + message['sender_id'] + '.json'
         with open(path,'r',encoding="utf-8") as f:
             text = f.read()  
         reconstituted_model = markovify.Text.from_json(model_json)
