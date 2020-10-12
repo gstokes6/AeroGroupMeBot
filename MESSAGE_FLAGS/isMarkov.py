@@ -17,7 +17,8 @@ class isMarkov(messageFlag.messageFlag):
         self.message = message
         ##first see if invoked
         #invokedFlag = isMentioned.isMentioned(message,'73358488')#Gavin
-        invokedFlag = isMentioned.isAcademicInvoked(message)#Academic
+        invokedFlag = isMentioned.isMentioned(message,'73362029')
+        #invokedFlag = isMentioned.isAcademicInvoked(message)#Academic
         isInvoked = invokedFlag.isTrue
 
         ##see if keyword is in message
