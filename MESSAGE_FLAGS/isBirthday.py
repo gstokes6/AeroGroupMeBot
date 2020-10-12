@@ -11,7 +11,7 @@ class isBirthday(messageFlag.messageFlag):
     def checkTrue(self, message):
         ##Logic to find if flag is set
         currentDate = datetime.datetime.today()
-        if ( ('special' in message['text'].lower()) and ('day' in message['text'].lower()) and (currentDate.day == 12) and (currentDate.month == 10):
+        if ('special' in message['text'].lower()) and ('day' in message['text'].lower()) and (currentDate.day == 12) and (currentDate.month == 10):
             name = "Gavin Stokes"
             self.isTrue = True
             
