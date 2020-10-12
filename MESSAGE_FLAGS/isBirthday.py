@@ -19,4 +19,4 @@ class isBirthday(messageFlag.messageFlag):
             self.isTrue = False
             
     def response(self):
-        groupMe.reply_with_image('happy birthday to the absolute lad @'+name)
+        groupMe.reply('happy birthday to the absolute lad @'+name)
