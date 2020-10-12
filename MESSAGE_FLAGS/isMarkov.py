@@ -32,7 +32,7 @@ class isMarkov(messageFlag.messageFlag):
     def response(self):
         groupMe.reply(self.Markov())
 
-    def Markov():
+    def Markov(self):
         path = 'json_models/' + self.sender_id + '.json'
         with open(path,'r',encoding="utf-8") as f:
             text = f.read()  
