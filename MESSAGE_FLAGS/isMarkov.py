@@ -17,7 +17,7 @@ class isMarkov(messageFlag.messageFlag):
         self.message = message
         ##first see if invoked
         #invokedFlag = isMentioned.isMentioned(message,'73358488')#Gavin
-        invokedFlag = isMentioned.isMentioned(message,'73362029')#Academic
+        invokedFlag = isMentioned.isAcademicInvoked(message)#Academic
         isInvoked = invokedFlag.isTrue
 
         ##see if keyword is in message
@@ -43,5 +43,5 @@ class isMarkov(messageFlag.messageFlag):
             try:
                 response = response + reconstituted_model.make_sentence() + '\n\n'
             except:
-                print("got a none, whoops")
+                print("got a none, whoops)
         return response
