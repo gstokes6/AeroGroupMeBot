@@ -22,4 +22,4 @@ class isBirthday(messageFlag.messageFlag):
             self.isTrue = True
             
     def response(self):
-        groupMe.replyMention('happy birthday to the absolute lad '+self.name, self.gavinID, [35, len(self.name)])
+        groupMe.replyMention('happy birthday to the absolute lad '+self.name, self.gavinID, (35, len(self.name)))
