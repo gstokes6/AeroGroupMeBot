@@ -19,6 +19,6 @@ class isBirthday(messageFlag.messageFlag):
             
     def response(self):
         if self.isTrue == True:
-            groupMe.reply('happy birthday to the absolute lad @'+name +currentDate.month +currentDate.day)
+            groupMe.reply('happy birthday to the absolute lad @'+name)
         if chris == True:
-            groupMe.reply('happy birthday to the absolute boy @'+name +currentDate.month +currentDate.day)
+            groupMe.reply('happy birthday to the absolute boy @'+name)
