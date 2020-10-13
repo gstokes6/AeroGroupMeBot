@@ -7,6 +7,11 @@ import os
 import LOAD_ENV_VARS
 
 def reply(msg):
+    #If debug, just return after printing message
+    if LOAD_ENV_VARS.ENV_VARS['debug']:
+        print(msg)
+        return
+    
     url = 'https://api.groupme.com/v3/bots/post'
     bot_id = LOAD_ENV_VARS.ENV_VARS['bot_id']
     data = {
@@ -22,6 +27,10 @@ def reply(msg):
         print('bot_id not found, bypassing')
 
 def replyMention(msg,ID,loci):
+    #If debug, just return after printing message
+    if LOAD_ENV_VARS.ENV_VARS['debug']:
+        print(msg,ID,loci)
+        return
     url = 'https://api.groupme.com/v3/bots/post'
     bot_id = LOAD_ENV_VARS.ENV_VARS['bot_id']
     data = {
@@ -40,6 +49,10 @@ def replyMention(msg,ID,loci):
         print('bot_id not found, bypassing')
     
 def reply_with_image(msg, imgPath):
+    #If debug, just return after printing message
+    if LOAD_ENV_VARS.ENV_VARS['debug']:
+        print(msg,imgPath)
+        return
     bot_id = LOAD_ENV_VARS.ENV_VARS['bot_id']
     if bot_id:
         url = 'https://api.groupme.com/v3/bots/post'
@@ -57,6 +70,10 @@ def reply_with_image(msg, imgPath):
 
 
 def upload_image_to_groupme(imgPath):
+    #If debug, just return after printing message
+    if LOAD_ENV_VARS.ENV_VARS['debug']:
+        print(imgPath)
+        return
     # Send Image
     headers = {'content-type': 'application/json'}
     url = 'https://image.groupme.com/pictures'
@@ -70,6 +87,10 @@ def upload_image_to_groupme(imgPath):
 
 
 def likeMessage(message):
+    #If debug, just return after printing message
+    if LOAD_ENV_VARS.ENV_VARS['debug']:
+        print("Message is liked!")
+        return
     group_id = LOAD_ENV_VARS.ENV_VARS['group_id']
     gm_access_token = LOAD_ENV_VARS.ENV_VARS['gm_access_token']
     message_id = message['id']
