@@ -16,7 +16,7 @@ def reply(msg):
 
     } 
     if bot_id:
-        r = request.post(url,data)
+        r = requests.post(url,data)
         print('Posted!')
     else:
         print('bot_id not found, bypassing')
@@ -33,7 +33,7 @@ def replyMention(msg,ID,loci):
     #PostRequest = "https://api.groupme.com/v3/bots/post?bot_id=%s&text=%s&token=%s"%(bot_id,msg,gm_access_token)
     #requests.post(PostRequest)
     if bot_id:
-        r = request.post(url,data)
+        r = requests.post(url,data)
         print('Posted!')
     else:
         print('bot_id not found, bypassing')
