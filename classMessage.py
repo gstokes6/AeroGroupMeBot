@@ -8,15 +8,17 @@ class message:
         ##add new flag names here, must have class definition python file in MESSAGE_FLAGS folder.
         self.MESSAGE_FLAG_LIST = ["isAcademicInvoked","is69","isF","isHartfield","isWheelSpin","isSender",
                                   "isFileUpload","isUpdate","isLinkRequest",'isRandomLike','isMentioned',
-                                  'isMock','isMailen','isSaturday','isButter', 'isFlat','isAutomation','isMarkov']
+                                  'isMock','isMailen','isSaturday','isButter', 'isFlat','isAutomation','isMarkov', 'isBirthday']
 
         ##Initialize the flag list and GroupMe message holder containers
         self.messageFlagsList = []
+        
         ##add schedule to message
-        messageClass['scheduleList'] = LOAD_ENV_VARS.gDriveInstance.checkClasses(messageClass)
+        if not LOAD_ENV_VARS.ENV_VARS['debug']:
+            messageClass['scheduleList'] = LOAD_ENV_VARS.gDriveInstance.checkClasses(messageClass)
         print(messageClass['scheduleList'])
-        self.message = messageClass
 
+        self.message = messageClass
         self.getMessageFlagsList()
 
     def getMessageFlagsList(self):

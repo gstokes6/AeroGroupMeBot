@@ -1,6 +1,14 @@
 import os
 import gDrive
-def init():
+def init(debug = False):
+    
+    if debug:
+        global ENV_VARS
+        ENV_VARS = {
+            'debug':debug
+            }
+        return
+    print("why")
     ##Groupme related enviromental variables
     bot_id = os.getenv('GROUPME_BOT_ID')
     group_id = os.getenv('GROUPME_GROUP_ID')
@@ -13,8 +21,7 @@ def init():
     gd_refresh_token = os.getenv('GD_REFRESH_TOKEN')
     gd_token_expiry = os.getenv('GD_TOKEN_EXPIRY')
 
-
-    global ENV_VARS
+    #global ENV_VARS
     ENV_VARS = {
                 'bot_id':bot_id,
                 'group_id':group_id,
@@ -25,7 +32,9 @@ def init():
                 'gd_client_secret':gd_client_secret,
                 'gd_client_id':gd_client_id,
                 'gd_refresh_token':gd_refresh_token,
-                'gd_token_expiry':gd_token_expiry
+                'gd_token_expiry':gd_token_expiry,
+
+                'debug':debug
                 }
     
     global gDriveInstance
