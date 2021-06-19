@@ -1,5 +1,6 @@
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+import requests
 
 import requests
 import os
@@ -20,8 +21,7 @@ def reply(msg):
 
     } 
     if bot_id:
-        request = Request(url, urlencode(data).encode())
-        json = urlopen(request).read().decode()
+        r = requests.post(url, json=data)
         print('Posted!')
     else:
         print('bot_id not found, bypassing')
@@ -42,8 +42,7 @@ def replyMention(msg,ID,loci):
     #PostRequest = "https://api.groupme.com/v3/bots/post?bot_id=%s&text=%s&token=%s"%(bot_id,msg,gm_access_token)
     #requests.post(PostRequest)
     if bot_id:
-        request = Request(url, urlencode(data).encode())
-        json = urlopen(request).read().decode()
+        r = requests.post(url, json=data)
         print('Posted!')
     else:
         print('bot_id not found, bypassing')
@@ -62,8 +61,7 @@ def reply_with_image(msg, imgPath):
 	    'text'      	: msg,
 	    'picture_url'       : urlOnGroupMeService
 	}
-        request = Request(url, urlencode(data).encode())
-        json = urlopen(request).read().decode()
+        r = requests.post(url, json=data)
         print('Posted!')
     else:
         print('bot_id not found, bypassing')
