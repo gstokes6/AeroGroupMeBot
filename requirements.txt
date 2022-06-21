@@ -5,7 +5,7 @@ wget==3.2
 pydrive2==1.4.14
 openpyxl==2.6.2
 Pillow==6.2.0
-numpy==1.17.0
+numpy==1.22.0
 python-magic==0.4.15
 pytz==2019.1
 pytesseract==0.3.1
